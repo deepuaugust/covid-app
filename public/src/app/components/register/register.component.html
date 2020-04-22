@@ -1,0 +1,37 @@
+<h2 style="text-align:center">Signup Form</h2>
+
+<form #signupForm="ngForm" (ngSubmit)="signup(user)">
+
+  <div class="container">
+    <label for="fname">
+        <b>First Name</b>
+      </label>
+      <input type="text" [(ngModel)]="user.fName" class="form-control" placeholder="Enter First name" name="fName" required #fName="ngModel">
+      <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger">
+        First name is required
+      </div>
+      <label for="lname">
+        <b>Last Name</b>
+      </label>
+      <input type="text" [(ngModel)]="user.lName" class="form-control" placeholder="Enter Last name" name="lName" required #lName="ngModel">
+      <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger">
+        Last name is required
+      </div>
+    <label for="uname">
+      <b>Username</b>
+    </label>
+    <input type="text" [(ngModel)]="user.userName" class="form-control" placeholder="Enter Username" name="userName" required #userName="ngModel">
+    <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
+      Username is required
+    </div>
+    <label for="psw">
+      <b>Password</b>
+    </label>
+    <input type="password" [(ngModel)]="user.password" class="form-control" placeholder="Enter Password" name="password" required #password="ngModel">
+    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+      Password is required
+    </div>
+    <button [disabled]="!signupForm.form.valid" type="submit">Sign Up</button>
+  </div>
+
+</form>

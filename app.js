@@ -8,6 +8,7 @@ const { mongo } = require('./dao');
 var logger = require('morgan');
 const { auth } = require('./controllers');
 var authenticate = require('./routes/auth');
+var routes = require('./routes');
 var app = express();
 
 app.use(cors());
@@ -23,6 +24,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use('/api/auth', authenticate);
+app.use('/api', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

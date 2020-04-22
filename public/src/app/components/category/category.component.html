@@ -1,0 +1,15 @@
+<h2>Category</h2>
+<div class="container" >
+  <button type="button" routerLink="/category/create">Create</button>
+</div>
+<div>
+
+
+
+  <ul>
+    <li *ngFor="let category of categories">
+        <span>{{category.name}} </span>
+        <p> {{category.description}} </p>
+    </li>
+    </ul>
+</div>

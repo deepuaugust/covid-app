@@ -9,6 +9,7 @@ class User {
     this.userName = resData.userName || "";
     this.password = resData.password || "";
     this.type = resData.password || "";
+    this.category = resData.category || "";
   }
 
   makeAdmin() {

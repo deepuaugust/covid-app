@@ -31,6 +31,16 @@
     <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
       Password is required
     </div>
+    <label for="category">
+      <b>Category</b>
+    </label>
+    <select [(ngModel)]="user.category" class="form-control" placeholder="Select Category" name="category" required #category="ngModel">
+      <option>Volunteer</option>
+      <option>Service Provider</option>
+    </select>
+    <div [hidden]="category.valid || category.pristine" class="alert alert-danger">
+      Category is required
+    </div>
     <button [disabled]="!signupForm.form.valid" type="submit">Sign Up</button>
   </div>
 

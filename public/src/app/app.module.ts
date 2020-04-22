@@ -13,8 +13,8 @@ import { AdminComponent } from './components/admin/admin.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'user/:id', component: UserComponent }
+  { path: 'admin_home/register', component: RegisterComponent },
+  { path: 'user/:id', component: UserComponent },
   { path: 'admin_home', component: AdminComponent }
 ];
 

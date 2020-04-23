@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem("token","")
     this._user.login(data).subscribe(res => {
       if(res.data == null){
-        alert(res.message)
+        alert(res.msg)
       }
       else {
       this._user.saveToken(res.data.jwtToken)    

@@ -1,45 +1,52 @@
-<h2>Create Role</h2>
-<div>
-  <form #roleForm="ngForm" (ngSubmit)="create(role)">
-    <div class="container">
-      <label for="role"><b>Role</b></label>
+<div class="main col-md-12">
+  <h2 style="text-align: center;">Create Roles</h2>
 
+  <form class="col-md-12" #roleForm="ngForm" (ngSubmit)="create(role)">
+    <div class="container col-md-12">
+      <label class="col-md-12" for="name"><b>Role</b></label>
       <input
         type="text"
         [(ngModel)]="role.name"
-        class="form-control"
+        class="form-control col-md-12"
         placeholder="Enter Role"
-        name="roleName"
+        name="name"
         required
-        #roleName="ngModel"
+        #name="ngModel"
       />
-      <div
-        [hidden]="roleName.valid || roleName.pristine"
-        class="alert alert-danger"
-      >
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger col-md-12">
         Role Name is required
       </div>
 
-      <label for="psw"><b>Description</b></label>
+      <label class="col-md-12" for="psw"><b>Description</b></label>
       <input
         type="text"
         [(ngModel)]="role.description"
-        class="form-control"
+        class="form-control col-md-12"
         placeholder="Enter Description"
         name="description"
         #description="ngModel"
       />
-      <label for="category">Category</label>
-      <select  [(ngModel)]="role.category" name="category" >
+      <label class="col-md-12" for="category">Category</label>
+      <select
+        [(ngModel)]="role.category"
+        name="category"
+        class="form-control col-md-12"
+        required
+        #category="ngModel"
+      >
         <option disabled>Select Category</option>
-        <option *ngFor="let category of categories"  [ngValue]="category._id">{{category.name}}</option>
+        <option *ngFor="let category of categories" [ngValue]="category._id">{{
+          category.name
+        }}</option>
       </select>
-
-     
-
-      <button [disabled]="!roleForm.form.valid" type="submit">
-        Create
-      </button>
+      <div [hidden]="category.valid || category.pristine" class="alert alert-danger col-md-12">
+        Category is required
+      </div>
+      <div class="col-md-12 buttondiv">
+        <button [disabled]="!roleForm.form.valid" type="submit">
+          Create
+        </button>
+      </div>
     </div>
   </form>
 </div>

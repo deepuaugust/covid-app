@@ -1,47 +1,49 @@
-<h2 style="text-align:center">Signup Form</h2>
+<div class="main col-md-12">
+<h2 style="text-align:center">Signup</h2>
 
-<form #signupForm="ngForm" (ngSubmit)="signup(user)">
+<form class="col-md-12" #signupForm="ngForm" (ngSubmit)="signup(user)">
 
-  <div class="container">
-    <label for="fname">
+  <div class="container col-md-12">
+    <label class="col-md-12" for="fname">
         <b>First Name</b>
       </label>
-      <input type="text" [(ngModel)]="user.fName" class="form-control" placeholder="Enter First name" name="fName" required #fName="ngModel">
-      <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger">
+      <input type="text" [(ngModel)]="user.fName" class="form-control col-md-12" placeholder="Enter First name" name="fName" required #fName="ngModel">
+      <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger col-md-12">
         First name is required
       </div>
-      <label for="lname">
+      <label class="col-md-12" for="lname">
         <b>Last Name</b>
       </label>
-      <input type="text" [(ngModel)]="user.lName" class="form-control" placeholder="Enter Last name" name="lName" required #lName="ngModel">
-      <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger">
+      <input type="text" [(ngModel)]="user.lName" class="form-control col-md-12" placeholder="Enter Last name" name="lName" required #lName="ngModel">
+      <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger col-md-12">
         Last name is required
       </div>
-    <label for="uname">
+    <label class="col-md-12" for="uname">
       <b>Username</b>
     </label>
-    <input type="text" [(ngModel)]="user.userName" class="form-control" placeholder="Enter Username" name="userName" required #userName="ngModel">
-    <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
+    <input type="text" [(ngModel)]="user.userName" class="form-control col-md-12" placeholder="Enter Username" name="userName" required #userName="ngModel">
+    <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger col-md-12">
       Username is required
     </div>
-    <label for="psw">
+    <label class="col-md-12" for="psw">
       <b>Password</b>
     </label>
-    <input type="password" [(ngModel)]="user.password" class="form-control" placeholder="Enter Password" name="password" required #password="ngModel">
-    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+    <input type="password" [(ngModel)]="user.password" class="form-control col-md-12" placeholder="Enter Password" name="password" required #password="ngModel">
+    <div [hidden]="password.valid || password.pristine" class="alert alert-danger col-md-12">
       Password is required
     </div>
-    <label for="category">
+    <label class="col-md-12" for="category">
       <b>Category</b>
     </label>
-    <select [(ngModel)]="user.category" class="form-control" placeholder="Select Category" name="category" required #category="ngModel">
+    <select [(ngModel)]="user.category" class="form-control col-md-12" placeholder="Select Category" name="category" required #category="ngModel">
       <option>Select Category</option>
         <option *ngFor="let category of categories"  [ngValue]="category._id">{{category.name}}</option>
     </select>
-    <div [hidden]="category.valid || category.pristine" class="alert alert-danger">
+    <div [hidden]="category.valid || category.pristine" class="alert alert-danger col-md-12">
       Category is required
     </div>
-    <button [disabled]="!signupForm.form.valid" type="submit">Sign Up</button>
+    <button class="col-md-12" [disabled]="!signupForm.form.valid" type="submit">Sign Up</button>
   </div>
 
 </form>
+</div>

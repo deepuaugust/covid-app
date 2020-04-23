@@ -1,1 +1,13 @@
-Welcome
+<h2>User List</h2>
+<div class="container" >
+  <button type="button" routerLink="/admin_home/register">Create</button>
+</div>
+<div>
+
+  <ul>
+    <li *ngFor="let user of users">
+        <p>{{user.fName}} </p>
+        <p>{{user.lName}} </p>
+    </li>
+    </ul>
+</div>

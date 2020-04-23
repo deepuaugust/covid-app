@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import {  Router } from "@angular/router";
-import { UserService, CategoryService } from "src/app/app.service";
+import { Router } from "@angular/router";
+import {
+  UserService,
+  CategoryService,
+  RolesService,
+} from "src/app/app.service";
 
 @Component({
   selector: "app-register",
@@ -9,12 +13,14 @@ import { UserService, CategoryService } from "src/app/app.service";
 })
 export class RegisterComponent implements OnInit {
   user = { type: "regular" };
-  categories = {};
+  roles = [];
+  categories = [];
   private errorMessage: string;
   constructor(
     private route: Router,
     private _user: UserService,
-    private _category: CategoryService
+    private _category: CategoryService,
+    private _roles: RolesService
   ) {}
 
   loadCategories = () => {
@@ -24,12 +30,19 @@ export class RegisterComponent implements OnInit {
     });
   };
 
+  onChange = (category) => {
+    
+    this._roles.getByCategory(category).subscribe((res) => {
+      if (res.data == null) alert(res.message);
+      else this.roles = res.data;
+    });
+  };
+
   ngOnInit() {
     this.loadCategories();
   }
 
   signup(data) {
-    console.log(data);
     this._user.signup(data).subscribe(
       (data) => {
         if (data.status == "success") {

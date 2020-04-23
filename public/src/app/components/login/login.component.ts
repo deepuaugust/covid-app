@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
 
   login(data){
     localStorage.setItem("token","")
-    console.log(data);
     this._user.login(data).subscribe(res => {
       if(res.data == null){
         alert(res.message)

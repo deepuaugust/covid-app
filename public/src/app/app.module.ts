@@ -18,11 +18,11 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'admin_home/register', component: RegisterComponent },
-  { path: 'user/:id', component: UserComponent },
   { path: 'admin_home', component: AdminComponent },
+  { path: 'admin_home/user', component: UserComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'category/create', component: CreateCategoryComponent },
-  { path: 'roles', component: RolesComponent }
+  { path: 'roles', component: RolesComponent },
   { path: 'roles/create', component: CreateRolesComponent },
 ];
 

@@ -4,6 +4,8 @@ const rolesController = require("../controllers/roles");
 
 router.get("/", rolesController.list);
 
+router.get("/category/:category", rolesController.getListByCategory);
+
 router.post("/create", rolesController.create);
 
 router.post("/update", rolesController.update);

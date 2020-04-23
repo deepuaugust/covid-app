@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'admin_home/register', component: RegisterComponent },
   { path: 'user/:id', component: UserComponent },
   { path: 'admin_home', component: AdminComponent },
-  { path: 'category', component: CategoryComponent }
+  { path: 'category', component: CategoryComponent },
   { path: 'category/create', component: CreateCategoryComponent },
 ];
 

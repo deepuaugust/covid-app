@@ -1,15 +1,18 @@
-<h2>Category</h2>
-<div class="container" >
-  <button type="button" routerLink="/category/create">Create</button>
+<div class="main col-md-12">
+  <h2 class="col-md-12" style="text-align: center;">Available Categories</h2>
+  <div class="col-md-12 container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1 category" *ngFor="let category of categories">
+        <div class="col-md-12"><b>Category:</b> {{ category.name }}</div>
+        <div class="col-md-12">
+          <b>Description:</b> {{ category.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 buttondiv">
+  <button type="button" routerLink="/category/create">
+    Create a new category
+  </button>
 </div>
-<div>
-
-
-
-  <ul>
-    <li *ngFor="let category of categories">
-        <span>{{category.name}} </span>
-        <p> {{category.description}} </p>
-    </li>
-    </ul>
 </div>

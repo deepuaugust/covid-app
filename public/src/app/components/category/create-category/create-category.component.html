@@ -1,13 +1,12 @@
-<h2>Create Category</h2>
-<div>
-  <form #categoryForm="ngForm" (ngSubmit)="create(category)">
-    <div class="container">
-      <label for="category"><b>Category</b></label>
-
+<div class="main col-md-12">
+  <h2 style="text-align:center">Create Category</h2>
+  <form class="col-md-12" #categoryForm="ngForm" (ngSubmit)="create(category)">
+    <div class="container col-md-12">
+      <label class="col-md-12" for="category"><b>Category</b></label>
       <input
         type="text"
         [(ngModel)]="category.name"
-        class="form-control"
+        class="form-control col-md-12"
         placeholder="Enter Category"
         name="categoryName"
         required
@@ -15,21 +14,21 @@
       />
       <div
         [hidden]="categoryName.valid || categoryName.pristine"
-        class="alert alert-danger"
+        class="alert alert-danger col-md-12"
       >
         Category Name is required
       </div>
 
-      <label for="psw"><b>Description</b></label>
+      <label class="col-md-12" for="psw"><b>Description</b></label>
       <input
         type="text"
         [(ngModel)]="category.description"
-        class="form-control"
+        class="form-control col-md-12"
         placeholder="Enter Description"
         name="description"
         #description="ngModel"
       />
-      <button [disabled]="!categoryForm.form.valid" type="submit">
+      <button class="col-md-12" [disabled]="!categoryForm.form.valid" type="submit">
         Create
       </button>
     </div>

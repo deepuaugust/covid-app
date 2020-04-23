@@ -1,19 +1,43 @@
-<h2 style="text-align:center">Login Form</h2>
+<body>
+  <div class="main col-md-12">
+    <h2 style="text-align: center;">Login</h2>
+    <form class="col-md-12" #loginForm="ngForm" (ngSubmit)="login(user)">
+      <div class="container col-md-12">
+        <label class="col-md-12" for="uname"><b>Username</b></label>
+        <input
+          type="text"
+          [(ngModel)]="user.userName"
+          class="form-control col-md-12"
+          placeholder="Enter Username"
+          name="userName"
+          required
+          #userName="ngModel"
+        />
+        <div
+          [hidden]="userName.valid || userName.pristine"
+          class="alert alert-danger col-md-12"
+        >
+          Username is required
+        </div>
 
-<form #loginForm="ngForm" (ngSubmit)="login(user)">
-
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" [(ngModel)]="user.userName" class="form-control" placeholder="Enter Username" name="userName" required #userName="ngModel">
-    <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
-      Username is required
-    </div>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" [(ngModel)]="user.password" class="form-control" placeholder="Enter Password" name="password" required #password="ngModel">
-    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-      Password is required
-    </div>
-    <button [disabled]="!loginForm.form.valid" type="submit">Login</button>
+        <label class="col-md-12" for="psw"><b>Password</b></label>
+        <input
+          type="password"
+          [(ngModel)]="user.password"
+          class="form-control col-md-12"
+          placeholder="Enter Password"
+          name="password"
+          required
+          #password="ngModel"
+        />
+        <div
+          [hidden]="password.valid || password.pristine"
+          class="alert alert-danger col-md-12"
+        >
+          Password is required
+        </div>
+        <button class="col-md-12" [disabled]="!loginForm.form.valid" type="submit">Login</button>
+      </div>
+    </form>
   </div>
-</form>
+</body>

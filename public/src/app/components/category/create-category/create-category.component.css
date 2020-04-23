@@ -1,0 +1,62 @@
+.main {
+    width: 50%;
+    box-shadow: 3px 3px 3px 3px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    -ms-transform: translate(50%, -50%);
+    transform: translate(50%, -50%);
+  }
+  
+  form {
+    border: 3px solid #f1f1f1;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 15px;
+  }
+  
+  select {
+      margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  .container {
+    padding: 16px;
+  }
+  
+  .ng-valid[required],
+  .ng-valid.required {
+    border-left: 5px solid #42a948;
+    /* green */
+  }
+  
+  .ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+    /* red */
+  }
+
+  

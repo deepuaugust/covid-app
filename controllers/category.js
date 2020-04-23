@@ -1,46 +1,16 @@
 const { Response, Category } = require("../models");
-const { mongo } = require("../dao");
-const { collections } = require("../const");
 
+exports.create = function (req, res) {
+  Category.create(req.body, (err, data) =>
+    err ? res.send(err) : res.json(new Response({ message: "success", data: null, code: 200 }))
+  );
+};
 
-async function create(categoryData) {
-    let category = new Category(categoryData);
-    category.save();
-    return new Response({
-        code: 200,
-        message: "success",
-        data: null,
-      });
-}
-
-async function update() {
-    return new Response({
-        code: 200,
-        message: "TODO",
-        data: null,
-      });
-}
-
-async function list() {
-    try {
-      let list = await mongo.query(collections.category,{});
-      return new Response({
-        code: 200,
-        message: "success",
-        data: list,
-        err: null,
-      });
-    } catch (err) {
-      console.log(err);
-      return new Response({
-        code: 500,
-        message: "Something went wrong",
-        data: null,
-        err: err.message,
-      });
-    }
-  }
-  
-
-
-module.exports = { create, list, update };
+exports.list = function (req, res) {
+  Category.find({}, (err, data) =>
+    err ? res.send(err) : res.json(new Response({ message: "success", data, code: 200 }))
+  );
+};
+exports.update = function (req, res) {
+  res.send("TODO");
+};

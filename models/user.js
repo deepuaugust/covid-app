@@ -1,58 +1,45 @@
-const jwt = require("../utils/jwt");
-const { mongo } = require("../dao");
-const { collections, userTypes } = require("../const");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt-nodejs");
+const Schema = mongoose.Schema;
+const { ObjectId } = Schema;
 
-class User {
-  constructor(resData) {
-    this.fName = resData.fName || "";
-    this.lName = resData.lName || "";
-    this.userName = resData.userName || "";
-    this.password = resData.password || "";
-    this.type = resData.password || "";
-    this.category = resData.category || "";
-  }
+let UserSchema = new Schema({
+  fName: { type: String, required: true, max: 100 },
+  lName: { type: String },
+  userName: { type: String, required: true, unique: true, max: 20 },
+  password: { type: String, required: true },
+  type: String,
+  createdBy: { type: ObjectId, ref: "Users" },
+  created_at: { type: Date, default: Date.now },
+});
 
-  makeAdmin() {
-    this.type = userTypes.ADMIN;
-  }
-
-  makeRegular() {
-    this.type = userTypes.REGULAR;
-  }
-
-  encryptPassword() {
-    this.password = jwt.encryptPassword(this.password);
-  }
-
-  serialize() {
-    return {
-      userName: this.userName,
-      type: this.type,
-    };
-  }
-
-  async getByUserName(userName) {
-    let user = await mongo.query(collections.users, {
-      userName: this.userName || userName,
+UserSchema.pre("save", function (next) {
+  var user = this;
+  if (this.isModified("password") || this.isNew) {
+    bcrypt.genSalt(10, function (err, salt) {
+      if (err) {
+        return next(err);
+      }
+      bcrypt.hash(user.password, salt, null, function (err, hash) {
+        if (err) {
+          return next(err);
+        }
+        user.password = hash;
+        next();
+      });
     });
-    if (user && user.length > 0) {
-      return user[0];
-    } else {
-      return null;
+  } else {
+    return next();
+  }
+});
+
+UserSchema.methods.comparePassword = function (passw, cb) {
+  bcrypt.compare(passw, this.password, function (err, isMatch) {
+    if (err) {
+      return cb(err);
     }
-  }
+    cb(null, isMatch);
+  });
+};
 
-  async userNameAvailability() {
-    if (await this.getByUserName()) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  async save() {
-    await mongo.insert(collections.users, this);
-  }
-}
-
-module.exports = User;
+module.exports= mongoose.model("User", UserSchema);

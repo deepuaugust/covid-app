@@ -36,8 +36,8 @@
       <b>Category</b>
     </label>
     <select [(ngModel)]="user.category" class="form-control col-md-12" placeholder="Select Category" name="category" required #category="ngModel">
-      <option>Volunteer</option>
-      <option>Service Provider</option>
+      <option>Select Category</option>
+        <option *ngFor="let category of categories"  [ngValue]="category._id">{{category.name}}</option>
     </select>
     <div [hidden]="category.valid || category.pristine" class="alert alert-danger col-md-12">
       Category is required

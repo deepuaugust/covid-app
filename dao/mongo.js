@@ -1,18 +1,14 @@
 const { mongoUrl } = require("../config");
-const MongoClient = require("mongodb").MongoClient;
 
 var db;
 
 let connect = () => {
   return new Promise((resolve, reject) => {
-    MongoClient.connect(
+    const mongoose = require("mongoose");
+    mongoose.connect(
       mongoUrl,
-      { useUnifiedTopology: true, useNewUrlParser: true },
-      function (err, dbInstance) {
-        if (err) return reject(err);
-        db = dbInstance.db('covid_db');
-        return resolve();
-      }
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      (e, d) => (e ? reject(e) : resolve(console.log("db connected")))
     );
   });
 };
@@ -66,6 +62,8 @@ let deleteItem = (collectionName, query) => {
     });
   });
 };
+
+
 
 module.exports = {
   connect,

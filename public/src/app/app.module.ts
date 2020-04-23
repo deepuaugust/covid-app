@@ -6,11 +6,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { UserService, CategoryService } from './app.service';
+import { UserService, CategoryService,RolesService } from './app.service';
 import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CreateCategoryComponent } from './components/category/create-category/create-category.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { CreateRolesComponent } from './components/roles/create-roles/create-roles.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'admin_home', component: AdminComponent },
   { path: 'category', component: CategoryComponent }
   { path: 'category/create', component: CreateCategoryComponent },
+  { path: 'roles', component: RolesComponent }
+  { path: 'roles/create', component: CreateRolesComponent },
 ];
 
 @NgModule({
@@ -31,6 +35,8 @@ const routes: Routes = [
     AdminComponent,
     CategoryComponent,
     CreateCategoryComponent,
+    RolesComponent,
+    CreateRolesComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService,CategoryService],
+  providers: [UserService,CategoryService,RolesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

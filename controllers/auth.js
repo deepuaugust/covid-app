@@ -1,120 +1,92 @@
 const { Response, User } = require("../models");
-const { mongo } = require("../dao");
+// const { mongo } = require("../dao");
 const { collections, userTypes } = require("../const");
 const jwt = require("../utils/jwt");
+const { JWTsecret } = require("../config");
 
-async function createAdmin(adminData) {
-  try {
-    let user = new User(adminData);
-    user.encryptPassword();
-    user.makeAdmin();
-    user.save();
+exports.createAdmin = function (adminData) {
+  // var newUser = new User(adminData);
+  // newUser.save((err) => {
+  User.create(adminData, (err, data) =>
+    err
+      ? console.log({ status: "failed", msg: err })
+      : console.log({
+          status: "success",
+          msg: "Successful created new user.",
+        })``
+  );
+};
 
-    console.log(`Admin: ${adminData.userName} created`);
-  } catch (err) {
-    console.log(`Failed to create Admin: ${adminData.userName}`);
+exports.signup = function (req, res) {
+  console.log(req.body);
+  if (!req.body.userName || !req.body.password) {
+    res.json(
+      new Response({
+        message: "Please Enter username and password",
+        status: "failed",
+        code: 200,
+      })
+    );
+  } else {
+    var newUser = new User(req.body);
+    // save the user
+    newUser.save((err) => {
+      if (err) {
+        return res.json({ success: false, msg: err });
+      }
+      res.json(
+        new Response({
+          status: "success",
+          message: "User created succesfully.!",
+          code: 200,
+        })
+      );
+    });
   }
-}
+};
 
-async function signup(signupData) {
-  try {
-    let user = new User(signupData);
-    let available = await user.userNameAvailability();
-    if (!available) {
-      return new Response({
-        code: 201,
-        message: "UserName taken",
-        data: null,
-        err: null,
-      });
+exports.login = function login(req, res) {
+  User.findOne(
+    {
+      userName: req.body.userName,
+    },
+    (err, user) => {
+      if (err) throw err;
+
+      if (!user) {
+        res.status(401).send({
+          success: false,
+          msg: "Authentication failed. User not found.",
+        });
+      } else {
+        // check if password matches
+        user.comparePassword(req.body.password, (err, isMatch) => {
+          if (isMatch && !err) {
+            // if user is found and password is right create a token
+            var token = jwt.createToken(user.toJSON(), JWTsecret, {
+              expiresIn: "30m",
+            });
+            // return the information including token as JSON
+            res.json(
+              new Response({
+                status: "success",
+                message: "Authentication succesfull.!",
+                data: { jwtToken: token, userDetails: user },
+                code: 200,
+              })
+            );
+          } else {
+            res.status(401).send({
+              success: false,
+              msg: "Authentication failed. Wrong password.",
+            });
+          }
+        });
+      }
     }
+  );
+};
 
-    user.encryptPassword();
-    user.makeRegular();
-    user.save();
-
-    return new Response({
-      code: 200,
-      message: "Registered Successfully",
-      data: { body: "Done" },
-      err: null,
-    });
-  } catch (err) {
-    return new Response({
-      code: 500,
-      message: "Something went wrong",
-      data: null,
-      err: err.message,
-    });
-  }
-}
-
-async function login(loginData) {
-  try {
-    let user = new User({});
-    let userFromDb = await user.getByUserName(loginData.userName);
-    if (!userFromDb) {
-      return new Response({
-        code: 202,
-        message: "No such user in the system",
-        data: null,
-        err: null,
-      });
-    }
-
-    //check for creds
-    if (!jwt.comparePassword(loginData.password, userFromDb.password)) {
-      return new Response({
-        code: 201,
-        message: "Wrong userName/password",
-        data: null,
-        err: null,
-      });
-    }
-
-    //create JWT token
-    delete userFromDb.password;
-    let jwtToken = jwt.createToken(userFromDb);
-    return new Response({
-      code: 200,
-      message: "success full login",
-      data: {
-        userDetails: userFromDb,
-        jwtToken,
-      },
-      err: null,
-    });
-  } catch (err) {
-    console.log(err);
-    return new Response({
-      code: 500,
-      message: "Something went wrong",
-      data: null,
-      err: err.message,
-    });
-  }
-}
-
-async function checkAdmins(noOfAdmins) {
-  console.log(noOfAdmins);
-  try {
-    let admins = await mongo.query(collections.users, {
-      type: userTypes.ADMIN,
-    });
-    return admins.length >= noOfAdmins;
-  } catch (err) {
-    return new Response({
-      code: 500,
-      message: err.message,
-      data: null,
-      err: err.message,
-    });
-  }
-}
-
-module.exports = {
-  signup,
-  login,
-  createAdmin,
-  checkAdmins,
+exports.checkAdmins = function () {
+  User.count({ type: userTypes.ADMIN }, (e, c) => (e ? e : c));
 };

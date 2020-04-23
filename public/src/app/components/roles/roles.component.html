@@ -1,0 +1,14 @@
+<h2>Roles</h2>
+<div class="container" >
+  <button type="button" routerLink="/roles/create">Create</button>
+</div>
+<div>
+
+  <ul>
+    <li *ngFor="let role of roles">
+        <span>{{role.name}} </span>
+        <p> {{role.description}} </p>
+        <p> {{role.category.name}} </p>
+    </li>
+    </ul>
+</div>

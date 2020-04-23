@@ -1,18 +1,12 @@
-const jwt = require("../utils/jwt");
-const { mongo } = require("../dao");
-const { collections } = require("../const");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const {ObjectId} = Schema
 
-class Category {
-  constructor(resData) {
-    this.name = resData.name || "";
-    this.description = resData.description || "";
-    this.createdBy = resData.createdBy || "";
-    this.createdDateTime = new Date();
-  }
+let CategorySchema = new Schema({
+  name: { type: String, required: true, max: 100 },
+  description: { type: String },
+  createdBy: { type: ObjectId, ref: "Users" },
+  created_at:{ type: Date, default: Date.now }
+});
 
-  async save() {
-    await mongo.insert(collections.category, this);
-  }
-}
-
-module.exports = Category;
+module.exports = mongoose.model("Categories", CategorySchema);

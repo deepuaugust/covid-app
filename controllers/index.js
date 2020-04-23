@@ -1,5 +1,6 @@
 module.exports = {
     auth: require('./auth'),
-    category: require('./category')
+    category: require('./category'),
+    roles: require('./roles')
 }
 

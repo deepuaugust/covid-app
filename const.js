@@ -1,6 +1,7 @@
 module.exports.collections = {
   users: "users",
-  category:"categories"
+  category:"categories",
+  roles:"roles"
 };
 
 module.exports.userTypes = {

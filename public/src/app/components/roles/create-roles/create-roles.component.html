@@ -1,0 +1,45 @@
+<h2>Create Role</h2>
+<div>
+  <form #roleForm="ngForm" (ngSubmit)="create(role)">
+    <div class="container">
+      <label for="role"><b>Role</b></label>
+
+      <input
+        type="text"
+        [(ngModel)]="role.name"
+        class="form-control"
+        placeholder="Enter Role"
+        name="roleName"
+        required
+        #roleName="ngModel"
+      />
+      <div
+        [hidden]="roleName.valid || roleName.pristine"
+        class="alert alert-danger"
+      >
+        Role Name is required
+      </div>
+
+      <label for="psw"><b>Description</b></label>
+      <input
+        type="text"
+        [(ngModel)]="role.description"
+        class="form-control"
+        placeholder="Enter Description"
+        name="description"
+        #description="ngModel"
+      />
+      <label for="category">Category</label>
+      <select  [(ngModel)]="role.category" name="category" >
+        <option disabled>Select Category</option>
+        <option *ngFor="let category of categories"  [ngValue]="category._id">{{category.name}}</option>
+      </select>
+
+     
+
+      <button [disabled]="!roleForm.form.valid" type="submit">
+        Create
+      </button>
+    </div>
+  </form>
+</div>

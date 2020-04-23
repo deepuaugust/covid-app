@@ -2,7 +2,10 @@
   <h2 class="col-md-12" style="text-align: center;">Available Categories</h2>
   <div class="col-md-12 container-fluid">
     <div class="row">
-      <div class="col-md-3 col-md-offset-1 category" *ngFor="let category of categories">
+      <div
+        class="col-md-3 col-md-offset-1 category"
+        *ngFor="let category of categories"
+      >
         <div class="col-md-12"><b>Category:</b> {{ category.name }}</div>
         <div class="col-md-12">
           <b>Description:</b> {{ category.description }}
@@ -11,8 +14,8 @@
     </div>
   </div>
   <div class="col-md-12 buttondiv">
-  <button type="button" routerLink="/category/create">
-    Create a new category
-  </button>
-</div>
+    <button type="button" routerLink="/category/create">
+      Create a new category
+    </button>
+  </div>
 </div>

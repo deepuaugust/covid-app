@@ -29,7 +29,7 @@ export class CreateRolesComponent implements OnInit {
 
   create(data) {
     this._role.create(data).subscribe((res) => {
-      if (res.code ==200) this.route.navigate(["/roles"]);
+      if (res.code == 200) this.route.navigate(["/roles"]);
       else alert(res.message);
     });
   }

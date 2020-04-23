@@ -1,13 +1,24 @@
-<h2>User List</h2>
-<div class="container" >
-  <button type="button" routerLink="/admin_home/register">Create</button>
+<div class="main col-md-12">
+  <h2 class="col-md-12" style="text-align: center;">Available Users</h2>
+  <div class="col-md-12 container-fluid">
+    <div class="row">
+      <div
+        class="col-md-3 col-md-offset-1 user"
+        *ngFor="let user of users"
+      >
+        <div class="col-md-12"><b>Name:</b> {{ user.fName }} {{user.lName}}</div>
+        <div class="col-md-12">
+          <b>Category:</b> {{ user.category.name }}
+        </div>
+        <div class="col-md-12"><b>Role:</b> {{user.role.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 buttondiv">
+    <button type="button" routerLink="/admin_home/register">
+      Create a new user
+    </button>
+  </div>
 </div>
-<div>
 
-  <ul>
-    <li *ngFor="let user of users">
-        <p>{{user.fName}} </p>
-        <p>{{user.lName}} </p>
-    </li>
-    </ul>
-</div>
+

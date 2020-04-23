@@ -48,7 +48,7 @@ exports.login = function login(req, res) {
     if (err) throw err;
 
     if (!user) {
-      res.status(401).send({
+      res.status(201).send({
         success: false,
         msg: "Authentication failed. User not found.",
       });
@@ -70,7 +70,7 @@ exports.login = function login(req, res) {
             })
           );
         } else {
-          res.status(401).send({
+          res.status(201).send({
             success: false,
             msg: "Authentication failed. Wrong password.",
           });

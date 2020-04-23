@@ -10,11 +10,6 @@ button:hover {
   opacity: 0.8;
 }
 
-.categories {
-  margin-bottom: 20px;
-  margin-top: 15px;
-}
-
 .category {
   background-color: white;
   padding: 15px;

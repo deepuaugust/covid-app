@@ -8,6 +8,8 @@ let UserSchema = new Schema({
   lName: { type: String },
   userName: { type: String, required: true, unique: true, max: 20 },
   password: { type: String, required: true },
+  category: { type: ObjectId, ref: "Categories" },
+  role: { type: ObjectId, ref: "Roles" },
   type: String,
   createdBy: { type: ObjectId, ref: "Users" },
   created_at: { type: Date, default: Date.now },

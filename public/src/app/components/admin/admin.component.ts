@@ -16,7 +16,6 @@ export class AdminComponent implements OnInit {
 
   login(data){
     localStorage.setItem("token","")
-    console.log(data);
     this._user.login(data);
   }
 

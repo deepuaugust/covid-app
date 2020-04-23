@@ -46,12 +46,10 @@ app.use(function (err, req, res, next) {
 mongo
   .connect()
   .then(async (result) => {
-    console.log(result);
     console.log("db connected starting routes");
 
     //bootstarp with 2 admin accounts
     const adminExists = await auth.checkAdmins();
-    console.log(adminExists)
     if (!adminExists) {
       // auth.createAdmin([
       //   {

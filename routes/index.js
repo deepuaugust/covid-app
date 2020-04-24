@@ -1,19 +1,20 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const category = require('./category')
-const roles = require('./roles')
-const user = require('./user')
+const category = require("./category");
+const roles = require("./roles");
+const user = require("./user");
+const request = require("./request");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get("/", (req, res) => res.render("index", { title: "Express" }));
 
-router.use('/category', category);
+router.use("/category", category);
 
-router.use('/user', user);
+router.use("/roles", roles);
 
-router.use('/roles', roles);
+router.use("/user", user);
+
+router.use("/request", request);
 
 module.exports = router;

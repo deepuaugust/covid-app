@@ -4,7 +4,6 @@ exports.list = function (req, res) {
   let query = {};
   const { key = "", value = "" } = req.params;
   if (key !== "" && value !== "") query[key] = value;
-  console.log("got hit");
   User.find(
     query,
     {},

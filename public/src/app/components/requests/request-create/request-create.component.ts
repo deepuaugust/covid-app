@@ -40,6 +40,9 @@ export class RequestCreateComponent implements OnInit {
   };
 
   onCategoryChange = (category) => {
+    this.roles = [];
+    this.request['role'] = '';
+    this.request['assignedTo'] = '';
     this._roles.getByCategory(category).subscribe((res) => {
       if (res.data == null) alert(res.message);
       else this.roles = res.data;
@@ -47,6 +50,8 @@ export class RequestCreateComponent implements OnInit {
   };
 
   onRoleChange = (role) => {
+    this.users = [];
+    this.request['assignedTo'] = '';
     const query = { type: "regular", role };
     this._user.dynamicList(query).subscribe((res) => {
       if (res.data == null) alert(res.message);

@@ -5,6 +5,8 @@ const userController = require("../controllers/user");
 router.get("/", userController.list);
 router.get("/:key/:value", userController.list);
 
+router.post("/listwithquery", userController.listwithquery);
+
 router.post("/update", userController.update);
 
 module.exports = router;

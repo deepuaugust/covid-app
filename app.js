@@ -51,20 +51,12 @@ mongo
     //bootstarp with 2 admin accounts
     const adminExists = await auth.checkAdmins();
     if (!adminExists) {
-      // auth.createAdmin([
-      //   {
-      //     fName: "admin",
-      //     userName: "admin1",
-      //     password: "Password1",
-      //     type: userTypes.ADMIN,
-      //   },
-      //   {
-      //     userName: "admin2",
-      //     password: "Password2",
-      //     fName: "admin",
-      //     type: userTypes.ADMIN,
-      //   },
-      // ]);
+      auth.createAdmin({
+        fName: "admin",
+        userName: "admin",
+        password: "admin",
+        type: userTypes.SU,
+      });
     }
   })
   .catch((err) => {

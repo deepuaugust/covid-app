@@ -1,0 +1,26 @@
+<div class="main col-md-12">
+  <h2 class="col-md-12" style="text-align: center;">Requests</h2>
+  <div class="col-md-12 container-fluid">
+    <div class="row">
+      <div
+        class="col-md-3 col-md-offset-1 category"
+        *ngFor="let request of requests"
+      >
+        <div class="col-md-12"><b>Title:</b> {{ request.title }}</div>
+        <div class="col-md-12"><b>Description:</b> {{ request.description }}</div>
+        <div class="col-md-12"><b>Country:</b> {{ request.country }}</div>
+        <div class="col-md-12"><b>Current Address</b> {{ request.currentAddress }}</div>
+        <div class="col-md-12"><b>Native Address</b> {{ request.nativeAddress }}</div>
+        <div class="col-md-12"><b>Primary Contact Number:</b> {{ request.primaryContactNumber }}</div>
+        <div class="col-md-12"><b>Category</b> {{ request.category.name }}</div>
+        <div class="col-md-12"><b>Role</b> {{ request.role.name }}</div>
+        <div class="col-md-12"><b>assigned To:</b> {{ request.assignedTo.fName }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 buttondiv">
+    <button type="button" routerLink="/requests/create">
+      Create a new request
+    </button>
+  </div>
+</div>

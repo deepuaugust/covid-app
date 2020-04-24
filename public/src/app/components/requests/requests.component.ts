@@ -10,8 +10,10 @@ import { RequestService } from "../../app.service";
 export class RequestsComponent implements OnInit {
   requests = [];
   categories = [];
+  status = [];
   filtered_requests = [];
   selectedCategory: string;
+  selectedStatus: string;
   constructor(private _request: RequestService, private route: Router) {}
 
   ngOnInit() {
@@ -27,8 +29,23 @@ export class RequestsComponent implements OnInit {
     });
   }
 
-  showRequests(category){
-    this.filtered_requests = this.requests.filter(item => item.category.name === category);
+  showRequests(category) {
     this.selectedCategory = category;
+    this.status = Array.from(
+      new Set(
+        this.requests
+          .filter((data) => data.category.name === category)
+          .map((item) => item.status)
+      )
+    );
+    this.showData(this.status[0]);
+  }
+
+  showData(status) {
+    this.selectedStatus = status;
+    this.filtered_requests = this.requests.filter(
+      (item) =>
+        item.category.name === this.selectedCategory && item.status === status
+    );
   }
 }

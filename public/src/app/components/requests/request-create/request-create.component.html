@@ -1,0 +1,239 @@
+<div class="main col-md-12">
+  <h2 style="text-align: center;">Create Request</h2>
+
+  <form
+    class="col-md-12"
+    #requestForm="ngForm"
+    (ngSubmit)="createRequest(request)"
+  >
+    <div class="container col-md-12">
+      <label class="col-md-12" for="fname">
+        <b>Title</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.title"
+        class="form-control col-md-12"
+        placeholder="Enter Title"
+        name="title"
+        required
+        #title="ngModel"
+      />
+      <div
+        [hidden]="title.valid || title.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Title is required
+      </div>
+      <label class="col-md-12" for="lname">
+        <b>Description</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.description"
+        class="form-control col-md-12"
+        placeholder="Enter Description"
+        name="description"
+        required
+        #description="ngModel"
+      />
+      <div
+        [hidden]="description.valid || description.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Description is required
+      </div>
+      <label class="col-md-12" for="uname">
+        <b>Country</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.country"
+        class="form-control col-md-12"
+        placeholder="Enter Country"
+        name="country"
+        required
+        #country="ngModel"
+      />
+      <div
+        [hidden]="country.valid || country.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Country is required
+      </div>
+      <div>
+        <label class="col-md-12" for="uname">
+          <b>Current Address</b>
+        </label>
+        <textarea
+          placeholder="Current Address"
+          [(ngModel)]="request.currentAddress"
+          [maxlength]="400"
+          name="currentAddress"
+          #currentAddress
+        >
+        </textarea>
+
+        <!-- <div
+        [hidden]="currentAddress.valid || currentAddress.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Current address is required
+      </div> -->
+      </div>
+      <div>
+        <label class="col-md-12" for="uname">
+          <b>Native Address</b>
+        </label>
+        <textarea
+          placeholder="Native Address"
+          [(ngModel)]="request.nativeAddress"
+          [maxlength]="400"
+          name="nativeAddress"
+          #nativeAddress
+        >
+        </textarea>
+        <!-- <div
+        [hidden]="nativeAddress.valid || nativeAddress.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Native address is required
+      </div> -->
+      </div>
+      <label class="col-md-12" for="uname">
+        <b>Primary Contact Number</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.primaryContactNumber"
+        class="form-control col-md-12"
+        placeholder="Primary Contact number"
+        name="primaryContactNumber"
+        #primaryContactNumber="ngModel"
+      />
+      <!-- <div
+        [hidden]="primaryContactNumber.valid || primaryContactNumber.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Alternate Contact Number is required
+      </div> -->
+
+      <label class="col-md-12" for="uname">
+        <b>Alternate Contact Number</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.alternateContactNumber"
+        class="form-control col-md-12"
+        placeholder="Alternate Contact Number"
+        name="alternateContactNumber"
+        required
+        #alternateContactNumber="ngModel"
+      />
+      <!-- <div
+        [hidden]="
+          alternateContactNumber.valid || alternateContactNumber.pristine
+        "
+        class="alert alert-danger col-md-12"
+      >
+        Alternate Contact Number is required
+      </div> -->
+
+      <label class="col-md-12" for="status">
+        <b>Status</b>
+      </label>
+      <select
+        [(ngModel)]="request.status"
+        class="form-control col-md-12"
+        name="status"
+        required
+        #status="ngModel"
+      >
+        <option disabled> Status</option>
+        <option *ngFor="let status of statuses" [ngValue]="status.value">{{
+          status.label
+        }}</option>
+      </select>
+      <div
+        [hidden]="assignTo.valid || assignTo.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Status is required
+      </div>
+
+      <b> Please select a category and role to find the relevant assignee</b>
+      <label class="col-md-12" for="category">
+        <b>Category</b>
+      </label>
+      <select
+        [(ngModel)]="request.category"
+        class="form-control col-md-12"
+        placeholder="Select Category"
+        name="category"
+        required
+        #category="ngModel"
+        (ngModelChange)="onCategoryChange($event)"
+      >
+        <option disabled>Select Category</option>
+        <option *ngFor="let category of categories" [ngValue]="category._id">{{
+          category.name
+        }}</option>
+      </select>
+      <div
+        [hidden]="category.valid || category.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Category is required
+      </div>
+      <label class="col-md-12" for="Role">
+        <b>Role</b>
+      </label>
+      <select
+        [(ngModel)]="request.role"
+        class="form-control col-md-12"
+        placeholder="Select Category"
+        name="role"
+        required
+        (ngModelChange)="onRoleChange($event)"
+        #role="ngModel"
+      >
+        <option disabled> Select Role</option>
+        <option *ngFor="let role of roles" [ngValue]="role._id">{{
+          role.name
+        }}</option>
+      </select>
+      <div
+        [hidden]="role.valid || role.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Role is required
+      </div>
+      <label class="col-md-12" for="assignee">
+        <b>Assignee</b>
+      </label>
+      <select
+        [(ngModel)]="request.assignedTo"
+        class="form-control col-md-12"
+        name="assignTo"
+        required
+        #assignTo="ngModel"
+      >
+        <option disabled> Assign To</option>
+        <option *ngFor="let user of users" [ngValue]="user._id"
+          >{{ user.fName }}{{ user.lName }}</option
+        >
+      </select>
+      <div
+        [hidden]="assignTo.valid || assignTo.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Role is required
+      </div>
+      <div class="col-md-12 buttondiv">
+        <button [disabled]="!requestForm.form.valid" type="submit">
+          Sign Up
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

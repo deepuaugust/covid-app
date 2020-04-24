@@ -6,7 +6,7 @@ let RolesSchema = new Schema({
   name: { type: String, required: true, max: 100 },
   description: { type: String },
   category: { type: ObjectId, ref: "Categories" },
-  createdBy: { type: ObjectId, ref: "Users" },
+  createdBy: { type: ObjectId, ref: "User" },
   created_at: { type: Date, default: Date.now },
 });
 

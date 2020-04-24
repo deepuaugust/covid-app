@@ -7,4 +7,5 @@ module.exports.collections = {
 module.exports.userTypes = {
   ADMIN: "admin",
   REGULAR: "regular",
+  SU:"superAdmin"
 };

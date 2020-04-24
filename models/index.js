@@ -3,4 +3,6 @@ module.exports = {
   Response: require("./response"),
   Category: require("./category"),
   Roles: require("./roles"),
+  Request: require("./request"),
+  RequestHistory: require("./requestHistory"),
 };

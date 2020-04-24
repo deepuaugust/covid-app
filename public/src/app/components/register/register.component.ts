@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
       (data) => {
         if (data.status == "success") {
           alert("User registered successfully");
-          this.route.navigate(["/login"]);
+          this.route.navigate(["/admin_home/user"]);
         } else alert(data.message);
       },
       (error) => (this.errorMessage = <any>error)

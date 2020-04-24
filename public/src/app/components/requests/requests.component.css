@@ -26,7 +26,7 @@ button {
     text-align: center;
   }
 
-  .active{
+  .activetab {
     background-color: blue;
     color: white;
     font-weight: 700;
@@ -59,3 +59,16 @@ button {
     min-height: 150px;
   }
   
+  .active {
+    background-color: #ccc;
+    font-weight: 700; 
+  }
+
+  .status {
+    padding: 15px;
+    border: 1px solid lightslategray;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+

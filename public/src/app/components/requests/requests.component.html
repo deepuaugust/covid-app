@@ -5,46 +5,60 @@
       <div
         class="category_tabs"
         (click)="showRequests(item)"
-        [ngClass]="{ active: selectedCategory === item }"
+        [ngClass]="{ activetab: selectedCategory === item }"
       >
         {{ item }}
       </div>
     </li>
   </ul>
+
   <div class="col-md-12 container-fluid">
-    <div class="row">
+    <div class="col-md-2 statuscol">
       <div
-        class="col-md-3 col-md-offset-1 request"
-        *ngFor="let request of filtered_requests"
+        class="col-md-12 status"
+        *ngFor="let item of status"
+        (click)="showData(item)"
+        [ngClass]="{ active: selectedStatus === item }"
       >
-        <div class="col-md-12"><b>Request:</b> {{ request.title }}</div>
-        <div class="col-md-12">
-          <b>Description:</b> {{ request.description }}
-        </div>
-        <div class="col-md-12"><b>Status:</b> {{ request.status }}</div>
-        <div class="col-md-12"><b>Country:</b> {{ request.country }}</div>
-        <div class="col-md-12">
-          <b>Current Address:</b> {{ request.currentAddress }}
-        </div>
-        <div class="col-md-12">
-          <b>Native Address:</b> {{ request.nativeAddress }}
-        </div>
-        <div class="col-md-12">
-          <b>Primary Contact Number:</b> {{ request.primaryContactNumber }}
-        </div>
-        <div class="col-md-12">
-          <b>Alternate Contact Number:</b> {{ request.alternateContactNumber }}
-        </div>
-        <div class="col-md-12"><b>Role:</b> {{ request.role.name }}</div>
-        <div class="col-md-12">
-          <b>Assigned To:</b> {{ request.assignedTo.fName }}
+        {{ item }}
+      </div>
+    </div>
+    <div class="col-md-10 requestcol">
+      <div class="row">
+        <div
+          class="col-md-3 col-md-offset-1 request"
+          *ngFor="let request of filtered_requests"
+        >
+          <div class="col-md-12"><b>Request:</b> {{ request.title }}</div>
+          <div class="col-md-12">
+            <b>Description:</b> {{ request.description }}
+          </div>
+          <div class="col-md-12"><b>Status:</b> {{ request.status }}</div>
+          <div class="col-md-12"><b>Country:</b> {{ request.country }}</div>
+          <div class="col-md-12">
+            <b>Current Address:</b> {{ request.currentAddress }}
+          </div>
+          <div class="col-md-12">
+            <b>Native Address:</b> {{ request.nativeAddress }}
+          </div>
+          <div class="col-md-12">
+            <b>Primary Contact Number:</b> {{ request.primaryContactNumber }}
+          </div>
+          <div class="col-md-12">
+            <b>Alternate Contact Number:</b>
+            {{ request.alternateContactNumber }}
+          </div>
+          <div class="col-md-12"><b>Role:</b> {{ request.role.name }}</div>
+          <div class="col-md-12">
+            <b>Assigned To:</b> {{ request.assignedTo.fName }}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-12 buttondiv">
-    <button type="button" routerLink="/requests/create">
-      Create a new request
-    </button>
+    <div class="col-md-12 buttondiv">
+      <button type="button" routerLink="/requests/create">
+        Create a new request
+      </button>
+    </div>
   </div>
 </div>

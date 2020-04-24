@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import {
   ActivatedRoute,
   Router
@@ -13,19 +14,23 @@ import {UserService} from '../../app.service';
 export class LoginComponent implements OnInit {
   user = {}
 
-  constructor(private _user: UserService, private route: Router) { }
+  constructor(private _user: UserService, private route: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
+  }
+
+  showError(msg) {
+    this.toastr.error(msg);
   }
 
   login(data){
     localStorage.setItem("token","")
     this._user.login(data).subscribe(res => {
       if(res.data == null){
-        alert(res.msg)
+        this.showError(res.msg);
       }
       else {
-      this._user.saveToken(res.data.jwtToken)    
+      this._user.saveToken(res.data.jwtToken);  
       if (res.data.userDetails.type == "admin")
         this.route.navigate(['/admin_home'])
       else

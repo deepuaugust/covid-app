@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 import {
   UserService,
   CategoryService,
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
     private route: Router,
     private _user: UserService,
     private _category: CategoryService,
-    private _roles: RolesService
+    private _roles: RolesService,
+    private toastr: ToastrService
   ) {}
 
   loadCategories = () => {
@@ -30,10 +32,17 @@ export class RegisterComponent implements OnInit {
     });
   };
 
+  showSuccess(msg) {
+    this.toastr.success(msg);
+  }
+
+  showError(msg) {
+    this.toastr.error(msg);
+  }
+
   onChange = (category) => {
-    
     this._roles.getByCategory(category).subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.showError(res.message);
       else this.roles = res.data;
     });
   };
@@ -46,9 +55,9 @@ export class RegisterComponent implements OnInit {
     this._user.signup(data).subscribe(
       (data) => {
         if (data.status == "success") {
-          alert("User registered successfully");
-          this.route.navigate(["/login"]);
-        } else alert(data.message);
+          this.showSuccess("User registered successfully");
+          this.route.navigate(["/admin_home/user"]);
+        } else this.showError(data.message);
       },
       (error) => (this.errorMessage = <any>error)
     );

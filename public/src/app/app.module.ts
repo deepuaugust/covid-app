@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
@@ -42,7 +45,10 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [UserService,CategoryService,RolesService],
   bootstrap: [AppComponent]

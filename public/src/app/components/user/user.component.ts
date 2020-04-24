@@ -9,14 +9,27 @@ import { Router } from "@angular/router";
 })
 export class UserComponent implements OnInit {
   users = [];
+  categories = [];
+  filtered_users = [];
+  selectedCategory: string;
 
   constructor(private _users: UserService, private route: Router) {}
 
   ngOnInit() {
     this._users.list("type", "regular").subscribe((res) => {
       if (res.data == null) alert(res.message);
-      else {this.users = res.data;
-      console.log(this.users)}
+      else {
+        this.users = res.data;
+        this.categories = Array.from(
+          new Set(this.users.map((item) => item.category.name))
+        );
+        this.showUsers(this.users[0].category.name);
+      }
     });
+  }
+
+  showUsers(category){
+    this.filtered_users = this.users.filter(item => item.category.name === category);
+    this.selectedCategory = category;
   }
 }

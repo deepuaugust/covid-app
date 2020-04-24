@@ -1,16 +1,26 @@
 <div class="main col-md-12">
   <h2 class="col-md-12" style="text-align: center;">Available Users</h2>
+  <ul class="nav nav-pills col-md-12">
+    <li *ngFor="let item of categories" class="categories">
+      <div
+        class="category_tabs"
+        (click)="showUsers(item)"
+        [ngClass]="{ active: selectedCategory === item }"
+      >
+        {{ item }}
+      </div>
+    </li>
+  </ul>
   <div class="col-md-12 container-fluid">
     <div class="row">
       <div
         class="col-md-3 col-md-offset-1 user"
-        *ngFor="let user of users"
+        *ngFor="let user of filtered_users"
       >
-        <div class="col-md-12"><b>Name:</b> {{ user.fName }} {{user.lName}}</div>
         <div class="col-md-12">
-          <b>Category:</b> {{ user.category.name }}
+          <b>Name:</b> {{ user.fName }} {{ user.lName }}
         </div>
-        <div class="col-md-12"><b>Role:</b> {{user.role.name}}</div>
+        <div class="col-md-12"><b>Role:</b> {{ user.role.name }}</div>
       </div>
     </div>
   </div>
@@ -20,5 +30,3 @@
     </button>
   </div>
 </div>
-
-

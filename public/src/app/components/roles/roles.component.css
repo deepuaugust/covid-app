@@ -26,3 +26,23 @@ button {
     text-align: center;
   }
   
+  .active{
+    background-color: blue;
+    color: white;
+    font-weight: 700;
+  }
+
+  ul {
+    border-bottom: 5px solid black;
+    margin-bottom: 20px;
+  }
+
+  .categories {
+    cursor: pointer;
+  }
+
+  .category_tabs {
+    padding: 10px 20px 10px 20px;
+    border: 1px solid lightslategray;
+    border-radius: 5px;
+  }

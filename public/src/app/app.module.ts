@@ -23,6 +23,7 @@ import { RolesComponent } from "./components/roles/roles.component";
 import { CreateRolesComponent } from "./components/roles/create-roles/create-roles.component";
 import { RequestsComponent } from "./components/requests/requests.component";
 import { RequestCreateComponent } from "./components/requests/request-create/request-create.component";
+import { RequestInteractComponent } from './components/requests/request-interact/request-interact.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -36,6 +37,8 @@ const routes: Routes = [
   { path: "roles/create", component: CreateRolesComponent },
   { path: "requests", component: RequestsComponent },
   { path: "requests/create", component: RequestCreateComponent },
+  { path: "requests/edit/:id", component: RequestCreateComponent },
+  { path: "requests/interact/:id", component: RequestInteractComponent },
 ];
 
 @NgModule({
@@ -51,6 +54,7 @@ const routes: Routes = [
     CreateRolesComponent,
     RequestsComponent,
     RequestCreateComponent,
+    RequestInteractComponent,
   ],
   imports: [
     BrowserModule,

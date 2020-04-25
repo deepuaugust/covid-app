@@ -7,14 +7,32 @@
         *ngFor="let request of requests"
       >
         <div class="col-md-12"><b>Title:</b> {{ request.title }}</div>
-        <div class="col-md-12"><b>Description:</b> {{ request.description }}</div>
+        <div class="col-md-12">
+          <b>Description:</b> {{ request.description }}
+        </div>
         <div class="col-md-12"><b>Country:</b> {{ request.country }}</div>
-        <div class="col-md-12"><b>Current Address</b> {{ request.currentAddress }}</div>
-        <div class="col-md-12"><b>Native Address</b> {{ request.nativeAddress }}</div>
-        <div class="col-md-12"><b>Primary Contact Number:</b> {{ request.primaryContactNumber }}</div>
+        <div class="col-md-12">
+          <b>Current Address</b> {{ request.currentAddress }}
+        </div>
+        <div class="col-md-12">
+          <b>Native Address</b> {{ request.nativeAddress }}
+        </div>
+        <div class="col-md-12">
+          <b>Primary Contact Number:</b> {{ request.primaryContactNumber }}
+        </div>
         <div class="col-md-12"><b>Category</b> {{ request.category.name }}</div>
         <div class="col-md-12"><b>Role</b> {{ request.role.name }}</div>
-        <div class="col-md-12"><b>assigned To:</b> {{ request.assignedTo.fName }}</div>
+        <div class="col-md-12">
+          <b>assigned To:</b> {{ request.assignedTo.fName }}
+        </div>
+        <div class="col-md-12 buttondiv">
+          <button type="button" routerLink="/requests/edit/request._id">
+            Edit
+          </button>
+          <button type="button" routerLink="/requests/interact/request._id">
+            Interact
+          </button>
+        </div>
       </div>
     </div>
   </div>

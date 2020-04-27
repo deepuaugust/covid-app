@@ -9,12 +9,43 @@ import { RequestService } from "../../app.service";
 })
 export class RequestsComponent implements OnInit {
   requests = [];
+  categories = [];
+  status = [];
+  filtered_requests = [];
+  selectedCategory: string;
+  selectedStatus: string;
   constructor(private _request: RequestService, private route: Router) {}
 
   ngOnInit() {
     this._request.list().subscribe((res) => {
       if (res.data == null) alert(res.message);
-      else this.requests = res.data;
+      else {
+        this.requests = res.data;
+        this.categories = Array.from(
+          new Set(this.requests.map((item) => item.category.name))
+        );
+        this.showRequests(this.requests[0].category.name);
+      }
     });
+  }
+
+  showRequests(category) {
+    this.selectedCategory = category;
+    this.status = Array.from(
+      new Set(
+        this.requests
+          .filter((data) => data.category.name === category)
+          .map((item) => item.status)
+      )
+    );
+    this.showData(this.status[0]);
+  }
+
+  showData(status) {
+    this.selectedStatus = status;
+    this.filtered_requests = this.requests.filter(
+      (item) =>
+        item.category.name === this.selectedCategory && item.status === status
+    );
   }
 }

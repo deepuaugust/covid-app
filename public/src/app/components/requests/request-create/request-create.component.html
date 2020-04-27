@@ -66,6 +66,7 @@
           <b>Current Address</b>
         </label>
         <textarea
+          class="form-control col-md-12"
           placeholder="Current Address"
           [(ngModel)]="request.currentAddress"
           [maxlength]="400"
@@ -86,6 +87,7 @@
           <b>Native Address</b>
         </label>
         <textarea
+          class="form-control col-md-12"
           placeholder="Native Address"
           [(ngModel)]="request.nativeAddress"
           [maxlength]="400"
@@ -110,13 +112,14 @@
         placeholder="Primary Contact number"
         name="primaryContactNumber"
         #primaryContactNumber="ngModel"
+        required
       />
-      <!-- <div
+      <div
         [hidden]="primaryContactNumber.valid || primaryContactNumber.pristine"
         class="alert alert-danger col-md-12"
       >
-        Alternate Contact Number is required
-      </div> -->
+        Primary Contact Number is required
+      </div>
 
       <label class="col-md-12" for="uname">
         <b>Alternate Contact Number</b>
@@ -127,7 +130,6 @@
         class="form-control col-md-12"
         placeholder="Alternate Contact Number"
         name="alternateContactNumber"
-        required
         #alternateContactNumber="ngModel"
       />
       <!-- <div
@@ -150,18 +152,20 @@
         #status="ngModel"
       >
         <option disabled> Status</option>
-        <option *ngFor="let status of statuses" [ngValue]="status.value">{{
+        <option *ngFor="let status of statuses" [ngValue]="status.label">{{
           status.label
         }}</option>
       </select>
       <div
-        [hidden]="assignTo.valid || assignTo.pristine"
+        [hidden]="status.valid || status.pristine"
         class="alert alert-danger col-md-12"
       >
         Status is required
       </div>
 
-      <b> Please select a category and role to find the relevant assignee</b>
+      <div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
+        <b>Please select a category and role to find the relevant assignee.</b>
+      </div>
       <label class="col-md-12" for="category">
         <b>Category</b>
       </label>
@@ -197,7 +201,7 @@
         (ngModelChange)="onRoleChange($event)"
         #role="ngModel"
       >
-        <option disabled> Select Role</option>
+        <option disabled>Select Role</option>
         <option *ngFor="let role of roles" [ngValue]="role._id">{{
           role.name
         }}</option>
@@ -227,11 +231,11 @@
         [hidden]="assignTo.valid || assignTo.pristine"
         class="alert alert-danger col-md-12"
       >
-        Role is required
+        Assignee is required
       </div>
       <div class="col-md-12 buttondiv">
         <button [disabled]="!requestForm.form.valid" type="submit">
-          Sign Up
+          Create Request
         </button>
       </div>
     </div>

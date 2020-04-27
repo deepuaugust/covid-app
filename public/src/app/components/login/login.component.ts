@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { UserService } from "../../app.service";
+import { ToasterService } from "../../services/toaster.service";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
   selector: "app-login",
@@ -14,25 +14,20 @@ export class LoginComponent implements OnInit {
   constructor(
     private _user: UserService,
     private route: Router,
-    private toastr: ToastrService
+    private toaster: ToasterService
   ) {}
 
   ngOnInit() {}
-
-  showError(msg) {
-    this.toastr.error(msg);
-  }
 
   login(data) {
     localStorage.setItem("token", "");
     this._user.login(data).subscribe((res) => {
       if (res.data == null) {
-        this.showError(res.msg);
+        this.toaster.showError(res.msg);
       } else {
         this._user.saveToken(res.data.jwtToken);
         const { data } = res;
         const role = data.userDetails.type;
-        console.log(role);
         localStorage.setItem("role", role);
         if (role == "superAdmin" || role == "admin") {
           this.route.navigate(["/admin_home"]);

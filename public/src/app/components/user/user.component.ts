@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../app.service";
+import { UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
+import { ToasterService } from "../../services/toaster.service";
 
 @Component({
   selector: "app-user",
@@ -13,11 +14,11 @@ export class UserComponent implements OnInit {
   filtered_users = [];
   selectedCategory: string;
 
-  constructor(private _users: UserService, private route: Router) {}
+  constructor(private _users: UserService, private route: Router, private toaster: ToasterService) {}
 
   ngOnInit() {
     this._users.list("type", "regular").subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else {
         this.users = res.data;
         this.categories = Array.from(

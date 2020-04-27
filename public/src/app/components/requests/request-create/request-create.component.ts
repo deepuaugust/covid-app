@@ -1,12 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-
-import {
-  UserService,
-  CategoryService,
-  RolesService,
-  RequestService,
-} from "src/app/app.service";
+import { ToasterService } from "../../../services/toaster.service";
+import { UserService } from "src/app/services/user.service";
+import { CategoryService } from "src/app/services/category.service";
+import { RolesService } from "src/app/services/role.service";
+import { RequestService } from "src/app/services/request.service";
 
 @Component({
   selector: "app-request-create",
@@ -29,12 +27,13 @@ export class RequestCreateComponent implements OnInit {
     private _user: UserService,
     private _category: CategoryService,
     private _roles: RolesService,
-    private _request: RequestService
+    private _request: RequestService,
+    private toaster: ToasterService,
   ) {}
 
   loadCategories = () => {
     this._category.list().subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else this.categories = res.data;
     });
   };
@@ -44,7 +43,7 @@ export class RequestCreateComponent implements OnInit {
     this.request['role'] = '';
     this.request['assignedTo'] = '';
     this._roles.getByCategory(category).subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else this.roles = res.data;
     });
   };
@@ -54,7 +53,7 @@ export class RequestCreateComponent implements OnInit {
     this.request['assignedTo'] = '';
     const query = { type: "regular", role };
     this._user.dynamicList(query).subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else this.users = res.data;
     });
   };
@@ -66,7 +65,7 @@ export class RequestCreateComponent implements OnInit {
   createRequest = (request) => {
     this._request.create(request).subscribe((res) => {
       if (res.message == "success") this.route.navigate(["/requests"]);
-      else alert(res.message);
+      else this.toaster.showError(res.message);
     });
   };
 }

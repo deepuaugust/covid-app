@@ -1,11 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
-import {
-  UserService,
-  CategoryService,
-  RolesService,
-} from "src/app/app.service";
+import { ToasterService } from "../../services/toaster.service";
+import { UserService } from "src/app/services/user.service";
+import { CategoryService } from "src/app/services/category.service";
+import { RolesService } from "src/app/services/role.service";
 
 @Component({
   selector: "app-register",
@@ -22,27 +20,19 @@ export class RegisterComponent implements OnInit {
     private _user: UserService,
     private _category: CategoryService,
     private _roles: RolesService,
-    private toastr: ToastrService
+    private toaster: ToasterService
   ) {}
 
   loadCategories = () => {
     this._category.list().subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else this.categories = res.data;
     });
   };
 
-  showSuccess(msg) {
-    this.toastr.success(msg);
-  }
-
-  showError(msg) {
-    this.toastr.error(msg);
-  }
-
   onChange = (category) => {
     this._roles.getByCategory(category).subscribe((res) => {
-      if (res.data == null) this.showError(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else this.roles = res.data;
     });
   };
@@ -55,9 +45,9 @@ export class RegisterComponent implements OnInit {
     this._user.signup(data).subscribe(
       (data) => {
         if (data.status == "success") {
-          this.showSuccess("User registered successfully");
+          this.toaster.showSuccess("User registered successfully");
           this.route.navigate(["/admin_home/user"]);
-        } else this.showError(data.message);
+        } else this.toaster.showError(data.message);
       },
       (error) => (this.errorMessage = <any>error)
     );

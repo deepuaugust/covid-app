@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { RequestService } from "../../app.service";
+import { RequestService } from "../../services/request.service";
+import { ToasterService } from "../../services/toaster.service";
 
 @Component({
   selector: "app-requests",
@@ -14,11 +15,11 @@ export class RequestsComponent implements OnInit {
   filtered_requests = [];
   selectedCategory: string;
   selectedStatus: string;
-  constructor(private _request: RequestService, private route: Router) {}
+  constructor(private _request: RequestService, private route: Router, private toaster: ToasterService) {}
 
   ngOnInit() {
     this._request.list().subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else {
         this.requests = res.data;
         this.categories = Array.from(

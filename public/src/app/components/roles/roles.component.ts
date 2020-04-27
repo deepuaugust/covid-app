@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { RolesService } from "../../app.service";
+import { RolesService } from "../../services/role.service";
+import { ToasterService } from "../../services/toaster.service";
 
 @Component({
   selector: 'app-roles',
@@ -14,11 +15,11 @@ export class RolesComponent implements OnInit {
   filtered_roles = [];
   selectedCategory: string;
 
-  constructor(private _roles: RolesService, private route: Router) {}
+  constructor(private _roles: RolesService, private route: Router, private toaster: ToasterService) {}
 
   ngOnInit() {
     this._roles.list().subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else { 
         this.roles = res.data;
         this.categories = Array.from(

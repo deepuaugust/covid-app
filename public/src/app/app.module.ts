@@ -4,7 +4,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Routes, RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/login/login.component";
@@ -22,6 +22,7 @@ import { UserService } from './services/user.service';
 import { CategoryService } from './services/category.service';
 import { RolesService } from './services/role.service';
 import { RequestService } from './services/request.service';
+import { AuthInterceptorService } from "./authInterceptor.service";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -60,7 +61,11 @@ const routes: Routes = [
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [UserService, CategoryService, RolesService, RequestService, ToasterService],
+  providers: [UserService, CategoryService, RolesService, RequestService, ToasterService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

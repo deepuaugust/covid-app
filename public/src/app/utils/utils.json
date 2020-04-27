@@ -1,0 +1,30 @@
+{
+    "statuses": [
+        {
+            "label": "New",
+            "value": 1
+        },
+        {
+            "label": "In progress",
+            "value": 2
+        },
+        {
+            "label": "Resolved",
+            "value": 3
+        }
+    ],
+    "communicationModes": [
+        {
+            "label": "Whatsapp",
+            "value": 1
+        },
+        {
+            "label": "Call",
+            "value": 2
+        },
+        {
+            "label": "SMS",
+            "value": 3
+        }
+    ]
+}

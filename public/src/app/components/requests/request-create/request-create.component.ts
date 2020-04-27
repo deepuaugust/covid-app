@@ -5,6 +5,8 @@ import { UserService } from "src/app/services/user.service";
 import { CategoryService } from "src/app/services/category.service";
 import { RolesService } from "src/app/services/role.service";
 import { RequestService } from "src/app/services/request.service";
+import countries from "src/app/utils/countries.json";
+import utils from "src/app/utils/utils.json";
 
 @Component({
   selector: "app-request-create",
@@ -12,15 +14,16 @@ import { RequestService } from "src/app/services/request.service";
   styleUrls: ["./request-create.component.css"],
 })
 export class RequestCreateComponent implements OnInit {
-  request = {};
+  user = JSON.parse(localStorage.getItem("user"));
+
+  request = { createdBy: this.user._id };
   categories = [];
   roles = [];
   users = [];
-  statuses = [
-    { label: "New", value: 1 },
-    { label: "In progress", value: 2 },
-    { label: "Resolved", value: 3 },
-  ];
+  countryList = countries;
+
+  statuses = utils.statuses;
+  communicationModes = utils.communicationModes;
 
   constructor(
     private route: Router,
@@ -28,7 +31,7 @@ export class RequestCreateComponent implements OnInit {
     private _category: CategoryService,
     private _roles: RolesService,
     private _request: RequestService,
-    private toaster: ToasterService,
+    private toaster: ToasterService
   ) {}
 
   loadCategories = () => {
@@ -40,8 +43,8 @@ export class RequestCreateComponent implements OnInit {
 
   onCategoryChange = (category) => {
     this.roles = [];
-    this.request['role'] = '';
-    this.request['assignedTo'] = '';
+    this.request["role"] = "";
+    this.request["assignedTo"] = "";
     this._roles.getByCategory(category).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else this.roles = res.data;
@@ -50,7 +53,7 @@ export class RequestCreateComponent implements OnInit {
 
   onRoleChange = (role) => {
     this.users = [];
-    this.request['assignedTo'] = '';
+    this.request["assignedTo"] = "";
     const query = { type: "regular", role };
     this._user.dynamicList(query).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);

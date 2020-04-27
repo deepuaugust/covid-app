@@ -16,7 +16,7 @@ let RequestHistorySchema = new Schema({
       previousAssignee: { type: ObjectId, ref: "User" },
       newAssignee: { type: ObjectId, ref: "User" },
       created_at: { type: Date, default: Date.now },
-      status: { type: String },
+      status: Number,
     },
   ],
 });

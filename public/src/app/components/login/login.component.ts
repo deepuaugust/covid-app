@@ -29,9 +29,12 @@ export class LoginComponent implements OnInit {
         const { data } = res;
         const role = data.userDetails.type;
         localStorage.setItem("role", role);
+        localStorage.setItem("user", JSON.stringify(data.userDetails));
         if (role == "superAdmin" || role == "admin") {
           this.route.navigate(["/admin_home"]);
-        } else this.route.navigate(["/request"]);
+        } else {
+          console.log(data)
+          this.route.navigate(["/requests"]);}
       }
     });
   }

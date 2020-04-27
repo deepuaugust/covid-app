@@ -9,11 +9,12 @@ export class RequestService {
   private _listUrl = "http://localhost:3001/api/request";
   private _updateUrl = "http://localhost:3001/api/request/update";
   private _listByCategoryUrl = "http://localhost:3001/api/request/category/";
+  private _interactUrl = "http://localhost:3001/api/request/interact/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 
   create(data): Observable<any> {
-    console.log(data)
+    console.log(data);
     return this._http.post<any>(this._createUrl, data);
   }
   list(): Observable<any> {
@@ -24,5 +25,8 @@ export class RequestService {
   }
   getByCategory(category): Observable<any> {
     return this._http.get<any>(`${this._listByCategoryUrl}${category}`);
+  }
+  interact(id): Observable<any> {
+    return this._http.get<any>(`${this._interactUrl}${id}`);
   }
 }

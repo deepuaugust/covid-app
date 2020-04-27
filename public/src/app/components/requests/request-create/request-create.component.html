@@ -7,7 +7,7 @@
     (ngSubmit)="createRequest(request)"
   >
     <div class="container col-md-12">
-      <label class="col-md-12" for="fname">
+      <label class="col-md-12" for="title">
         <b>Title</b>
       </label>
       <input
@@ -43,96 +43,79 @@
       >
         Description is required
       </div>
-      <label class="col-md-12" for="uname">
-        <b>Country</b>
+
+      <label class="col-md-12" for="name">
+        <b>Full Name</b>
       </label>
       <input
         type="text"
+        [(ngModel)]="request.fullName"
+        class="form-control col-md-12"
+        placeholder="Enter Full Name"
+        name="fullName"
+        required
+        #fullName="ngModel"
+      />
+      <div
+        [hidden]="fullName.valid || fullName.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Title is required
+      </div>
+
+      <label class="col-md-12" for="country">
+        <b>Select Country</b>
+      </label>
+      <select
         [(ngModel)]="request.country"
         class="form-control col-md-12"
-        placeholder="Enter Country"
         name="country"
         required
         #country="ngModel"
-      />
+      >
+        <option disabled> Country</option>
+        <option *ngFor="let country of countryList" [ngValue]="country.code">
+          {{ country.name }} ({{ country.dial_code }})</option
+        >
+      </select>
       <div
         [hidden]="country.valid || country.pristine"
         class="alert alert-danger col-md-12"
       >
         Country is required
       </div>
-      <div>
-        <label class="col-md-12" for="uname">
-          <b>Current Address</b>
-        </label>
-        <textarea
-          class="form-control col-md-12"
-          placeholder="Current Address"
-          [(ngModel)]="request.currentAddress"
-          [maxlength]="400"
-          name="currentAddress"
-          #currentAddress
-        >
-        </textarea>
+    </div>
+    <label class="col-md-12" for="primaryContactNumber">
+      <b>Primary Contact Number</b>
+    </label>
+    <input
+      type="number"
+      [(ngModel)]="request.primaryContactNumber"
+      class="form-control col-md-12"
+      placeholder="Primary Contact number"
+      name="primaryContactNumber"
+      #primaryContactNumber="ngModel"
+      required
+    />
+    <div
+      [hidden]="primaryContactNumber.valid || primaryContactNumber.pristine"
+      class="alert alert-danger col-md-12"
+    >
+      Primary Contact Number is required
+    </div>
 
-        <!-- <div
-        [hidden]="currentAddress.valid || currentAddress.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Current address is required
-      </div> -->
-      </div>
-      <div>
-        <label class="col-md-12" for="uname">
-          <b>Native Address</b>
-        </label>
-        <textarea
-          class="form-control col-md-12"
-          placeholder="Native Address"
-          [(ngModel)]="request.nativeAddress"
-          [maxlength]="400"
-          name="nativeAddress"
-          #nativeAddress
-        >
-        </textarea>
-        <!-- <div
-        [hidden]="nativeAddress.valid || nativeAddress.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Native address is required
-      </div> -->
-      </div>
-      <label class="col-md-12" for="uname">
-        <b>Primary Contact Number</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.primaryContactNumber"
-        class="form-control col-md-12"
-        placeholder="Primary Contact number"
-        name="primaryContactNumber"
-        #primaryContactNumber="ngModel"
-        required
-      />
-      <div
-        [hidden]="primaryContactNumber.valid || primaryContactNumber.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Primary Contact Number is required
-      </div>
-
-      <label class="col-md-12" for="uname">
-        <b>Alternate Contact Number</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.alternateContactNumber"
-        class="form-control col-md-12"
-        placeholder="Alternate Contact Number"
-        name="alternateContactNumber"
-        #alternateContactNumber="ngModel"
-      />
-      <!-- <div
+    <label class="col-md-12" for="alternateContactNumber">
+      <b>Alternate Contact Number</b>
+    </label>
+    <input
+      type="number"
+      [(ngModel)]="request.alternateContactNumber"
+      class="form-control col-md-12"
+      placeholder="Alternate Contact Number"
+      name="alternateContactNumber"
+      #alternateContactNumber="ngModel"
+    />
+    <!-- <div
         [hidden]="
           alternateContactNumber.valid || alternateContactNumber.pristine
         "
@@ -140,6 +123,71 @@
       >
         Alternate Contact Number is required
       </div> -->
+
+    <div>
+      <label class="col-md-12" for="currentAddress">
+        <b>Current Address</b>
+      </label>
+      <textarea
+        class="form-control col-md-12"
+        placeholder="Current Address"
+        [(ngModel)]="request.currentAddress"
+        [maxlength]="400"
+        name="currentAddress"
+        #currentAddress
+      >
+      </textarea>
+
+      <!-- <div
+        [hidden]="currentAddress.valid || currentAddress.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Current address is required
+      </div> -->
+    </div>
+    <div>
+      <label class="col-md-12" for="nativeAddress">
+        <b>Native Address</b>
+      </label>
+      <textarea
+        class="form-control col-md-12"
+        placeholder="Native Address"
+        [(ngModel)]="request.nativeAddress"
+        [maxlength]="400"
+        name="nativeAddress"
+        #nativeAddress
+      >
+      </textarea>
+      <!-- <div
+        [hidden]="nativeAddress.valid || nativeAddress.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Native address is required
+      </div> -->
+
+      <label class="col-md-12" for="communicationMedium">
+        <b>Status</b>
+      </label>
+      <select
+        [(ngModel)]="request.communicationMedium"
+        class="form-control col-md-12"
+        name="communicationMedium"
+        required
+        #communicationMedium="ngModel"
+      >
+        <option disabled> Preferred communication medium</option>
+        <option
+          *ngFor="let mode of communicationModes"
+          [ngValue]="mode.value"
+          >{{ mode.label }}</option
+        >
+      </select>
+      <div
+        [hidden]="status.valid || status.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Status is required
+      </div>
 
       <label class="col-md-12" for="status">
         <b>Status</b>
@@ -152,7 +200,7 @@
         #status="ngModel"
       >
         <option disabled> Status</option>
-        <option *ngFor="let status of statuses" [ngValue]="status.label">{{
+        <option *ngFor="let status of statuses" [ngValue]="status.value">{{
           status.label
         }}</option>
       </select>

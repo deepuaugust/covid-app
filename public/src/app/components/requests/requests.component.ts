@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { RequestService } from "../../services/request.service";
 import { ToasterService } from "../../services/toaster.service";
+import countries from "src/app/utils/countries.json";
+import utils from "src/app/utils/utils.json";
 
 @Component({
   selector: "app-requests",
@@ -15,7 +17,15 @@ export class RequestsComponent implements OnInit {
   filtered_requests = [];
   selectedCategory: string;
   selectedStatus: string;
-  constructor(private _request: RequestService, private route: Router, private toaster: ToasterService) {}
+  countryList = countries;
+  statuses = utils.statuses;
+  communicationModes = utils.communicationModes;
+
+  constructor(
+    private _request: RequestService,
+    private route: Router,
+    private toaster: ToasterService
+  ) {}
 
   ngOnInit() {
     this._request.list().subscribe((res) => {
@@ -25,7 +35,9 @@ export class RequestsComponent implements OnInit {
         this.categories = Array.from(
           new Set(this.requests.map((item) => item.category.name))
         );
-        this.showRequests(this.requests[0].category.name);
+        this.requests.length > 0
+          ? this.showRequests(this.requests[0].category.name)
+          : "";
       }
     });
   }
@@ -48,5 +60,10 @@ export class RequestsComponent implements OnInit {
       (item) =>
         item.category.name === this.selectedCategory && item.status === status
     );
+  }
+
+  getitemFromList(key, value, list = [], valueKey) {
+    const item = list.filter((d) => d[key] === value) || [];
+    return item.length > 0 ? item[0][valueKey] : "";
   }
 }

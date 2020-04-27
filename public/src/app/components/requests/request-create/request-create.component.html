@@ -282,7 +282,7 @@
         Assignee is required
       </div>
       <div class="col-md-12 buttondiv">
-        <button [disabled]="!requestForm.form.valid" type="submit">
+        <button [ngClass]="{disabled:!requestForm.form.valid}" [disabled]="!requestForm.form.valid" type="submit">
           Create Request
         </button>
       </div>

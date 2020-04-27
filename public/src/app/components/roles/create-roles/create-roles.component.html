@@ -43,7 +43,7 @@
         Category is required
       </div>
       <div class="col-md-12 buttondiv">
-        <button [disabled]="!roleForm.form.valid" type="submit">
+        <button [ngClass]="{disabled:!roleForm.form.valid}" [disabled]="!roleForm.form.valid" type="submit">
           Create
         </button>
       </div>

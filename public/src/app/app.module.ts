@@ -9,12 +9,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
-import {
-  UserService,
-  CategoryService,
-  RolesService,
-  RequestService,
-} from "./app.service";
 import { UserComponent } from "./components/user/user.component";
 import { AdminComponent } from "./components/admin/admin.component";
 import { CategoryComponent } from "./components/category/category.component";
@@ -23,6 +17,11 @@ import { RolesComponent } from "./components/roles/roles.component";
 import { CreateRolesComponent } from "./components/roles/create-roles/create-roles.component";
 import { RequestsComponent } from "./components/requests/requests.component";
 import { RequestCreateComponent } from "./components/requests/request-create/request-create.component";
+import { ToasterService } from './services/toaster.service';
+import { UserService } from './services/user.service';
+import { CategoryService } from './services/category.service';
+import { RolesService } from './services/role.service';
+import { RequestService } from './services/request.service';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -61,7 +60,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [UserService, CategoryService, RolesService, RequestService],
+  providers: [UserService, CategoryService, RolesService, RequestService, ToasterService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-
 import { Router } from "@angular/router";
-import { CategoryService } from "../../app.service";
+import { ToasterService } from "../../services/toaster.service";
+import { CategoryService } from "src/app/services/category.service";
 
 @Component({
   selector: "app-category",
@@ -11,11 +11,11 @@ import { CategoryService } from "../../app.service";
 export class CategoryComponent implements OnInit {
   categories = [];
 
-  constructor(private _category: CategoryService, private route: Router) {}
+  constructor(private _category: CategoryService, private route: Router, private toaster: ToasterService) {}
 
   ngOnInit() {
     this._category.list().subscribe((res) => {
-      if (res.data == null) alert(res.message);
+      if (res.data == null) this.toaster.showError(res.message);
       else this.categories = res.data;
     });
   }

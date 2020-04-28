@@ -3,14 +3,16 @@ const Schema = mongoose.Schema;
 const { ObjectId } = Schema;
 
 let RequestSchema = new Schema({
-  title: { type: String, required: true, max: 100 },
+  fullName: { type: String, required: true, max: 100 },
+  title: { type: String, required: true, max: 500 },
   description: { type: String },
   country: { type: String, required: true },
   currentAddress: { type: String },
   nativeAddress: { type: String },
-  primaryContactNumber: { type: String, required: true },
+  communicationMedium: { type: Number, required: true },
+  primaryContactNumber: { type: Number, unique: true, required: true },
   alternateContactNumber: { type: String },
-  status: { type: String },
+  status: { type: Number, required: true },
   category: { type: ObjectId, ref: "Categories" },
   role: { type: ObjectId, ref: "Roles" },
   assignedTo: { type: ObjectId, ref: "User" },

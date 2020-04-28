@@ -33,8 +33,31 @@
           <div class="col-md-12">
             <b>Description:</b> {{ request.description }}
           </div>
-          <div class="col-md-12"><b>Status:</b> {{ request.status }}</div>
-          <div class="col-md-12"><b>Country:</b> {{ request.country }}</div>
+          <div class="col-md-12"><b>Status:</b> {{
+            getitemFromList(
+              "value",
+              request.status,
+              statuses,
+              "label"
+            )
+          }}
+        </div>
+          <div class="col-md-12"><b>Full Name:</b> {{ request.fullName }}</div>
+          <div class="col-md-12">
+            <b>Preffered Mode of contact:</b>
+            {{
+              getitemFromList(
+                "value",
+                request.communicationMedium,
+                communicationModes,
+                "label"
+              )
+            }}
+          </div>
+          <div class="col-md-12">
+            <b>Country:</b>
+            {{ getitemFromList("code", request.country, countryList, "name") }}
+          </div>
           <div class="col-md-12">
             <b>Current Address:</b> {{ request.currentAddress }}
           </div>
@@ -52,6 +75,14 @@
           <div class="col-md-12">
             <b>Assigned To:</b> {{ request.assignedTo.fName }}
           </div>
+          <div class="col-md-12 buttondiv">
+            <button type="button" routerLink="/requests/edit/request._id">
+              Edit
+            </button>
+            <button type="button" routerLink="/requests/interact/{{request._id}}">
+              Interact
+            </button>
+          </div>
         </div>
       </div>
     </div> -->
@@ -63,12 +94,13 @@
       [rowData]="rowData"
       [columnDefs]="columnDefs"
       [headerHeight]="50"
+      [rowHeight]="55"
       [suppressMenuHide]="true"
     >
     </ag-grid-angular>
   </div>
   <div class="col-md-12 buttondiv">
-    <button type="button" routerLink="/requests/create">
+    <button class="btn btn-primary" type="button" routerLink="/requests/create">
       Create a new request
     </button>
   </div>

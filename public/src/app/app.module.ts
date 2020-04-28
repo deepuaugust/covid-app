@@ -56,7 +56,8 @@ const routes: Routes = [
     CreateRolesComponent,
     RequestsComponent,
     RequestCreateComponent,
-    CellRendererComponent
+    CellRendererComponent,
+    RequestInteractComponent,
   ],
   imports: [
     BrowserModule,

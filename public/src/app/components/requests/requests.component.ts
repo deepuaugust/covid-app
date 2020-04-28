@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { RequestService } from "../../services/request.service";
 import { ToasterService } from "../../services/toaster.service";
 import { CellRendererComponent } from "../cell_renderer/cell_renderer.component";
+import countries from "src/app/utils/countries.json";
+import utils from "src/app/utils/utils.json";
 
 @Component({
   selector: "app-requests",
@@ -18,6 +20,10 @@ export class RequestsComponent implements OnInit {
   selectedStatus: string;
   columnDefs = [];
   rowData = [];
+  countryList = countries;
+  statuses = utils.statuses;
+  communicationModes = utils.communicationModes;
+
   constructor(
     private _request: RequestService,
     private route: Router,
@@ -93,13 +99,11 @@ export class RequestsComponent implements OnInit {
         this.categories = Array.from(
           new Set(this.requests.map((item) => item.category.name))
         );
-        this.showRequests(this.requests[0].category.name);
+        this.requests.length > 0
+          ? this.showRequests(this.requests[0].category.name)
+          : "";
       }
     });
-  }
-
-  alert1(){
-    alert('msg');
   }
 
   showRequests(category) {
@@ -120,5 +124,10 @@ export class RequestsComponent implements OnInit {
       (item) =>
         item.category.name === this.selectedCategory && item.status === status
     );
+  }
+
+  getitemFromList(key, value, list = [], valueKey) {
+    const item = list.filter((d) => d[key] === value) || [];
+    return item.length > 0 ? item[0][valueKey] : "";
   }
 }

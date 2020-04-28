@@ -1,6 +1,6 @@
 <div class="main col-md-12">
   <h2 class="col-md-12" style="text-align: center;">Available Requests</h2>
-  <ul class="nav nav-pills col-md-12">
+  <!-- <ul class="nav nav-pills col-md-12">
     <li *ngFor="let item of categories" class="categories">
       <div
         class="category_tabs"
@@ -85,11 +85,24 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-12 buttondiv">
-      <button type="button" routerLink="/requests/create">
-        Create a new request
-      </button>
-    </div>
+    </div> -->
+
+  <div class="col-md-12">
+    <ag-grid-angular
+      style="height: 600px;"
+      class="ag-theme-alpine col-md-12"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [headerHeight]="50"
+      [rowHeight]="55"
+      [suppressMenuHide]="true"
+    >
+    </ag-grid-angular>
   </div>
+  <div class="col-md-12 buttondiv">
+    <button class="btn btn-primary" type="button" routerLink="/requests/create">
+      Create a new request
+    </button>
+  </div>
+  <!-- </div> -->
 </div>

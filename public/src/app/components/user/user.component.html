@@ -1,6 +1,6 @@
 <div class="main col-md-12">
   <h2 class="col-md-12" style="text-align: center;">Available Users</h2>
-  <ul class="nav nav-pills col-md-12">
+  <!-- <ul class="nav nav-pills col-md-12">
     <li *ngFor="let item of categories" class="categories">
       <div
         class="category_tabs"
@@ -23,9 +23,22 @@
         <div class="col-md-12"><b>Role:</b> {{ user.role.name }}</div>
       </div>
     </div>
+  </div> -->
+  <div class="col-md-12">
+    <ag-grid-angular
+      style="height: 600px;"
+      class="ag-theme-alpine col-md-12"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [headerHeight]="50"
+      [rowHeight]="55"
+      [suppressMenuHide]="true"
+      (gridReady)="onGridReady($event)"
+    >
+    </ag-grid-angular>
   </div>
   <div class="col-md-12 buttondiv">
-    <button type="button" routerLink="/admin_home/register">
+    <button class="btn btn-primary" type="button" routerLink="/admin_home/register">
       Create a new user
     </button>
   </div>

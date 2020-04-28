@@ -13,14 +13,48 @@ export class UserComponent implements OnInit {
   categories = [];
   filtered_users = [];
   selectedCategory: string;
+  columnDefs = [];
+  rowData = [];
+  gridApi = [];
+  gridColumnApi = [];
 
-  constructor(private _users: UserService, private route: Router, private toaster: ToasterService) {}
+  constructor(
+    private _users: UserService,
+    private route: Router,
+    private toaster: ToasterService
+  ) {}
 
   ngOnInit() {
     this._users.list("type", "regular").subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else {
         this.users = res.data;
+        this.columnDefs = [
+          {
+            headerName: "Name",
+            valueGetter: function (params) {
+              return params.data.fName + " " + params.data.lName;
+            },
+            cellStyle: { border: "1px solid lightgrey" },
+            sortable: true,
+            filter: true,
+          },
+          {
+            headerName: "Category",
+            field: "category.name",
+            sortable: true,
+            filter: true,
+            cellStyle: { border: "1px solid lightgrey" },
+          },
+          {
+            headerName: "Role",
+            field: "role.name",
+            sortable: true,
+            filter: true,
+            cellStyle: { border: "1px solid lightgrey" },
+          },
+        ];
+        this.rowData = this.users;
         this.categories = Array.from(
           new Set(this.users.map((item) => item.category.name))
         );
@@ -29,8 +63,16 @@ export class UserComponent implements OnInit {
     });
   }
 
-  showUsers(category){
-    this.filtered_users = this.users.filter(item => item.category.name === category);
+  showUsers(category) {
+    this.filtered_users = this.users.filter(
+      (item) => item.category.name === category
+    );
     this.selectedCategory = category;
+  }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    params.api.sizeColumnsToFit();
   }
 }

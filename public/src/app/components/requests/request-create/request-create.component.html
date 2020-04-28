@@ -84,38 +84,38 @@
       >
         Country is required
       </div>
-    </div>
-    <label class="col-md-12" for="primaryContactNumber">
-      <b>Primary Contact Number</b>
-    </label>
-    <input
-      type="number"
-      [(ngModel)]="request.primaryContactNumber"
-      class="form-control col-md-12"
-      placeholder="Primary Contact number"
-      name="primaryContactNumber"
-      #primaryContactNumber="ngModel"
-      required
-    />
-    <div
-      [hidden]="primaryContactNumber.valid || primaryContactNumber.pristine"
-      class="alert alert-danger col-md-12"
-    >
-      Primary Contact Number is required
-    </div>
 
-    <label class="col-md-12" for="alternateContactNumber">
-      <b>Alternate Contact Number</b>
-    </label>
-    <input
-      type="number"
-      [(ngModel)]="request.alternateContactNumber"
-      class="form-control col-md-12"
-      placeholder="Alternate Contact Number"
-      name="alternateContactNumber"
-      #alternateContactNumber="ngModel"
-    />
-    <!-- <div
+      <label class="col-md-12" for="primaryContactNumber">
+        <b>Primary Contact Number</b>
+      </label>
+      <input
+        type="number"
+        [(ngModel)]="request.primaryContactNumber"
+        class="form-control col-md-12"
+        placeholder="Primary Contact number"
+        name="primaryContactNumber"
+        #primaryContactNumber="ngModel"
+        required
+      />
+      <div
+        [hidden]="primaryContactNumber.valid || primaryContactNumber.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Primary Contact Number is required
+      </div>
+
+      <label class="col-md-12" for="alternateContactNumber">
+        <b>Alternate Contact Number</b>
+      </label>
+      <input
+        type="number"
+        [(ngModel)]="request.alternateContactNumber"
+        class="form-control col-md-12"
+        placeholder="Alternate Contact Number"
+        name="alternateContactNumber"
+        #alternateContactNumber="ngModel"
+      />
+      <!-- <div
         [hidden]="
           alternateContactNumber.valid || alternateContactNumber.pristine
         "
@@ -124,7 +124,6 @@
         Alternate Contact Number is required
       </div> -->
 
-    <div>
       <label class="col-md-12" for="currentAddress">
         <b>Current Address</b>
       </label>
@@ -144,8 +143,7 @@
       >
         Current address is required
       </div> -->
-    </div>
-    <div>
+
       <label class="col-md-12" for="nativeAddress">
         <b>Native Address</b>
       </label>
@@ -166,7 +164,7 @@
       </div> -->
 
       <label class="col-md-12" for="communicationMedium">
-        <b>Status</b>
+        <b>Preferred communication medium</b>
       </label>
       <select
         [(ngModel)]="request.communicationMedium"
@@ -282,7 +280,12 @@
         Assignee is required
       </div>
       <div class="col-md-12 buttondiv">
-        <button [ngClass]="{disabled:!requestForm.form.valid}" [disabled]="!requestForm.form.valid" type="submit">
+        <button
+          class="btn btn-success"
+          [ngClass]="{ disabled: !requestForm.form.valid }"
+          [disabled]="!requestForm.form.valid"
+          type="submit"
+        >
           Create Request
         </button>
       </div>

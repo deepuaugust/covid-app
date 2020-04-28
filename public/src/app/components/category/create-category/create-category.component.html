@@ -28,9 +28,11 @@
         name="description"
         #description="ngModel"
       />
-      <button class="col-md-12" [ngClass]="{disabled:!categoryForm.form.valid}" [disabled]="!categoryForm.form.valid" type="submit">
-        Create
+      <div class="col-md-12 buttondiv">
+      <button class="btn btn-success" [ngClass]="{disabled:!categoryForm.form.valid}" [disabled]="!categoryForm.form.valid" type="submit">
+        Create Category
       </button>
+      </div>
     </div>
   </form>
 </div>

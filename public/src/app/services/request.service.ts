@@ -10,6 +10,7 @@ export class RequestService {
   private _updateUrl = "http://localhost:3001/api/request/update";
   private _listByCategoryUrl = "http://localhost:3001/api/request/category/";
   private _interactUrl = "http://localhost:3001/api/request/interact/";
+  private _addCommentUrl = "http://localhost:3001/api/request/addcomment/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 
@@ -28,5 +29,8 @@ export class RequestService {
   }
   interact(id): Observable<any> {
     return this._http.get<any>(`${this._interactUrl}${id}`);
+  }
+  addComment(data): Observable<any> {
+    return this._http.post<any>(this._addCommentUrl, data);
   }
 }

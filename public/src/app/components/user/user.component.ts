@@ -13,6 +13,7 @@ export class UserComponent implements OnInit {
   categories = [];
   filtered_users = [];
   selectedCategory: string;
+  loggedInUser = JSON.parse(localStorage.getItem("user"));
   columnDefs = [];
   rowData = [];
   gridApi = [];
@@ -25,7 +26,8 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._users.list("type", "regular").subscribe((res) => {
+    const type = this.loggedInUser.type === "admin" ? "regular" : "admin";
+    this._users.listUrlByRole(type).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else {
         this.users = res.data;

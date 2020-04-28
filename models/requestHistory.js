@@ -13,8 +13,7 @@ let RequestHistorySchema = new Schema({
   ],
   assignment: [
     {
-      previousAssignee: { type: ObjectId, ref: "User" },
-      newAssignee: { type: ObjectId, ref: "User" },
+      assignedTo: { type: ObjectId, ref: "User" },
       created_at: { type: Date, default: Date.now },
       status: Number,
     },

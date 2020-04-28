@@ -8,6 +8,7 @@ export class UserService {
   private _loginUrl = "http://localhost:3001/api/auth/login";
   private _signupUrl = "http://localhost:3001/api/auth/signup";
   private _listUrl = "http://localhost:3001/api/user";
+  private _listUrlByRole = "http://localhost:3001/api/user/role";
   private _listwithquery = "http://localhost:3001/api/user/listwithquery";
 
   TOKEN_KEY = "token";
@@ -35,8 +36,12 @@ export class UserService {
     this.route.navigate(["/login"]);
   }
 
-  list(key,value): Observable<any> {
-    return this._http.get<any>(`${this._listUrl}/${key}/${value}`);
+  list(): Observable<any> {
+    return this._http.get<any>(this._listUrl);
+  }
+
+  listUrlByRole(role): Observable<any> {
+    return this._http.get<any>(`${this._listUrlByRole}/${role}`);
   }
 
   dynamicList(query): Observable<any> {

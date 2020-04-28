@@ -2,6 +2,70 @@
   request-interact works!
 </p>
 
-createdBy {{request.requestID.createdBy.fName}} {{request.requestID.createdBy.lName}}
-<p><b>Please create a factory and process the response and place here</b> </p>
-<p><b>Its good if we can draw journey map using assignment and comment status</b> </p>
+<span *ngIf="request.requestID"
+  >createdBy {{ request.requestID.createdBy.fName }}
+  {{ request.requestID.createdBy.lName }}</span
+>
+<p><b>Please create a factory and process the response and place here</b></p>
+<p>
+  <b>Its good if we can draw journey map using assignment and comment status</b>
+</p>
+
+<!--Section to update status and comments, Can be created as component if needed-->
+<div>
+  <div class="main col-md-12">
+    <h2 style="text-align: center;">Add Comment</h2>
+    <form class="col-md-12" #commentForm="ngForm" (ngSubmit)="update(updates)">
+      <div class="container col-md-12">
+        <label class="col-md-12" for="comment"><b>Comment</b></label>
+        <textarea
+          class="form-control col-md-12"
+          placeholder="Comment"
+          [(ngModel)]="updates.comment"
+          [maxlength]="400"
+          name="comment"
+          #comment
+        >
+        </textarea>
+        <div
+          [hidden]="comment.valid || comment.pristine"
+          class="alert alert-danger col-md-12"
+        >
+          Comment is required
+        </div>
+
+        <label class="col-md-12" for="status">
+          <b>Status</b>
+        </label>
+        <select
+          [(ngModel)]="updates.status"
+          class="form-control col-md-12"
+          name="status"
+          required
+          #status="ngModel"
+        >
+          <option disabled> Status</option>
+          <option *ngFor="let status of statuses" [ngValue]="status.value">{{
+            status.label
+          }}</option>
+        </select>
+        <div
+          [hidden]="status.valid || status.pristine"
+          class="alert alert-danger col-md-12"
+        >
+          Status is required
+        </div>
+
+        <b> Mark as resolved will auto assign to volunteer</b>
+        <button
+          class="col-md-12"
+          [ngClass]="{ disabled: !commentForm.form.valid }"
+          [disabled]="!commentForm.form.valid"
+          type="submit"
+        >
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

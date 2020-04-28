@@ -36,19 +36,24 @@ export class RequestsComponent implements OnInit {
       else {
         this.requests = res.data;
         this.columnDefs = [
-          { headerName: "Request", field: "title", headerClass: "header-div", cellStyle: {'border': '1px solid lightgrey'}},
+          { headerName: "Request", field: "title", cellStyle: {'border': '1px solid lightgrey'}},
           { headerName: "Description", field: "description", cellStyle: {'border': '1px solid lightgrey'} },
           {
             headerName: "Status",
-            field: "status",
-            headerClass: "header-div",
+            valueGetter: function(params){
+              let status = utils.statuses.filter(item => item.value == params.data.status);
+              return status[0].label;
+            },
             sortable: true,
             filter: true,
             cellStyle: {'border': '1px solid lightgrey'},
           },
           {
             headerName: "Country",
-            field: "country",
+            valueGetter: function(params){
+              let country = countries.filter(item => item.code == params.data.country);
+              return country[0].name;
+            },
             sortable: true,
             filter: true,
             cellStyle: {'border': '1px solid lightgrey'},

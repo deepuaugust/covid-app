@@ -53,18 +53,6 @@ export class RequestsComponent implements OnInit {
             filter: true,
             cellStyle: {'border': '1px solid lightgrey'},
           },
-          { headerName: "Current Address", field: "currentAddress", cellStyle: {'border': '1px solid lightgrey'} },
-          { headerName: "Native Address", field: "nativeAddress", cellStyle: {'border': '1px solid lightgrey'} },
-          {
-            headerName: "Primary Contact Number",
-            field: "primaryContactNumber",
-            cellStyle: {'border': '1px solid lightgrey'}
-          },
-          {
-            headerName: "Alternate Contact Number",
-            field: "alternateContactNumber",
-            cellStyle: {'border': '1px solid lightgrey'}
-          },
           {
             headerName: "Category",
             field: "category.name",

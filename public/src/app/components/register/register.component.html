@@ -128,11 +128,7 @@
         </div>
       </div>
       <div class="col-md-12 buttondiv">
-        <button
-          [ngClass]="{ disabled: !signupForm.form.valid }"
-          [disabled]="!signupForm.form.valid"
-          type="submit"
-        >
+        <button class="btn btn-success" [ngClass]="{disabled:!signupForm.form.valid}" [disabled]="!signupForm.form.valid" type="submit">
           Sign Up
         </button>
       </div>

@@ -14,6 +14,10 @@ export class UserComponent implements OnInit {
   filtered_users = [];
   selectedCategory: string;
   loggedInUser = JSON.parse(localStorage.getItem("user"));
+  columnDefs = [];
+  rowData = [];
+  gridApi = [];
+  gridColumnApi = [];
 
   constructor(
     private _users: UserService,
@@ -27,6 +31,32 @@ export class UserComponent implements OnInit {
       if (res.data == null) this.toaster.showError(res.message);
       else {
         this.users = res.data;
+        this.columnDefs = [
+          {
+            headerName: "Name",
+            valueGetter: function (params) {
+              return params.data.fName + " " + params.data.lName;
+            },
+            cellStyle: { border: "1px solid lightgrey" },
+            sortable: true,
+            filter: true,
+          },
+          {
+            headerName: "Category",
+            field: "category.name",
+            sortable: true,
+            filter: true,
+            cellStyle: { border: "1px solid lightgrey" },
+          },
+          {
+            headerName: "Role",
+            field: "role.name",
+            sortable: true,
+            filter: true,
+            cellStyle: { border: "1px solid lightgrey" },
+          },
+        ];
+        this.rowData = this.users;
         this.categories = Array.from(
           new Set(this.users.map((item) => item.category.name))
         );
@@ -40,5 +70,11 @@ export class UserComponent implements OnInit {
       (item) => item.category.name === category
     );
     this.selectedCategory = category;
+  }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    params.api.sizeColumnsToFit();
   }
 }

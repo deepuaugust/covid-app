@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { RequestService } from "../../services/request.service";
 import { ToasterService } from "../../services/toaster.service";
+import { CellRendererComponent } from "../cell_renderer/cell_renderer.component";
 import countries from "src/app/utils/countries.json";
 import utils from "src/app/utils/utils.json";
 
@@ -17,6 +18,8 @@ export class RequestsComponent implements OnInit {
   filtered_requests = [];
   selectedCategory: string;
   selectedStatus: string;
+  columnDefs = [];
+  rowData = [];
   countryList = countries;
   statuses = utils.statuses;
   communicationModes = utils.communicationModes;
@@ -32,6 +35,67 @@ export class RequestsComponent implements OnInit {
       if (res.data == null) this.toaster.showError(res.message);
       else {
         this.requests = res.data;
+        this.columnDefs = [
+          { headerName: "Request", field: "title", headerClass: "header-div", cellStyle: {'border': '1px solid lightgrey'}},
+          { headerName: "Description", field: "description", cellStyle: {'border': '1px solid lightgrey'} },
+          {
+            headerName: "Status",
+            field: "status",
+            headerClass: "header-div",
+            sortable: true,
+            filter: true,
+            cellStyle: {'border': '1px solid lightgrey'},
+          },
+          {
+            headerName: "Country",
+            field: "country",
+            sortable: true,
+            filter: true,
+            cellStyle: {'border': '1px solid lightgrey'},
+          },
+          { headerName: "Current Address", field: "currentAddress", cellStyle: {'border': '1px solid lightgrey'} },
+          { headerName: "Native Address", field: "nativeAddress", cellStyle: {'border': '1px solid lightgrey'} },
+          {
+            headerName: "Primary Contact Number",
+            field: "primaryContactNumber",
+            cellStyle: {'border': '1px solid lightgrey'}
+          },
+          {
+            headerName: "Alternate Contact Number",
+            field: "alternateContactNumber",
+            cellStyle: {'border': '1px solid lightgrey'}
+          },
+          {
+            headerName: "Category",
+            field: "category.name",
+            sortable: true,
+            filter: true,
+            cellStyle: {'border': '1px solid lightgrey'}
+          },
+          {
+            headerName: "Role",
+            field: "role.name",
+            sortable: true,
+            filter: true,
+            cellStyle: {'border': '1px solid lightgrey'}
+          },
+          {
+            headerName: "Assigned To",
+            valueGetter: function (params) {
+              return params.data.assignedTo.fName + " " + params.data.assignedTo.lName;
+            },
+            sortable: true,
+            filter: true,
+            cellStyle: {'border': '1px solid lightgrey'}
+          },
+          {
+            headerName: "Actions",
+            field: "action",
+            cellRendererFramework: CellRendererComponent,
+            cellStyle: {'border': '1px solid lightgrey'}
+          },
+        ];
+        this.rowData = this.requests;
         this.categories = Array.from(
           new Set(this.requests.map((item) => item.category.name))
         );

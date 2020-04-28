@@ -11,7 +11,10 @@ import { RolesService } from "src/app/services/role.service";
   styleUrls: ["./register.component.css"],
 })
 export class RegisterComponent implements OnInit {
-  user = { type: "regular" };
+  loggedInUser = JSON.parse(localStorage.getItem("user"));
+  type = this.loggedInUser.type === "admin" ? "regular" : "admin";
+
+  user = { type: this.type };
   roles = [];
   categories = [];
   private errorMessage: string;

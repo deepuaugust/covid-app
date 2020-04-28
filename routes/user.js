@@ -3,7 +3,8 @@ const router = express.Router();
 const userController = require("../controllers/user");
 
 router.get("/", userController.list);
-router.get("/:key/:value", userController.list);
+
+router.get("/role/:role", userController.listWithRole);
 
 router.post("/listwithquery", userController.listwithquery);
 

@@ -1,5 +1,7 @@
 <div class="main col-md-12">
-  <h2 style="text-align: center;">Add User</h2>
+  <h2 style="text-align: center;">
+    Add {{ loggedInUser.type === "superAdmin" ? "Admin" : "User" }}
+  </h2>
 
   <form class="col-md-12" #signupForm="ngForm" (ngSubmit)="signup(user)">
     <div class="container col-md-12">
@@ -15,7 +17,10 @@
         required
         #fName="ngModel"
       />
-      <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger col-md-12">
+      <div
+        [hidden]="fName.valid || fName.pristine"
+        class="alert alert-danger col-md-12"
+      >
         First name is required
       </div>
       <label class="col-md-12" for="lname">
@@ -30,7 +35,10 @@
         required
         #lName="ngModel"
       />
-      <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger col-md-12">
+      <div
+        [hidden]="lName.valid || lName.pristine"
+        class="alert alert-danger col-md-12"
+      >
         Last name is required
       </div>
       <label class="col-md-12" for="uname">
@@ -69,50 +77,62 @@
       >
         Password is required
       </div>
-      <label class="col-md-12" for="category">
-        <b>Category</b>
-      </label>
-      <select
-        [(ngModel)]="user.category"
-        class="form-control col-md-12"
-        placeholder="Select Category"
-        name="category"
-        required
-        #category="ngModel"
-        (ngModelChange)="onChange($event)"
-      >
-        <option disabled>Select Category</option>
-        <option *ngFor="let category of categories" [ngValue]="category._id">{{
-          category.name
-        }}</option>
-      </select>
-      <div
-        [hidden]="category.valid || category.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Category is required
-      </div>
-      <label class="col-md-12" for="category">
-        <b>Role</b>
-      </label>
-      <select
-        [(ngModel)]="user.role"
-        class="form-control col-md-12"
-        placeholder="Select Category"
-        name="role"
-        required
-        #role="ngModel"
-      >
-        <option disabled> Select Role</option>
-        <option *ngFor="let role of roles" [ngValue]="role._id">{{
-          role.name
-        }}</option>
-      </select>
-      <div [hidden]="role.valid || role.pristine" class="alert alert-danger col-md-12">
-        Role is required
+
+      <div *ngIf="loggedInUser.type === 'admin'">
+        <label class="col-md-12" for="category">
+          <b>Category</b>
+        </label>
+        <select
+          [(ngModel)]="user.category"
+          class="form-control col-md-12"
+          placeholder="Select Category"
+          name="category"
+          required
+          #category="ngModel"
+          (ngModelChange)="onChange($event)"
+        >
+          <option disabled>Select Category</option>
+          <option
+            *ngFor="let category of categories"
+            [ngValue]="category._id"
+            >{{ category.name }}</option
+          >
+        </select>
+        <div
+          [hidden]="category.valid || category.pristine"
+          class="alert alert-danger col-md-12"
+        >
+          Category is required
+        </div>
+        <label class="col-md-12" for="category">
+          <b>Role</b>
+        </label>
+        <select
+          [(ngModel)]="user.role"
+          class="form-control col-md-12"
+          placeholder="Select Category"
+          name="role"
+          required
+          #role="ngModel"
+        >
+          <option disabled> Select Role</option>
+          <option *ngFor="let role of roles" [ngValue]="role._id">{{
+            role.name
+          }}</option>
+        </select>
+        <div
+          [hidden]="role.valid || role.pristine"
+          class="alert alert-danger col-md-12"
+        >
+          Role is required
+        </div>
       </div>
       <div class="col-md-12 buttondiv">
-        <button [ngClass]="{disabled:!signupForm.form.valid}" [disabled]="!signupForm.form.valid" type="submit">
+        <button
+          [ngClass]="{ disabled: !signupForm.form.valid }"
+          [disabled]="!signupForm.form.valid"
+          type="submit"
+        >
           Sign Up
         </button>
       </div>

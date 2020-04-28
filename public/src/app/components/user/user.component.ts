@@ -13,11 +13,17 @@ export class UserComponent implements OnInit {
   categories = [];
   filtered_users = [];
   selectedCategory: string;
+  loggedInUser = JSON.parse(localStorage.getItem("user"));
 
-  constructor(private _users: UserService, private route: Router, private toaster: ToasterService) {}
+  constructor(
+    private _users: UserService,
+    private route: Router,
+    private toaster: ToasterService
+  ) {}
 
   ngOnInit() {
-    this._users.list("type", "regular").subscribe((res) => {
+    const type = this.loggedInUser.type === "admin" ? "regular" : "admin";
+    this._users.listUrlByRole(type).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else {
         this.users = res.data;
@@ -29,8 +35,10 @@ export class UserComponent implements OnInit {
     });
   }
 
-  showUsers(category){
-    this.filtered_users = this.users.filter(item => item.category.name === category);
+  showUsers(category) {
+    this.filtered_users = this.users.filter(
+      (item) => item.category.name === category
+    );
     this.selectedCategory = category;
   }
 }

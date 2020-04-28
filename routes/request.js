@@ -10,5 +10,7 @@ router.post("/update", requestController.update);
 
 router.post("/create", requestController.create);
 
+router.post("/addcomment", requestController.addComment);
+
 module.exports = router;
 

@@ -11,6 +11,10 @@
         {
             "label": "Resolved",
             "value": 3
+        },
+        {
+            "label": "Archive",
+            "value": 4
         }
     ],
     "communicationModes": [

@@ -12,6 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class RequestInteractComponent implements OnInit {
   request = {};
+  updates = {};
   user = JSON.parse(localStorage.getItem("user"));
 
   countryList = countries;
@@ -26,15 +27,23 @@ export class RequestInteractComponent implements OnInit {
 
   loadData() {
     const id = this._route.snapshot.params["id"];
-    console.log(id)
     this._request.interact(id).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else {
-        this.request = res.data;
-        console.log(res.data);
+        const {data} = res;
+        this.request = data;
+        this.updates['id'] = data._id
       }
     });
   }
+
+  update(commentData) {
+    this._request.addComment(commentData).subscribe((res) => {
+      if (res.data == null) this.toaster.showError(res.message);
+      else this.loadData()
+    });
+  }
+
   ngOnInit() {
     this.loadData();
   }

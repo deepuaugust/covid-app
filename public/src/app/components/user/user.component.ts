@@ -57,19 +57,8 @@ export class UserComponent implements OnInit {
           },
         ];
         this.rowData = this.users;
-        this.categories = Array.from(
-          new Set(this.users.map((item) => item.category.name))
-        );
-        this.showUsers(this.users[0].category.name);
       }
     });
-  }
-
-  showUsers(category) {
-    this.filtered_users = this.users.filter(
-      (item) => item.category.name === category
-    );
-    this.selectedCategory = category;
   }
 
   onGridReady(params) {

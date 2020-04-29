@@ -75,7 +75,7 @@ export class RequestsComponent implements OnInit {
           {
             headerName: "Assigned To",
             valueGetter: function (params) {
-              return params.data.assignedTo.fName + " " + params.data.assignedTo.lName;
+              return params.data.assignedTo ? params.data.assignedTo.fName + " " + params.data.assignedTo.lName : '';
             },
             sortable: true,
             filter: true,
@@ -89,34 +89,8 @@ export class RequestsComponent implements OnInit {
           },
         ];
         this.rowData = this.requests;
-        this.categories = Array.from(
-          new Set(this.requests.map((item) => item.category.name))
-        );
-        this.requests.length > 0
-          ? this.showRequests(this.requests[0].category.name)
-          : "";
       }
     });
-  }
-
-  showRequests(category) {
-    this.selectedCategory = category;
-    this.status = Array.from(
-      new Set(
-        this.requests
-          .filter((data) => data.category.name === category)
-          .map((item) => item.status)
-      )
-    );
-    this.showData(this.status[0]);
-  }
-
-  showData(status) {
-    this.selectedStatus = status;
-    this.filtered_requests = this.requests.filter(
-      (item) =>
-        item.category.name === this.selectedCategory && item.status === status
-    );
   }
 
   getitemFromList(key, value, list = [], valueKey) {

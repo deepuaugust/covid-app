@@ -11,6 +11,7 @@ export class RequestService {
   private _listByCategoryUrl = "http://localhost:3001/api/request/category/";
   private _interactUrl = "http://localhost:3001/api/request/interact/";
   private _addCommentUrl = "http://localhost:3001/api/request/addcomment/";
+  private _getWithRoleUrl = "http://localhost:3001/api/request/roleassigned/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 
@@ -20,6 +21,9 @@ export class RequestService {
   }
   list(): Observable<any> {
     return this._http.get<any>(this._listUrl);
+  }
+  listByRole(userid): Observable<any> {
+    return this._http.get<any>(`${this._getWithRoleUrl}${userid}`);
   }
   update(data): Observable<any> {
     return this._http.post<any>(this._updateUrl, data);

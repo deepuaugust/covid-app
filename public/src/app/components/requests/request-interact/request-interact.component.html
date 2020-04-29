@@ -4,11 +4,11 @@
     {{ request.requestID.title }}
   </h1>
   <h5 style="text-align: center;">
-    Created By: {{ request.requestID.createdBy.fName }}
-    {{ request.requestID.createdBy.lName }}
+    Created By: {{ request.requestID ? request.requestID.createdBy.fName : "" }}
+    {{ request.requestID ? request.requestID.createdBy.lName : "" }}
   </h5>
   <div class="separator col-md-12"></div>
-  <h3 style="text-align: center" *ngIf="request.requestID">
+  <h3 style="text-align: center;" *ngIf="request.requestID">
     Request Status
   </h3>
   <div class="col-md-12" *ngFor="let item of requestdata; let last = last">
@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="separator col-md-12"></div>
-  <h3 style="text-align: center">Add Comment</h3>
+  <h3 style="text-align: center;">Add Comment</h3>
   <form class="col-md-12" #commentForm="ngForm" (ngSubmit)="update(updates)">
     <div class="container col-md-12">
       <label class="col-md-12" for="comment"><b>Comment</b></label>

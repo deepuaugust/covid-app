@@ -13,7 +13,10 @@
         required
         #name="ngModel"
       />
-      <div [hidden]="name.valid || name.pristine" class="alert alert-danger col-md-12">
+      <div
+        [hidden]="name.valid || name.pristine"
+        class="alert alert-danger col-md-12"
+      >
         Role Name is required
       </div>
 
@@ -39,11 +42,31 @@
           category.name
         }}</option>
       </select>
-      <div [hidden]="category.valid || category.pristine" class="alert alert-danger col-md-12">
+      <div
+        [hidden]="category.valid || category.pristine"
+        class="alert alert-danger col-md-12"
+      >
         Category is required
       </div>
+      <!-- Default checked -->
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          name="requestReadAccess"
+          [(ngModel)]="role.requestReadAccess"
+        />
+        <label class="custom-control-label" for="customSwitch1"
+          >Toggle this switch element</label
+        >
+      </div>
       <div class="col-md-12 buttondiv">
-        <button class="btn btn-success" [ngClass]="{disabled:!roleForm.form.valid}" [disabled]="!roleForm.form.valid" type="submit">
+        <button
+          class="btn btn-success"
+          [ngClass]="{ disabled: !roleForm.form.valid }"
+          [disabled]="!roleForm.form.valid"
+          type="submit"
+        >
           Create Role
         </button>
       </div>

@@ -1,4 +1,4 @@
-const { Response, Request, RequestHistory } = require("../models");
+const { Response, Request, RequestHistory, User } = require("../models");
 const done = (err, data) => {
   console.log(err, data);
 };
@@ -111,4 +111,34 @@ exports.addComment = function (req, res) {
       );
     }
   );
+};
+
+exports.roleassigned = function (req, res) {
+  const { userid } = req.params;
+  User.findById(userid, {}, { populate: "role" }, (useErr, userData) => {
+    if (useErr)
+      res.json(new Response({ message: "fail", data: null, code: 200 }));
+    else {
+      let query = { assignedTo: userid };
+      if (userData.role.requestReadAccess) query = {};
+      
+      Request.find(
+        query,
+        {},
+        {
+          populate: [
+            { path: "category", select: { _id: 1, name: 1 } },
+            { path: "assignedTo", select: { _id: 1, fName: 1, lName: 1 } },
+            { path: "role", select: { _id: 1, name: 1 } },
+            { path: "createdBy", select: { _id: 1, fName: 1, lName: 1 } },
+          ],
+        },
+
+        (err, data) =>
+          err
+            ? res.send(err)
+            : res.json(new Response({ message: "success", data, code: 200 }))
+      );
+    }
+  });
 };

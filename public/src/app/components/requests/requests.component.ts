@@ -12,6 +12,8 @@ import utils from "src/app/utils/utils.json";
   styleUrls: ["./requests.component.css"],
 })
 export class RequestsComponent implements OnInit {
+  user = JSON.parse(localStorage.getItem("user"));
+  
   requests = [];
   categories = [];
   status = [];
@@ -31,7 +33,7 @@ export class RequestsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._request.list().subscribe((res) => {
+    this._request.listByRole(this.user._id).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else {
         this.requests = res.data;

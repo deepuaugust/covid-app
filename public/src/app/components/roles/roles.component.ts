@@ -48,17 +48,8 @@ export class RolesComponent implements OnInit {
           },
         ];
         this.rowData = this.roles;
-        this.categories = Array.from(
-          new Set(this.roles.map((item) => item.category.name))
-        );
-        this.showRoles(this.roles[0].category.name);
       }
     });
-  }
-
-  showRoles(category){
-    this.filtered_roles = this.roles.filter(item => item.category.name === category);
-    this.selectedCategory = category;
   }
 
   onGridReady(params) {

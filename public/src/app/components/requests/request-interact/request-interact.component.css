@@ -1,0 +1,104 @@
+.main {
+  width: 50%;
+  box-shadow: 3px 3px 3px 3px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  position: absolute;
+  top: 1%;
+  right: 50%;
+  -ms-transform: translate(50%, 0%);
+  transform: translate(50%, 0%);
+}
+
+form {
+  border: 3px solid #f1f1f1;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+select, textarea {
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: lightgrey;
+}
+
+.buttondiv {
+  text-align: center;
+}
+
+.stepdiv {
+  background-color: red;
+  width: 500px;
+  height: 150px;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border: 1px solid black;
+}
+
+.journeydiv {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.arrow {
+  height: 90px;
+}
+
+.new {
+  background-color: blanchedalmond;
+}
+
+.inprogress {
+  background-color: yellow;
+}
+
+.resolved {
+  background-color: green;
+  color: white;
+}
+
+.archive {
+  background-color: blue;
+  color: white;
+}
+
+.separator {
+  height: 10px;
+  background-color: black;
+  margin: 50px 0 50px 0;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948;
+  /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+  /* red */
+}

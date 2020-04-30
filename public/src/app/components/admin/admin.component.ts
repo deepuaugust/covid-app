@@ -1,22 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: "app-admin",
+  templateUrl: "./admin.component.html",
+  styleUrls: ["./admin.component.css"],
 })
 export class AdminComponent implements OnInit {
-  user = {}
+  user = JSON.parse(localStorage.getItem("user"));
 
-  constructor(private _user: UserService) { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  login(data){
-    localStorage.setItem("token","")
-    this._user.login(data);
-  }
-
+  login() {}
 }

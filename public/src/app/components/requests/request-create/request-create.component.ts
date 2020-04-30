@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ToasterService } from "../../../services/toaster.service";
 import { UserService } from "src/app/services/user.service";
 import { CategoryService } from "src/app/services/category.service";
@@ -22,11 +22,12 @@ export class RequestCreateComponent implements OnInit {
   users = [];
   countryList = countries;
 
-  statuses = utils.statuses;
+  statuses = []; // utils.statuses;
   communicationModes = utils.communicationModes;
 
   constructor(
     private route: Router,
+    private _route: ActivatedRoute,
     private _user: UserService,
     private _category: CategoryService,
     private _roles: RolesService,
@@ -61,8 +62,29 @@ export class RequestCreateComponent implements OnInit {
     });
   };
 
+  setStaus() {
+    const { url } = this.route;
+    if (url.indexOf("create") > -1) {
+      this.request["status"] = 1;
+    } else if (url.indexOf("edit") > -1)
+      this.statuses = utils.statuses.filter((d) => d.value != 1);
+  }
+
+  loadData() {
+    const { url } = this.route;
+    if (url.indexOf("edit") > -1) {
+      const id = this._route.snapshot.params["id"];
+      this._request.getById(id).subscribe((res) => {
+        if (res.message == "success" && res.data[0]) this.request = res.data[0];
+        else this.toaster.showError(res.message);
+      });
+    }
+  }
+
   ngOnInit() {
+    this.setStaus();
     this.loadCategories();
+    this.loadData();
   }
 
   createRequest = (request) => {

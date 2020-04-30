@@ -4,6 +4,8 @@ const requestController = require("../controllers/request");
 
 router.get("/", requestController.list);
 
+router.get("/:id", requestController.list);
+
 router.get("/roleassigned/:userid", requestController.roleassigned);
 
 router.get("/interact/:requestid", requestController.interact);

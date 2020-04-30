@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  user = JSON.parse(localStorage.getItem("user"));
+
   openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }

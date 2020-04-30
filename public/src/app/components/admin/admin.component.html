@@ -1,41 +1,56 @@
 <div class="col-md-12 heading">SELECT THE REQUIRED OPTION</div>
 <div class="main col-md-11">
-
   <div class="container">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div class="col-md-3 imgdiv" routerLink="/admin_home/user">
+          <div
+            class="col-md-3 imgdiv"
+            routerLink="/admin_home/user"
+            *ngIf="user.type == 'admin' || user.type == 'superAdmin'"
+          >
             <img
-              width="200"
-              height="200"
+              width="100"
+              height="100"
               class="col-md-12"
               src="../../../assets/images/user.png"
             />
             <div class="col-md-12 imgtxt">USERS</div>
           </div>
-          <div class="col-md-3 imgdiv" routerLink="/category">
+          <div
+            class="col-md-3 imgdiv"
+            routerLink="/category"
+            *ngIf="user.type == 'admin'"
+          >
             <img
-              width="200"
-              height="200"
+              width="100"
+              height="100"
               class="col-md-12"
               src="../../../assets/images/category.png"
             />
             <div class="col-md-12 imgtxt">CATEGORIES</div>
           </div>
-          <div class="col-md-3 imgdiv" routerLink="/roles">
+          <div
+            class="col-md-3 imgdiv"
+            routerLink="/roles"
+            *ngIf="user.type == 'admin'"
+          >
             <img
-              width="200"
-              height="200"
+              width="100"
+              height="100"
               class="col-md-12"
               src="../../../assets/images/role.png"
             />
             <div class="col-md-12 imgtxt">ROLES</div>
           </div>
-          <div class="col-md-3 imgdiv" routerLink="/requests">
+          <div
+            class="col-md-3 imgdiv"
+            routerLink="/requests"
+            *ngIf="user.type != 'superAdmin'"
+          >
             <img
-              width="200"
-              height="200"
+              width="100"
+              height="100"
               class="col-md-12"
               src="../../../assets/images/request.png"
             />

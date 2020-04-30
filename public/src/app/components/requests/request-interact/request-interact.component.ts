@@ -13,19 +13,23 @@ import { ActivatedRoute } from "@angular/router";
 export class RequestInteractComponent implements OnInit {
   request = {};
   updates = {};
-  user = JSON.parse(localStorage.getItem("user"));
+  user = JSON.parse(localStorage.getItem("user")) || {};
+  isVolunteer = false;
   assignments = [];
   comments = [];
   requestdata = [];
   countryList = countries;
-  statuses = utils.statuses;
+  statuses = [];
   communicationModes = utils.communicationModes;
 
   constructor(
     private _request: RequestService,
     private toaster: ToasterService,
     private _route: ActivatedRoute
-  ) {}
+  ) {
+    console.log(this.user.role.requestReadAccess);
+    this.isVolunteer = this.user.role && this.user.role.requestReadAccess;
+  }
 
   loadData() {
     const id = this._route.snapshot.params["id"];
@@ -35,6 +39,7 @@ export class RequestInteractComponent implements OnInit {
       else {
         const { data } = res;
         this.request = data;
+        this.setStaus();
         this.assignments = this.request["assignment"];
         this.comments = this.request["comments"];
         this.processRequestData();
@@ -53,16 +58,17 @@ export class RequestInteractComponent implements OnInit {
             this.assignments[i].assignedTo.lName,
           status: this.getStatus(this.assignments[i].status),
           statusid: this.assignments[i].status,
-          comment: 'Request Initiated',
+          comment: "Request Initiated",
         });
       } else {
         this.requestdata.push({
-          assigned: this.assignments[i].assignedTo ?
-            this.assignments[i].assignedTo.fName +
-            " " +
-            this.assignments[i].assignedTo.lName : this.assignments[0].assignedTo.fName +
-            " " +
-            this.assignments[0].assignedTo.lName,
+          assigned: this.assignments[i].assignedTo
+            ? this.assignments[i].assignedTo.fName +
+              " " +
+              this.assignments[i].assignedTo.lName
+            : this.assignments[0].assignedTo.fName +
+              " " +
+              this.assignments[0].assignedTo.lName,
           status: this.getStatus(this.assignments[i].status),
           statusid: this.assignments[i].status,
           comment: this.comments[i - 1].comment,
@@ -77,10 +83,22 @@ export class RequestInteractComponent implements OnInit {
   }
 
   update(commentData) {
+    let req = commentData;
+    req["user"] = this.user._id;
     this._request.addComment(commentData).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else this.loadData();
     });
+  }
+
+  setStaus() {
+    console.log(this.isVolunteer);
+    if (this.isVolunteer)
+      this.statuses = utils.statuses.filter((d) => d.value != 1);
+    else
+      this.statuses = utils.statuses.filter(
+        (d) => d.value != 1 && d.value != 2 && d.value != 5
+      );
   }
 
   ngOnInit() {

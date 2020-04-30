@@ -181,34 +181,34 @@
         >
       </select>
       <div
-        [hidden]="status.valid || status.pristine"
+        [hidden]="communicationMedium.valid || communicationMedium.pristine"
         class="alert alert-danger col-md-12"
       >
-      Preferred communication medium is required
+        Preferred communication medium is required
       </div>
-
-      <label class="col-md-12" for="status">
-        <b>Status</b>
-      </label>
-      <select
-        [(ngModel)]="request.status"
-        class="form-control col-md-12"
-        name="status"
-        required
-        #status="ngModel"
-      >
-        <option disabled> Status</option>
-        <option *ngFor="let status of statuses" [ngValue]="status.value">{{
-          status.label
-        }}</option>
-      </select>
-      <div
-        [hidden]="status.valid || status.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Status is required
+      <div *ngIf="statuses.length > 1">
+        <label class="col-md-12" for="status">
+          <b>Status</b>
+        </label>
+        <select
+          [(ngModel)]="request.status"
+          class="form-control col-md-12"
+          name="status"
+          required
+          #status="ngModel"
+        >
+          <option disabled> Status</option>
+          <option *ngFor="let status of statuses" [ngValue]="status.value">{{
+            status.label
+          }}</option>
+        </select>
+        <div
+          [hidden]="status.valid || status.pristine"
+          class="alert alert-danger col-md-12"
+        >
+          Status is required
+        </div>
       </div>
-
       <div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
         <b>Please select a category and role to find the relevant assignee.</b>
       </div>

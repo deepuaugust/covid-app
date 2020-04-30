@@ -60,14 +60,21 @@ exports.login = function login(req, res) {
           var token = jwt.createToken(user.toJSON(), JWTsecret, {
             expiresIn: "30m",
           });
-          // return the information including token as JSON
-          res.json(
-            new Response({
-              status: "success",
-              message: "Authentication succesfull.!",
-              data: { jwtToken: token, userDetails: user },
-              code: 200,
-            })
+          User.findById(
+            user._id,
+            { password: 0 },
+            { populate: "role" },
+            (e, userData) => {
+              // return the information including token as JSON
+              res.json(
+                new Response({
+                  status: "success",
+                  message: "Authentication succesfull.!",
+                  data: { jwtToken: token, userDetails: userData },
+                  code: 200,
+                })
+              );
+            }
           );
         } else {
           res.status(201).send({

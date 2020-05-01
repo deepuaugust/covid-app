@@ -37,6 +37,7 @@ export class RequestsComponent implements OnInit {
     this._request.listByRole(this.user._id).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else {
+        console.log(res.data);
         this.requests = res.data;
         this.columnDefs = [
           { headerName: "Request", field: "title", cellStyle: {'border': '1px solid lightgrey'}},

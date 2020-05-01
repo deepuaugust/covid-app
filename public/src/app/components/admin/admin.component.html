@@ -1,60 +1,288 @@
-<div class="col-md-12 heading">SELECT THE REQUIRED OPTION</div>
-<div class="main col-md-11">
+<div class="maindiv col-md-12">
   <div class="container">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div
-            class="col-md-3 imgdiv"
-            routerLink="/admin_home/user"
-            *ngIf="user.type == 'admin' || user.type == 'superAdmin'"
-          >
-            <img
-              width="100"
-              height="100"
-              class="col-md-12"
-              src="../../../assets/images/user.png"
-            />
-            <div class="col-md-12 imgtxt">USERS</div>
+          <div class="col-md-3 imgdiv" routerLink="/admin_home/user" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
+            <div class="card-container">
+              <div class="card">
+                <div class="front">
+                  <div class="cover">
+                    <img src="../../../assets/images/cardbg.jpg" />
+                  </div>
+                  <div class="user">
+                    <img
+                      class="img-circle"
+                      src="../../../assets/images/user.png"
+                    />
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h3 class="name">Users</h3>
+                      <p class="profession"></p>
+
+                      <p class="text-center">
+                        The list of registered users depicting their
+                        corresponding categories and roles can be viewed. A new user can be registered based on availability.
+                      </p>
+                    </div>
+                    <div class="footer"></div>
+                  </div>
+                </div>
+                <!-- end front panel -->
+                <div class="back">
+                  <div class="header">
+                    <h5 class="motto">
+                      "Clean your hands often. Use soap and water, or an
+                      alcohol-based hand rub."
+                    </h5>
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h4 class="text-center">Brief Overview</h4>
+                      <p class="text-center">
+                        The below depicts the total count of users registered
+                        within the application.
+                      </p>
+
+                      <div class="stats-container">
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+                        <div class="stats">
+                          <h4>114</h4>
+                          <p>
+                            Users
+                          </p>
+                        </div>
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer"></div>
+                </div>
+                <!-- end back panel -->
+              </div>
+              <!-- end card -->
+            </div>
+            <!-- end card-container -->
           </div>
-          <div
-            class="col-md-3 imgdiv"
-            routerLink="/category"
-            *ngIf="user.type == 'admin'"
-          >
-            <img
-              width="100"
-              height="100"
-              class="col-md-12"
-              src="../../../assets/images/category.png"
-            />
-            <div class="col-md-12 imgtxt">CATEGORIES</div>
+          <div class="col-md-3 imgdiv" routerLink="/category" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
+            <div class="card-container">
+              <div class="card">
+                <div class="front">
+                  <div class="cover">
+                    <img src="../../../assets/images/cardbg.jpg" />
+                  </div>
+                  <div class="user">
+                    <img
+                      class="img-circle"
+                      src="../../../assets/images/category.png"
+                    />
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h3 class="name">Categories</h3>
+                      <p class="profession"></p>
+
+                      <p class="text-center">
+                        All the categories within the system can be viewed. A
+                        new category can be created based on the incoming
+                        request if not already available.
+                      </p>
+                    </div>
+                    <div class="footer"></div>
+                  </div>
+                </div>
+                <!-- end front panel -->
+                <div class="back">
+                  <div class="header">
+                    <h5 class="motto">
+                      "Maintain a safe distance from anyone who is coughing or
+                      sneezing."
+                    </h5>
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h4 class="text-center">Brief Overview</h4>
+                      <p class="text-center">
+                        The below depicts the total number of categories for
+                        which services are being provided.
+                      </p>
+
+                      <div class="stats-container">
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+
+                        <div class="stats">
+                          <h4>100</h4>
+                          <p>
+                            Categories
+                          </p>
+                        </div>
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer"></div>
+                </div>
+                <!-- end back panel -->
+              </div>
+              <!-- end card -->
+            </div>
+            <!-- end card-container -->
           </div>
-          <div
-            class="col-md-3 imgdiv"
-            routerLink="/roles"
-            *ngIf="user.type == 'admin'"
-          >
-            <img
-              width="100"
-              height="100"
-              class="col-md-12"
-              src="../../../assets/images/role.png"
-            />
-            <div class="col-md-12 imgtxt">ROLES</div>
+          <div class="col-md-3 imgdiv" routerLink="/roles" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
+            <div class="card-container">
+              <div class="card">
+                <div class="front">
+                  <div class="cover">
+                    <img src="../../../assets/images/cardbg.jpg" />
+                  </div>
+                  <div class="user">
+                    <img
+                      class="img-circle"
+                      src="../../../assets/images/role.png"
+                    />
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h3 class="name">Roles</h3>
+                      <p class="profession"></p>
+
+                      <p class="text-center">
+                        All roles within the system can be viewed. A new role
+                        can be created based on the incoming request if not
+                        already available.
+                      </p>
+                    </div>
+                    <div class="footer"></div>
+                  </div>
+                </div>
+                <!-- end front panel -->
+                <div class="back">
+                  <div class="header">
+                    <h5 class="motto">
+                      "Cover your nose and mouth with your bent elbow or a
+                      tissue when you cough or sneeze."
+                    </h5>
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h4 class="text-center">Brief Overview</h4>
+                      <p class="text-center">
+                        The below depicts the total number of roles which are
+                        actively participating for resolving the requests
+                        created.
+                      </p>
+
+                      <div class="stats-container">
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+
+                        <div class="stats">
+                          <h4>250</h4>
+                          <p>
+                            Roles
+                          </p>
+                        </div>
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer"></div>
+                </div>
+                <!-- end back panel -->
+              </div>
+              <!-- end card -->
+            </div>
+            <!-- end card-container -->
           </div>
-          <div
-            class="col-md-3 imgdiv"
-            routerLink="/requests"
-            *ngIf="user.type != 'superAdmin'"
-          >
-            <img
-              width="100"
-              height="100"
-              class="col-md-12"
-              src="../../../assets/images/request.png"
-            />
-            <div class="col-md-12 imgtxt">REQUESTS</div>
+          <div class="col-md-3 imgdiv" routerLink="/requests">
+            <div class="card-container">
+              <div class="card">
+                <div class="front">
+                  <div class="cover">
+                    <img src="../../../assets/images/cardbg.jpg" />
+                  </div>
+                  <div class="user">
+                    <img
+                      class="img-circle"
+                      src="../../../assets/images/request.jpg"
+                    />
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h3 class="name">Requests</h3>
+                      <p class="profession"></p>
+
+                      <p class="text-center">
+                        The complete set of requests can be viewed.
+                        A new request can be regstered by mapping it to the
+                        corresponding service provider.
+                      </p>
+                    </div>
+                    <div class="footer"></div>
+                  </div>
+                </div>
+                <!-- end front panel -->
+                <div class="back">
+                  <div class="header">
+                    <h5 class="motto">
+                      "Follow the directions of your local health authority."
+                    </h5>
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h4 class="text-center">Brief Overview</h4>
+                      <p class="text-center">
+                        The below depicts the total count of requests that have
+                        been raised along with their corresponding statuses..
+                      </p>
+
+                      <div class="stats-container">
+                        <div class="stats">
+                          <h4>235</h4>
+                          <p>
+                            New
+                          </p>
+                        </div>
+                        <div class="stats">
+                          <h4>120</h4>
+                          <p>
+                            In Progress
+                          </p>
+                        </div>
+                        <div class="stats">
+                          <h4>35</h4>
+                          <p>
+                            Resolved
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer"></div>
+                </div>
+                <!-- end back panel -->
+              </div>
+              <!-- end card -->
+            </div>
+            <!-- end card-container -->
           </div>
         </div>
       </div>

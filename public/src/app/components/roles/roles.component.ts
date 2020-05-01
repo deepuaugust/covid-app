@@ -9,7 +9,7 @@ import { ToasterService } from "../../services/toaster.service";
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit {
-
+  user = JSON.parse(localStorage.getItem("user"));
   roles = [];
   categories = [];
   filtered_roles = [];

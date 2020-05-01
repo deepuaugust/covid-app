@@ -9,6 +9,7 @@ import { ToasterService } from "../../services/toaster.service";
   styleUrls: ["./user.component.css"],
 })
 export class UserComponent implements OnInit {
+  user = JSON.parse(localStorage.getItem("user"));
   users = [];
   categories = [];
   filtered_users = [];

@@ -4,7 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css', '../../../assets/styles/rotating-card.css']
 })
 export class AdminComponent implements OnInit {
   user = {}

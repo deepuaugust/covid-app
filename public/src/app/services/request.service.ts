@@ -22,6 +22,9 @@ export class RequestService {
   list(): Observable<any> {
     return this._http.get<any>(this._listUrl);
   }
+  getById(id): Observable<any> {
+    return this._http.get<any>(`${this._listUrl}/${id}`);
+  }
   listByRole(userid): Observable<any> {
     return this._http.get<any>(`${this._getWithRoleUrl}${userid}`);
   }

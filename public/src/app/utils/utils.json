@@ -5,16 +5,20 @@
             "value": 1
         },
         {
-            "label": "In progress",
+            "label": "Re Open",
             "value": 2
         },
         {
-            "label": "Resolved",
+            "label": "In progress",
             "value": 3
         },
         {
-            "label": "Archive",
+            "label": "Resolved",
             "value": 4
+        },
+        {
+            "label": "Archive",
+            "value": 5
         }
     ],
     "communicationModes": [

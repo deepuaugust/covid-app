@@ -1,5 +1,5 @@
 <div class="main col-md-12">
-  <h2 class="col-md-12" style="text-align: center;color:white">Available Requests</h2>
+  <h2 class="col-md-12" style="text-align: center;color:white">Requests</h2>
 
   <div class="col-md-12">
     <ag-grid-angular
@@ -13,10 +13,9 @@
     >
     </ag-grid-angular>
   </div>
-  <div class="col-md-12 buttondiv">
+  <div class="col-md-12 buttondiv" *ngIf="isVolunteer">
     <button class="btn btn-primary" type="button" routerLink="/requests/create">
       Create a new request
     </button>
   </div>
-  <!-- </div> -->
 </div>

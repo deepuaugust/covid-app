@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div class="col-md-3 imgdiv" routerLink="/admin_home/user">
+          <div class="col-md-3 imgdiv" routerLink="/admin_home/user" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
             <div class="card-container">
               <div class="card">
                 <div class="front">
@@ -71,7 +71,7 @@
             </div>
             <!-- end card-container -->
           </div>
-          <div class="col-md-3 imgdiv" routerLink="/category">
+          <div class="col-md-3 imgdiv" routerLink="/category" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
             <div class="card-container">
               <div class="card">
                 <div class="front">
@@ -141,7 +141,7 @@
             </div>
             <!-- end card-container -->
           </div>
-          <div class="col-md-3 imgdiv" routerLink="/roles">
+          <div class="col-md-3 imgdiv" routerLink="/roles" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
             <div class="card-container">
               <div class="card">
                 <div class="front">

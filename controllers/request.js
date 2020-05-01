@@ -4,25 +4,51 @@ const done = (err, data) => {
 };
 
 exports.create = function (req, res) {
-  Request.create(req.body, (err, data) => {
-    if (err) return res.send(err);
-    else {
-      const assignment = [{ assignedTo: data.assignedTo, status: 1 }];
-      if (data.status !== 1)
-        assignment.push({ assignedTo: data.assignedTo, status: data.status });
-      const history = { requestID: data._id, assignment, comments: [] };
-      RequestHistory.create(history, (e, s) => {
-        return res.json(
-          new Response({ message: "success", data: { data, e, s }, code: 200 })
-        );
-      });
-    }
-  });
+  if (req.body._id) {
+    Request.findByIdAndUpdate(
+      req.body._id,
+      { $set: { ...req.body } },
+      (err, data) => {
+        if (err) return res.send(err);
+        else {
+          return res.json(
+            new Response({
+              message: "success",
+              data,
+              code: 200,
+            })
+          );
+        }
+      }
+    );
+  } else {
+    Request.create(req.body, (err, data) => {
+      if (err) return res.send(err);
+      else {
+        const assignment = [{ assignedTo: data.assignedTo, status: 1 }];
+        if (data.status !== 1)
+          assignment.push({ assignedTo: data.assignedTo, status: data.status });
+        const history = { requestID: data._id, assignment, comments: [] };
+        RequestHistory.create(history, (e, s) => {
+          return res.json(
+            new Response({
+              message: "success",
+              data: { data, e, s },
+              code: 200,
+            })
+          );
+        });
+      }
+    });
+  }
 };
 
 exports.list = function (req, res) {
+  let query = {};
+  const { id = "" } = req.params;
+  if (id != "") query = { _id: id };
   Request.find(
-    {},
+    query,
     {},
     {
       populate: [
@@ -79,19 +105,20 @@ exports.addComment = function (req, res) {
     {},
     { populate: "requestID" },
     (err, history) => {
-      let status;
-      let assignedTo;
-      const prevAssignment = history.assignment.length;
+      console.log(err, history);
+      let status = body.status;
+      let assignedTo = history.requestID.assignedTo;
+      const { assignment } = history;
+      const prevAssignment = assignment[assignment.length - 1];
+      if (body.comment != "")
+        history.comments.push({ user: body.user, comment: body.comment });
       if (prevAssignment.status !== body.status) {
         if (body.status === 3) {
           assignedTo = history.requestID.createdBy;
           status = body.status;
-        } else {
-          assignedTo = body.assignedTo;
-          status = body.status;
         }
+
         history.assignment.push({ status, assignedTo });
-        history.comments.push({ user: assignedTo, comment: body.comment });
         history.save(done);
       }
       Request.findByIdAndUpdate(
@@ -120,8 +147,12 @@ exports.roleassigned = function (req, res) {
       res.json(new Response({ message: "fail", data: null, code: 200 }));
     else {
       let query = { assignedTo: userid };
-      if (userData.role.requestReadAccess) query = {};
-      
+      if (
+        (userData.role && userData.role.requestReadAccess) ||
+        userData.type === "admin"
+      )
+        query = {};
+
       Request.find(
         query,
         {},

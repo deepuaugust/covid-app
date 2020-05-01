@@ -9,6 +9,7 @@ import { CategoryService } from "src/app/services/category.service";
   styleUrls: ["./category.component.css"],
 })
 export class CategoryComponent implements OnInit {
+  user = JSON.parse(localStorage.getItem("user"));
   categories = [];
   columnDefs = [];
   rowData = [];

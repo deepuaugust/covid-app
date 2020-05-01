@@ -13,6 +13,7 @@ import utils from "src/app/utils/utils.json";
 })
 export class RequestsComponent implements OnInit {
   user = JSON.parse(localStorage.getItem("user"));
+  isVolunteer = this.user.role && this.user.role.requestReadAccess
   
   requests = [];
   categories = [];

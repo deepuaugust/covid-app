@@ -15,7 +15,7 @@ import utils from "src/app/utils/utils.json";
 })
 export class RequestCreateComponent implements OnInit {
   user = JSON.parse(localStorage.getItem("user"));
-
+  heading = "";
   request = { createdBy: this.user._id };
   categories = [];
   roles = [];
@@ -43,22 +43,39 @@ export class RequestCreateComponent implements OnInit {
   };
 
   onCategoryChange = (category) => {
+    const { url } = this.route;
     this.roles = [];
-    this.request["role"] = "";
-    this.request["assignedTo"] = "";
+    if (url.indexOf("create") > -1) {
+      this.request["role"] = "";
+      this.request["assignedTo"] = "";
+    }
     this._roles.getByCategory(category).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
-      else this.roles = res.data;
+      else {
+        this.roles = res.data;
+        if (url.indexOf("edit") > -1) {
+          this.request["role"] = this.request["role"]._id;
+          this.onRoleChange(this.request["role"]);
+        }
+      }
     });
   };
 
   onRoleChange = (role) => {
+    const { url } = this.route;
     this.users = [];
-    this.request["assignedTo"] = "";
+    if (url.indexOf("create") > -1) {
+      this.request["assignedTo"] = "";
+    }
     const query = { type: "regular", role };
     this._user.dynamicList(query).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
-      else this.users = res.data;
+      else {
+        this.users = res.data;
+        if (url.indexOf("edit") > -1) {
+          this.request["assignedTo"] = this.request["assignedTo"]._id;
+        }
+      }
     });
   };
 
@@ -75,8 +92,11 @@ export class RequestCreateComponent implements OnInit {
     if (url.indexOf("edit") > -1) {
       const id = this._route.snapshot.params["id"];
       this._request.getById(id).subscribe((res) => {
-        if (res.message == "success" && res.data[0]) this.request = res.data[0];
-        else this.toaster.showError(res.message);
+        if (res.message == "success" && res.data[0]) {
+          this.request = res.data[0];
+          this.request["category"] = this.request["category"]._id;
+          this.onCategoryChange(this.request["category"]);
+        } else this.toaster.showError(res.message);
       });
     }
   }
@@ -85,6 +105,8 @@ export class RequestCreateComponent implements OnInit {
     this.setStaus();
     this.loadCategories();
     this.loadData();
+    const id = this._route.snapshot.params["id"];
+    this.heading = id == undefined || id == null ? "Create" : "Edit";
   }
 
   createRequest = (request) => {

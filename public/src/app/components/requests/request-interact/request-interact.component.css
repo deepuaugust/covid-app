@@ -1,5 +1,5 @@
 .main {
-  width: 50%;
+  width: 80%;
   box-shadow: 3px 3px 3px 3px;
   background-color: white;
   border-radius: 20px;
@@ -9,6 +9,11 @@
   right: 50%;
   -ms-transform: translate(50%, 0%);
   transform: translate(50%, 0%);
+}
+
+.details {
+  margin-top: 20px;
+  text-align: center;
 }
 
 form {

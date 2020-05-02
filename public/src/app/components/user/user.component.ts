@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
   rowData = [];
   gridApi = [];
   gridColumnApi = [];
+  heading = '';
 
   constructor(
     private _users: UserService,
@@ -28,6 +29,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     const type = this.loggedInUser.type === "admin" ? "regular" : "admin";
+    this.heading = (type === "admin" ? 'Admins' : 'Volunteers');
     this._users.listUrlByRole(type).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else {

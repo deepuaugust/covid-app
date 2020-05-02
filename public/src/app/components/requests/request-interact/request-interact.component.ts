@@ -27,7 +27,6 @@ export class RequestInteractComponent implements OnInit {
     private toaster: ToasterService,
     private _route: ActivatedRoute
   ) {
-    console.log(this.user.role.requestReadAccess);
     this.isVolunteer = this.user.role && this.user.role.requestReadAccess;
   }
 

@@ -38,6 +38,8 @@ export class RequestInteractComponent implements OnInit {
       else {
         const { data } = res;
         this.request = data;
+        this.request['requestID'].country = this.getCountries(this.request['requestID'].country);
+        this.request['requestID'].communicationMedium = this.getMedium(this.request['requestID'].communicationMedium);
         this.setStaus();
         this.assignments = this.request["assignment"];
         this.comments = this.request["comments"];
@@ -45,6 +47,16 @@ export class RequestInteractComponent implements OnInit {
         this.updates["id"] = data._id;
       }
     });
+  }
+
+  getMedium(val) {
+    const medium = utils.communicationModes.filter(item => item.value === val);
+    return medium[0].label;
+  }
+
+  getCountries(code) {
+    const country = countries.filter(item => item.code === code);
+    return country[0].name;
   }
 
   processRequestData() {
@@ -91,7 +103,6 @@ export class RequestInteractComponent implements OnInit {
   }
 
   setStaus() {
-    console.log(this.isVolunteer);
     if (this.isVolunteer)
       this.statuses = utils.statuses.filter((d) => d.value != 1);
     else

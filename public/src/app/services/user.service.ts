@@ -19,8 +19,10 @@ export class UserService {
     return localStorage.getItem("token");
   }
 
-  saveToken(token) {
+  saveTokenUser(token, role, user) {
     localStorage.setItem("token", token);
+    localStorage.setItem("role", role);
+    localStorage.setItem("user", user);
   }
 
   signup(data): Observable<any> {
@@ -32,7 +34,9 @@ export class UserService {
   }
 
   logout() {
+    localStorage.setItem("user", "");
     localStorage.setItem("token", "");
+    localStorage.setItem("role", "");
     this.route.navigate(["/login"]);
   }
 

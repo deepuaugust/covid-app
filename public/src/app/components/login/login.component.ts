@@ -17,7 +17,9 @@ export class LoginComponent implements OnInit {
     private toaster: ToasterService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    document.getElementById("menu_id").style.display = "none";
+  }
 
   login(data) {
     localStorage.setItem("token", "");
@@ -25,16 +27,15 @@ export class LoginComponent implements OnInit {
       if (res.data == null) {
         this.toaster.showError(res.msg);
       } else {
-        this._user.saveToken(res.data.jwtToken);
         const { data } = res;
         const role = data.userDetails.type;
-        localStorage.setItem("role", role);
-        localStorage.setItem("user", JSON.stringify(data.userDetails));
+        this._user.saveTokenUser(data.jwtToken, role, JSON.stringify(data.userDetails));
         if (role == "superAdmin" || role == "admin") {
           this.route.navigate(["/admin_home"]);
+          document.getElementById('menu_id').style.display = "block";
         } else {
-          console.log(data)
           this.route.navigate(["/requests"]);}
+          document.getElementById('menu_id').style.display = "block";
       }
     });
   }

@@ -14,7 +14,6 @@ import utils from "src/app/utils/utils.json";
 export class RequestsComponent implements OnInit {
   user = JSON.parse(localStorage.getItem("user"));
   isVolunteer = this.user.role && this.user.role.requestReadAccess
-  
   requests = [];
   categories = [];
   status = [];
@@ -29,7 +28,6 @@ export class RequestsComponent implements OnInit {
 
   constructor(
     private _request: RequestService,
-    private route: Router,
     private toaster: ToasterService
   ) {}
 
@@ -37,7 +35,6 @@ export class RequestsComponent implements OnInit {
     this._request.listByRole(this.user._id).subscribe((res) => {
       if (res.data == null) this.toaster.showError(res.message);
       else {
-        console.log(res.data);
         this.requests = res.data;
         this.columnDefs = [
           { headerName: "Request", field: "title", cellStyle: {'border': '1px solid lightgrey'}},

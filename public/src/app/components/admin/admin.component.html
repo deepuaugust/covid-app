@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div class="col-md-3 imgdiv" routerLink="/admin_home/user" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
+          <div class="col-md-3 imgdiv" routerLink="/home/user" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
             <div class="card-container">
               <div class="card">
                 <div class="front">
@@ -255,24 +255,13 @@
                       </p>
 
                       <div class="stats-container">
-                        <div class="stats">
-                          <h4>235</h4>
+                        <div class="stats"  *ngFor="let summary of requestsSummary" >
+                          <h4>{{summary.count}}</h4>
                           <p>
-                            New
+                            {{statuses[summary._id]}}
                           </p>
                         </div>
-                        <div class="stats">
-                          <h4>120</h4>
-                          <p>
-                            In Progress
-                          </p>
-                        </div>
-                        <div class="stats">
-                          <h4>35</h4>
-                          <p>
-                            Resolved
-                          </p>
-                        </div>
+                        
                       </div>
                     </div>
                   </div>

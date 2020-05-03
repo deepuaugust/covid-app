@@ -65,6 +65,7 @@ exports.list = function (req, res) {
         : res.json(new Response({ message: "success", data, code: 200 }))
   );
 };
+
 exports.update = function (req, res) {
   res.send("TODO");
 };
@@ -171,5 +172,20 @@ exports.roleassigned = function (req, res) {
             : res.json(new Response({ message: "success", data, code: 200 }))
       );
     }
+  });
+};
+
+exports.summary = function (req, res) {
+  const { userid } = req.params;
+  User.findById(userid, (err, user) => {
+    let query = {};
+    if (user.type === "reqular") query = {};
+    Request.aggregate(
+      [{ $group: { _id: "$status", count: { $sum: 1 } } }],
+      (errReq, data) =>
+        errReq
+          ? res.send(errReq)
+          : res.json(new Response({ message: "success", data, code: 200 }))
+    );
   });
 };

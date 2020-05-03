@@ -26,6 +26,6 @@ export class AppComponent {
 
   goToHome() {
     this.closeNav();
-    this.route.navigate(["admin_home"]);
+    this.route.navigate(["home"]);
   }
 }

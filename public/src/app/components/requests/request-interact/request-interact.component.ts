@@ -91,7 +91,6 @@ export class RequestInteractComponent implements OnInit {
   }
 
   setStaus() {
-    console.log(this.isVolunteer);
     if (this.isVolunteer)
       this.statuses = utils.statuses.filter((d) => d.value != 1);
     else

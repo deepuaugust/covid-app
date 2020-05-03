@@ -60,6 +60,10 @@ select {
 }
 
 span.psw {
-    float: right;
-    padding-top: 16px;
-  }
+  float: right;
+  padding-top: 16px;
+}
+
+.custom-control-label {
+  margin-left: 10px;
+}

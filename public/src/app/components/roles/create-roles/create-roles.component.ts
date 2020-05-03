@@ -20,20 +20,32 @@ export class CreateRolesComponent implements OnInit {
   ) {}
 
   loadCategories = () => {
-    this._category.list().subscribe((res) => {
-      if (res.data == null) this.toaster.showError(res.message);
-      else this.categories = res.data;
-    });
+    this._category.list().subscribe(
+      (res) => {
+        if (res.data == null) this.toaster.showError(res.message);
+        else this.categories = res.data;
+      },
+      (error) => {
+        this.toaster.showError(error.error.message);
+        this.route.navigate(["login"]);
+      }
+    );
   };
 
   ngOnInit() {
-    this.loadCategories()
+    this.loadCategories();
   }
 
   create(data) {
-    this._role.create(data).subscribe((res) => {
-      if (res.code == 200) this.route.navigate(["/roles"]);
-      else this.toaster.showError(res.message);
-    });
+    this._role.create(data).subscribe(
+      (res) => {
+        if (res.code == 200) this.route.navigate(["/roles"]);
+        else this.toaster.showError(res.message);
+      },
+      (error) => {
+        this.toaster.showError(error.error.message);
+        this.route.navigate(["login"]);
+      }
+    );
   }
 }

@@ -212,7 +212,7 @@
             </div>
             <!-- end card-container -->
           </div>
-          <div class="col-md-3 imgdiv" routerLink="/requests">
+          <div class="col-md-3 imgdiv" routerLink="/requests" *ngIf="user.type">
             <div class="card-container">
               <div class="card">
                 <div class="front">

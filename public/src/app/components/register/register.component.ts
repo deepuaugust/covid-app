@@ -11,8 +11,17 @@ import { RolesService } from "src/app/services/role.service";
   styleUrls: ["./register.component.css"],
 })
 export class RegisterComponent implements OnInit {
-  loggedInUser = JSON.parse(localStorage.getItem("user"));
-  type = this.loggedInUser.type === "admin" ? "regular" : "admin";
+  loggedInUser = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : "";
+  // type = this.loggedInUser.type === "admin" ? "regular" : "admin";
+
+  type =
+    this.loggedInUser !== ""
+      ? this.loggedInUser.type === "admin"
+        ? "regular"
+        : "admin"
+      : "";
 
   user = { type: this.type };
   roles = [];
@@ -27,17 +36,29 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   loadCategories = () => {
-    this._category.list().subscribe((res) => {
-      if (res.data == null) this.toaster.showError(res.message);
-      else this.categories = res.data;
-    });
+    this._category.list().subscribe(
+      (res) => {
+        if (res.data == null) this.toaster.showError(res.message);
+        else this.categories = res.data;
+      },
+      (error) => {
+        this.toaster.showError(error.error.message);
+        this.route.navigate(["login"]);
+      }
+    );
   };
 
   onChange = (category) => {
-    this._roles.getByCategory(category).subscribe((res) => {
-      if (res.data == null) this.toaster.showError(res.message);
-      else this.roles = res.data;
-    });
+    this._roles.getByCategory(category).subscribe(
+      (res) => {
+        if (res.data == null) this.toaster.showError(res.message);
+        else this.roles = res.data;
+      },
+      (error) => {
+        this.toaster.showError(error.error.message);
+        this.route.navigate(["login"]);
+      }
+    );
   };
 
   ngOnInit() {
@@ -52,7 +73,10 @@ export class RegisterComponent implements OnInit {
           this.route.navigate(["/admin_home/user"]);
         } else this.toaster.showError(data.message);
       },
-      (error) => (this.errorMessage = <any>error)
+      (error) => {
+        this.toaster.showError(error.error.message);
+        this.route.navigate(["login"]);
+      }
     );
   }
 }

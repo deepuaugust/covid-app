@@ -1,4 +1,6 @@
+const mongoose = require("mongoose");
 const { Response, Request, RequestHistory, User } = require("../models");
+
 const done = (err, data) => {
   console.log(err, data);
 };
@@ -178,10 +180,12 @@ exports.roleassigned = function (req, res) {
 exports.summary = function (req, res) {
   const { userid } = req.params;
   User.findById(userid, (err, user) => {
-    let query = {};
-    if (user.type === "reqular") query = {};
+    let match = {};
+    if (user.type === "regular")
+      match = { createdBy: new mongoose.Types.ObjectId(userid) };
+    console.log(match);
     Request.aggregate(
-      [{ $group: { _id: "$status", count: { $sum: 1 } } }],
+      [{ $match: match }, { $group: { _id: "$status", count: { $sum: 1 } } }],
       (errReq, data) =>
         errReq
           ? res.send(errReq)

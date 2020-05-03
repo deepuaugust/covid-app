@@ -150,11 +150,9 @@ exports.roleassigned = function (req, res) {
       res.json(new Response({ message: "fail", data: null, code: 200 }));
     else {
       let query = { assignedTo: userid };
-      if (
-        (userData.role && userData.role.requestReadAccess) ||
-        userData.type === "admin"
-      )
-        query = {};
+      if (userData.role && userData.role.requestReadAccess)
+        query = { createdBy: userid };
+      if (userData.type === "admin") query = {};
 
       Request.find(
         query,

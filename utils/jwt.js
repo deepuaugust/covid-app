@@ -27,7 +27,7 @@ function verifyJWT(req, res, next) {
     } else {
         return res.status(403).send({
             success: false,
-            message: 'Invalid Token.'
+            message: 'Authentication Failed. Please login again.'
         });
     }
 }

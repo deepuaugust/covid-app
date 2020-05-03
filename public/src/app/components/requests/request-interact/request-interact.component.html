@@ -10,32 +10,32 @@
   <div class="col-md-12 details">
     <div class="col-md-6">
       <div class="col-md-12">
-        <b>Full Name:</b> {{ request.requestID.fullName }}
+        <b>Full Name:</b> {{ request.requestID ? request.requestID.fullName : "" }}
       </div>
       <div class="col-md-12">
-        <b>Description:</b> {{ request.requestID.description }}
+        <b>Description:</b> {{ request.requestID ? request.requestID.description : "" }}
       </div>
       <div class="col-md-12">
-        <b>Country:</b> {{ request.requestID.country }}
+        <b>Country:</b> {{ request.requestID ? request.requestID.country : "" }}
       </div>
       <div class="col-md-12">
-        <b>Communication Medium:</b> {{ request.requestID.communicationMedium }}
+        <b>Communication Medium:</b> {{ request.requestID ? request.requestID.communicationMedium : "" }}
       </div>
     </div>
     <div class="col-md-6">
       <div class="col-md-12">
-        <b>Primary Address:</b> {{ request.requestID.currentAddress }}
+        <b>Primary Address:</b> {{ request.requestID ? request.requestID.currentAddress : "" }}
       </div>
       <div class="col-md-12">
-        <b>Native Address:</b> {{ request.requestID.nativeAddress }}
+        <b>Native Address:</b> {{ request.requestID ? request.requestID.nativeAddress : "" }}
       </div>
       <div class="col-md-12">
         <b>Primary Contact Number:</b>
-        {{ request.requestID.primaryContactNumber }}
+        {{ request.requestID ? request.requestID.primaryContactNumber : "" }}
       </div>
       <div class="col-md-12">
         <b>Alternate Contact Number:</b>
-        {{ request.requestID.alternateContactNumber }}
+        {{ request.requestID ? request.requestID.alternateContactNumber : "" }}
       </div>
     </div>
   </div>

@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         const role = data.userDetails.type;
         this._user.saveTokenUser(data.jwtToken, role, JSON.stringify(data.userDetails));
         if (role == "superAdmin" || role == "admin") {
-          this.route.navigate(["/admin_home"]);
+          this.route.navigate(["/home"]);
           document.getElementById('menu_id').style.display = "block";
         } else {
           this.route.navigate(["/requests"]);}

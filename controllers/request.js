@@ -1,4 +1,6 @@
+const mongoose = require("mongoose");
 const { Response, Request, RequestHistory, User } = require("../models");
+
 const done = (err, data) => {
   console.log(err, data);
 };
@@ -65,6 +67,7 @@ exports.list = function (req, res) {
         : res.json(new Response({ message: "success", data, code: 200 }))
   );
 };
+
 exports.update = function (req, res) {
   res.send("TODO");
 };
@@ -171,5 +174,22 @@ exports.roleassigned = function (req, res) {
             : res.json(new Response({ message: "success", data, code: 200 }))
       );
     }
+  });
+};
+
+exports.summary = function (req, res) {
+  const { userid } = req.params;
+  User.findById(userid, (err, user) => {
+    let match = {};
+    if (user.type === "regular")
+      match = { createdBy: new mongoose.Types.ObjectId(userid) };
+    console.log(match);
+    Request.aggregate(
+      [{ $match: match }, { $group: { _id: "$status", count: { $sum: 1 } } }],
+      (errReq, data) =>
+        errReq
+          ? res.send(errReq)
+          : res.json(new Response({ message: "success", data, code: 200 }))
+    );
   });
 };

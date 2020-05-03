@@ -12,6 +12,7 @@ export class RequestService {
   private _interactUrl = "http://localhost:3001/api/request/interact/";
   private _addCommentUrl = "http://localhost:3001/api/request/addcomment/";
   private _getWithRoleUrl = "http://localhost:3001/api/request/roleassigned/";
+  private _summaryUrl = "http://localhost:3001/api/request/summary/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 
@@ -39,5 +40,8 @@ export class RequestService {
   }
   addComment(data): Observable<any> {
     return this._http.post<any>(this._addCommentUrl, data);
+  }
+  summary(id): Observable<any> {
+    return this._http.get<any>(`${this._summaryUrl}${id}`);
   }
 }

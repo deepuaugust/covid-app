@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
       (data) => {
         if (data.status == "success") {
           this.toaster.showSuccess("User registered successfully");
-          this.route.navigate(["/admin_home/user"]);
+          this.route.navigate(["/home/user"]);
         } else this.toaster.showError(data.message);
       },
       (error) => {

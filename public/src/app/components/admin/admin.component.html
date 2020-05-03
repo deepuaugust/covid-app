@@ -3,7 +3,11 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div class="col-md-3 imgdiv" routerLink="/admin_home/user" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
+          <div
+            class="col-md-3 imgdiv"
+            routerLink="/home/user"
+            *ngIf="user.type == 'admin' || user.type == 'superAdmin'"
+          >
             <div class="card-container">
               <div class="card">
                 <div class="front">
@@ -23,7 +27,8 @@
 
                       <p class="text-center">
                         The list of registered users depicting their
-                        corresponding categories and roles can be viewed. A new user can be registered based on availability.
+                        corresponding categories and roles can be viewed. A new
+                        user can be registered based on availability.
                       </p>
                     </div>
                     <div class="footer"></div>
@@ -71,7 +76,11 @@
             </div>
             <!-- end card-container -->
           </div>
-          <div class="col-md-3 imgdiv" routerLink="/category" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
+          <div
+            class="col-md-3 imgdiv"
+            routerLink="/category"
+            *ngIf="user.type == 'admin' || user.type == 'superAdmin'"
+          >
             <div class="card-container">
               <div class="card">
                 <div class="front">
@@ -141,7 +150,11 @@
             </div>
             <!-- end card-container -->
           </div>
-          <div class="col-md-3 imgdiv" routerLink="/roles" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
+          <div
+            class="col-md-3 imgdiv"
+            routerLink="/roles"
+            *ngIf="user.type == 'admin' || user.type == 'superAdmin'"
+          >
             <div class="card-container">
               <div class="card">
                 <div class="front">
@@ -231,8 +244,8 @@
                       <p class="profession"></p>
 
                       <p class="text-center">
-                        The complete set of requests can be viewed.
-                        A new request can be regstered by mapping it to the
+                        The complete set of requests can be viewed. A new
+                        request can be regstered by mapping it to the
                         corresponding service provider.
                       </p>
                     </div>
@@ -255,22 +268,13 @@
                       </p>
 
                       <div class="stats-container">
-                        <div class="stats">
-                          <h4>235</h4>
+                        <div
+                          class="stats"
+                          *ngFor="let summary of requestsSummary"
+                        >
+                          <h4>{{ summary.count }}</h4>
                           <p>
-                            New
-                          </p>
-                        </div>
-                        <div class="stats">
-                          <h4>120</h4>
-                          <p>
-                            In Progress
-                          </p>
-                        </div>
-                        <div class="stats">
-                          <h4>35</h4>
-                          <p>
-                            Resolved
+                            {{ statuses[summary._id - 1] }}
                           </p>
                         </div>
                       </div>

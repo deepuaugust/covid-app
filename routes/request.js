@@ -15,8 +15,7 @@ router.get(
 
 router.get("/interact/:requestid", jwt.verifyJWT, requestController.interact);
 
-router.get("/summary/:userid", requestController.summary);
-// router.get("/summary/:userid", jwt.verifyJWT, requestController.summary);
+router.get("/summary/:userid", jwt.verifyJWT, requestController.summary);
 
 router.post("/update", jwt.verifyJWT, requestController.update);
 

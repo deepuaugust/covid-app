@@ -1,20 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const requestController = require("../controllers/request");
+const jwt = require("../utils/jwt");
 
-router.get("/", requestController.list);
+router.get("/", jwt.verifyJWT, requestController.list);
 
-router.get("/:id", requestController.list);
+router.get("/:id", jwt.verifyJWT, requestController.list);
 
-router.get("/roleassigned/:userid", requestController.roleassigned);
+router.get("/roleassigned/:userid", jwt.verifyJWT, requestController.roleassigned);
 
-router.get("/interact/:requestid", requestController.interact);
+router.get("/interact/:requestid", jwt.verifyJWT, requestController.interact);
 
-router.post("/update", requestController.update);
+router.post("/update", jwt.verifyJWT, requestController.update);
 
-router.post("/create", requestController.create);
+router.post("/create", jwt.verifyJWT, requestController.create);
 
-router.post("/addcomment", requestController.addComment);
+router.post("/addcomment", jwt.verifyJWT, requestController.addComment);
 
 module.exports = router;
 

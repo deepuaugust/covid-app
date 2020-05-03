@@ -9,37 +9,49 @@ import { CategoryService } from "src/app/services/category.service";
   styleUrls: ["./category.component.css"],
 })
 export class CategoryComponent implements OnInit {
-  user = JSON.parse(localStorage.getItem("user"));
+  user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : "";
   categories = [];
   columnDefs = [];
   rowData = [];
   gridApi = [];
   gridColumnApi = [];
 
-  constructor(private _category: CategoryService, private route: Router, private toaster: ToasterService) {}
+  constructor(
+    private _category: CategoryService,
+    private route: Router,
+    private toaster: ToasterService
+  ) {}
 
   ngOnInit() {
-    this._category.list().subscribe((res) => {
-      if (res.data == null) this.toaster.showError(res.message);
-      else { 
-        this.categories = res.data;
-        this.columnDefs = [
-          {
-            headerName: "Category",
-            field: "name",
-            cellStyle: { border: "1px solid lightgrey" },
-            sortable: true,
-            filter: true,
-          },
-          {
-            headerName: "Description",
-            field: "description",
-            cellStyle: { border: "1px solid lightgrey" },
-          },
-        ];
-        this.rowData = this.categories;
+    this._category.list().subscribe(
+      (res) => {
+        if (res.data == null) this.toaster.showError(res.message);
+        else {
+          this.categories = res.data;
+          this.columnDefs = [
+            {
+              headerName: "Category",
+              field: "name",
+              cellStyle: { border: "1px solid lightgrey" },
+              sortable: true,
+              filter: true,
+            },
+            {
+              headerName: "Description",
+              field: "description",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+          ];
+          this.rowData = this.categories;
+        }
+      },
+      (error) => {
+        this.toaster.showError(error.error.message);
+        this.route.navigate(["login"]);
       }
-    });
+    );
   }
 
   onGridReady(params) {

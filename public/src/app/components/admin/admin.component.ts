@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { ToasterService } from "src/app/services/toaster.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -6,11 +8,16 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ['./admin.component.css', '../../../assets/styles/rotating-card.css']
 })
 export class AdminComponent implements OnInit {
-  user = JSON.parse(localStorage.getItem("user"));
+  user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : "";
 
-  constructor() {}
+  constructor(private toaster: ToasterService, private route: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.user.type === undefined) { 
+      this.toaster.showError("Authentication Failed. Please login again.");
+      this.route.navigate(['login']);
+    }
+  }
 
   login() {}
 }

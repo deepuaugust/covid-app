@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("../utils/jwt");
 const userController = require("../controllers/user");
 
-router.get("/", userController.list);
+router.get("/", jwt.verifyJWT, userController.list);
 
-router.get("/role/:role", userController.listWithRole);
+router.get("/role/:role", jwt.verifyJWT, userController.listWithRole);
 
-router.post("/listwithquery", userController.listwithquery);
+router.post("/listwithquery", jwt.verifyJWT, userController.listwithquery);
 
-router.post("/update", userController.update);
+router.post("/update", jwt.verifyJWT, userController.update);
 
 module.exports = router;
 

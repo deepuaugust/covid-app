@@ -63,14 +63,35 @@ button {
   border: 1px solid black;
 }
 
+.stepdiv1 {
+  background-color: red;
+  height: 150px;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border: 1px solid black;
+}
+
 .journeydiv {
   text-align: center;
   display: flex;
   justify-content: center;
 }
 
+.journeydiv1 {
+  text-align: center;
+  width: 85%;
+}
+
+.arrowdiv {
+  width: 15%;
+}
+
 .arrow {
-  height: 90px;
+  font-size: 50px;
+  position: relative;
+  top: 50px;
+  right: 15px;
 }
 
 .new {

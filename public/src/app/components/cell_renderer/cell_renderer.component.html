@@ -1,2 +1,2 @@
-<button class="btn btn-primary" type="button" routerLink="/requests/edit/{{data._id}}">Edit</button>
+<button class="btn btn-primary" type="button" *ngIf="readAccess" routerLink="/requests/edit/{{data._id}}">Edit</button>
 <button class="btn btn-primary" type="button" routerLink="/requests/interact/{{data._id}}">Interact</button>

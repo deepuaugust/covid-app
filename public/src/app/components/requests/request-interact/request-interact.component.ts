@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class RequestInteractComponent implements OnInit {
   request = {};
   updates = {};
+  countrycode = '';
   user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : "";
@@ -71,6 +72,7 @@ export class RequestInteractComponent implements OnInit {
 
   getCountries(code) {
     const country = countries.filter((item) => item.code === code);
+    this.countrycode = country[0].dial_code;
     return country[0].name;
   }
 

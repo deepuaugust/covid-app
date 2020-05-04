@@ -8,6 +8,7 @@ export class CategoryService {
   private _createUrl = "http://localhost:3001/api/category/create";
   private _listUrl = "http://localhost:3001/api/category";
   private _updateUrl = "http://localhost:3001/api/category/update";
+  private _summaryUrl = "http://localhost:3001/api/category/summary/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 
@@ -19,5 +20,8 @@ export class CategoryService {
   }
   update(data): Observable<any> {
     return this._http.post<any>(this._updateUrl, data);
+  }
+  summary(): Observable<any> {
+    return this._http.get<any>(this._summaryUrl);
   }
 }

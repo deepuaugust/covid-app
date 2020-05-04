@@ -11,4 +11,6 @@ router.post("/getassignee", jwt.verifyJWT, userController.getAssignee);
 
 router.post("/update", jwt.verifyJWT, userController.update);
 
+router.get("/summary/:role", jwt.verifyJWT, userController.summary);
+
 module.exports = router;

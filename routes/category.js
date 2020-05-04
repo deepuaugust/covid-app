@@ -9,4 +9,6 @@ router.post("/create", jwt.verifyJWT, category.create);
 
 router.post("/update", jwt.verifyJWT, category.update);
 
+router.get("/summary", jwt.verifyJWT, category.summary);
+
 module.exports = router;

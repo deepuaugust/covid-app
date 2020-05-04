@@ -11,5 +11,7 @@ router.post("/create", jwt.verifyJWT, rolesController.create);
 
 router.post("/update", jwt.verifyJWT, rolesController.update);
 
+router.get("/summary", jwt.verifyJWT, rolesController.summary);
+
 module.exports = router;
 

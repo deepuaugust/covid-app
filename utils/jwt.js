@@ -27,6 +27,7 @@ function verifyJWT(req, res, next) {
     } else {
         return res.status(403).send({
             success: false,
+            statusCode: 403,
             message: 'Authentication Failed. Please login again.'
         });
     }

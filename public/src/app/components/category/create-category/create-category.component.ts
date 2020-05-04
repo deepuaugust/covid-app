@@ -32,7 +32,7 @@ export class CreateCategoryComponent implements OnInit {
       },
       (error) => {
         this.toaster.showError(error.error.message);
-        this.route.navigate(["login"]);
+        if (error.error.statusCode === 403) this.route.navigate(["login"]);
       }
     );
   }

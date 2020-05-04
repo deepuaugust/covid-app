@@ -9,7 +9,7 @@ export class UserService {
   private _signupUrl = "http://localhost:3001/api/auth/signup";
   private _listUrl = "http://localhost:3001/api/user";
   private _listUrlByRole = "http://localhost:3001/api/user/role";
-  private _listwithquery = "http://localhost:3001/api/user/listwithquery";
+  private _getassigneeUrl = "http://localhost:3001/api/user/getassignee";
 
   TOKEN_KEY = "token";
 
@@ -48,7 +48,7 @@ export class UserService {
     return this._http.get<any>(`${this._listUrlByRole}/${role}`);
   }
 
-  dynamicList(query): Observable<any> {
-    return this._http.post<any>(this._listwithquery, query);
+  getAssignee(query): Observable<any> {
+    return this._http.post<any>(this._getassigneeUrl, query);
   }
 }

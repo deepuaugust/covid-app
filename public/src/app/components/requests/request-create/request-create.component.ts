@@ -82,7 +82,7 @@ export class RequestCreateComponent implements OnInit {
       this.request["assignedTo"] = "";
     }
     const query = { type: "regular", role };
-    this._user.dynamicList(query).subscribe(
+    this._user.getAssignee(query).subscribe(
       (res) => {
         if (res.data == null) this.toaster.showError(res.message);
         else {

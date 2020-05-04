@@ -104,7 +104,7 @@ export class RequestCreateComponent implements OnInit {
     if (url.indexOf("create") > -1) {
       this.request["status"] = 1;
     } else if (url.indexOf("edit") > -1)
-      this.statuses = utils.statuses.filter((d) => d.value != 1);
+      this.statuses = utils.statuses; //.filter((d) => d.value != 1);
   }
 
   loadData() {

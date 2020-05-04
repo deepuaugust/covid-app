@@ -10,6 +10,7 @@ export class RolesService {
   private _listUrl = "http://localhost:3001/api/roles";
   private _updateUrl = "http://localhost:3001/api/roles/update";
   private _listByCategoryUrl = "http://localhost:3001/api/roles/category/";
+  private _summaryUrl = "http://localhost:3001/api/roles/summary/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 
@@ -24,5 +25,8 @@ export class RolesService {
   }
   getByCategory(category): Observable<any> {
     return this._http.get<any>(`${this._listByCategoryUrl}${category}`);
+  }
+  summary(): Observable<any> {
+    return this._http.get<any>(this._summaryUrl);
   }
 }

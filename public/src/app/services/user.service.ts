@@ -10,6 +10,7 @@ export class UserService {
   private _listUrl = "http://localhost:3001/api/user";
   private _listUrlByRole = "http://localhost:3001/api/user/role";
   private _getassigneeUrl = "http://localhost:3001/api/user/getassignee";
+  private _summaryUrl = "http://localhost:3001/api/user/summary/";
 
   TOKEN_KEY = "token";
 
@@ -50,5 +51,8 @@ export class UserService {
 
   getAssignee(query): Observable<any> {
     return this._http.post<any>(this._getassigneeUrl, query);
+  }
+  summary(type): Observable<any> {
+    return this._http.get<any>(`${this._summaryUrl}${type}`);
   }
 }

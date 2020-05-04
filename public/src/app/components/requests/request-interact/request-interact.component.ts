@@ -58,7 +58,7 @@ export class RequestInteractComponent implements OnInit {
       },
       (error) => {
         this.toaster.showError(error.error.message);
-        this.router.navigate(["login"]);
+        if (error.error.statusCode === 403) this.router.navigate(["login"]);
       }
     );
   }
@@ -120,7 +120,7 @@ export class RequestInteractComponent implements OnInit {
       },
       (error) => {
         this.toaster.showError(error.error.message);
-        this.router.navigate(["login"]);
+        if (error.error.statusCode === 403) this.router.navigate(["login"]);
       }
     );
   }

@@ -45,7 +45,7 @@ export class RequestCreateComponent implements OnInit {
       },
       (error) => {
         this.toaster.showError(error.error.message);
-        this.route.navigate(["login"]);
+        if (error.error.statusCode === 403) this.route.navigate(["login"]);
       }
     );
   };
@@ -70,7 +70,7 @@ export class RequestCreateComponent implements OnInit {
       },
       (error) => {
         this.toaster.showError(error.error.message);
-        this.route.navigate(["login"]);
+        if (error.error.statusCode === 403) this.route.navigate(["login"]);
       }
     );
   };
@@ -94,7 +94,7 @@ export class RequestCreateComponent implements OnInit {
       },
       (error) => {
         this.toaster.showError(error.error.message);
-        this.route.navigate(["login"]);
+        if (error.error.statusCode === 403) this.route.navigate(["login"]);
       }
     );
   };
@@ -121,7 +121,7 @@ export class RequestCreateComponent implements OnInit {
         },
         (error) => {
           this.toaster.showError(error.error.message);
-          this.route.navigate(["login"]);
+          if (error.error.statusCode === 403) this.route.navigate(["login"]);
         }
       );
     }
@@ -143,7 +143,7 @@ export class RequestCreateComponent implements OnInit {
       },
       (error) => {
         this.toaster.showError(error.error.message);
-        this.route.navigate(["login"]);
+        if (error.error.statusCode === 403) this.route.navigate(["login"]);
       }
     );
   };

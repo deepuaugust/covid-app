@@ -65,3 +65,12 @@ exports.getAssignee = function (req, res) {
 exports.update = function (req, res) {
   res.send("TODO");
 };
+
+exports.summary = function (req, res) {
+  const type = req.params.role;
+  User.countDocuments({ type }, (err, c) =>
+    err
+      ? res.send(err)
+      : res.json(new Response({ message: "success", data: c, code: 200 }))
+  );
+};

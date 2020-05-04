@@ -270,7 +270,7 @@
       >
         <option disabled> Assign To</option>
         <option *ngFor="let user of users" [ngValue]="user._id"
-          >{{ user.fName }} {{ user.lName }}</option
+          >{{ user.fName }} {{ user.lName }} assigned to {{user.total}} requests.</option
         >
       </select>
       <div

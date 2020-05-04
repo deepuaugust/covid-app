@@ -6,6 +6,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./cell_renderer.component.css"],
 })
 export class CellRendererComponent implements OnInit {
+  user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : "";
+  readAccess = this.user.role && this.user.role.requestReadAccess;
   data: any;
   params: any;
   constructor() {}
@@ -16,8 +20,4 @@ export class CellRendererComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  alert1(msg) {
-    alert(msg);
-  }
 }

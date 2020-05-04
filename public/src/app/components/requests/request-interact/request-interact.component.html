@@ -10,32 +10,45 @@
   <div class="col-md-12 details">
     <div class="col-md-6">
       <div class="col-md-12">
-        <b>Full Name:</b> {{ request.requestID ? request.requestID.fullName : "" }}
+        <b>Full Name:</b>
+        {{ request.requestID ? request.requestID.fullName : "" }}
       </div>
       <div class="col-md-12">
-        <b>Description:</b> {{ request.requestID ? request.requestID.description : "" }}
+        <b>Description:</b>
+        {{ request.requestID ? request.requestID.description : "" }}
       </div>
       <div class="col-md-12">
         <b>Country:</b> {{ request.requestID ? request.requestID.country : "" }}
       </div>
       <div class="col-md-12">
-        <b>Communication Medium:</b> {{ request.requestID ? request.requestID.communicationMedium : "" }}
+        <b>Communication Medium:</b>
+        {{ request.requestID ? request.requestID.communicationMedium : "" }}
       </div>
     </div>
     <div class="col-md-6">
       <div class="col-md-12">
-        <b>Primary Address:</b> {{ request.requestID ? request.requestID.currentAddress : "" }}
+        <b>Primary Address:</b>
+        {{ request.requestID ? request.requestID.currentAddress : "" }}
       </div>
       <div class="col-md-12">
-        <b>Native Address:</b> {{ request.requestID ? request.requestID.nativeAddress : "" }}
+        <b>Native Address:</b>
+        {{ request.requestID ? request.requestID.nativeAddress : "" }}
       </div>
       <div class="col-md-12">
         <b>Primary Contact Number:</b>
-        {{ request.requestID ? request.requestID.primaryContactNumber : "" }}
+        {{
+          request.requestID
+            ? countrycode + request.requestID.primaryContactNumber
+            : ""
+        }}
       </div>
       <div class="col-md-12">
         <b>Alternate Contact Number:</b>
-        {{ request.requestID ? request.requestID.alternateContactNumber : "" }}
+        {{
+          request.requestID
+            ? countrycode + request.requestID.alternateContactNumber
+            : ""
+        }}
       </div>
     </div>
   </div>
@@ -43,7 +56,7 @@
   <h3 style="text-align: center;" *ngIf="request.requestID">
     Request Status
   </h3>
-  <div class="col-md-12" *ngFor="let item of requestdata; let last = last">
+  <!-- <div class="col-md-12" *ngFor="let item of requestdata; let last = last">
     <div class="col-md-12 journeydiv">
       <div
         class="stepdiv col-md-12"
@@ -62,7 +75,29 @@
     <div class="col-md-12 journeydiv" *ngIf="!last">
       <div class="arrow"><span style="font-size: 50px;">&#8595;</span></div>
     </div>
+  </div> -->
+  <div class="col-md-12">
+  <div class="col-md-4" *ngFor="let item of requestdata; let last = last">
+    <div class="col-md-11 journeydiv1">
+      <div
+        class="stepdiv1 col-md-12"
+        [ngClass]="{
+          new: item.statusid === 1,
+          inprogress: item.statusid == 2,
+          resolved: item.statusid == 3,
+          archive: item.statusid == 4
+        }"
+      >
+        <b>Assigned To:</b> {{ item.assigned }}
+        <div class="col-md-12"><b>Status:</b> {{ item.status }}</div>
+        <div class="col-md-12"><b>Comment:</b> {{ item.comment }}</div>
+      </div>
+    </div>
+    <div class="col-md-1 arrowdiv" *ngIf="!last">
+      <div><span class="arrow">&#8594;</span></div>
+    </div>
   </div>
+</div>
   <div class="separator col-md-12"></div>
   <div
     *ngIf="(request.requestID && request.requestID.status != 4) || isVolunteer"

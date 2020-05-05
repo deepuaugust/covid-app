@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
     ? JSON.parse(localStorage.getItem("user"))
     : "";
   type = this.user.type === "superAdmin" ? "admin" : "regular";
-  userType = this.user.type === "superAdmin" ? "Admins" : "Service Providers";
+  userType = this.user.type === "superAdmin" ? "Admins" : "Volunteers/Service Providers";
 
   constructor(
     private toaster: ToasterService,

@@ -116,7 +116,7 @@ exports.addComment = function (req, res) {
       if (body.comment != "")
         history.comments.push({ user: body.user, comment: body.comment });
       if (prevAssignment.status !== body.status) {
-        if (body.status === 3) {
+        if (body.status === 4) {
           assignedTo = history.requestID.createdBy;
           status = body.status;
         }

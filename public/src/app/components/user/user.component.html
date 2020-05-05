@@ -1,5 +1,7 @@
 <div class="main col-md-12">
-  <h2 class="col-md-12" style="text-align: center; color:white">Available {{heading}}</h2>
+  <h2 class="col-md-12" style="text-align: center; color: white;">
+    Available {{ heading }}
+  </h2>
 
   <div class="col-md-12">
     <ag-grid-angular
@@ -14,9 +16,22 @@
     >
     </ag-grid-angular>
   </div>
-  <div class="col-md-12 buttondiv" *ngIf="user.type == 'admin' || user.type == 'superAdmin'">
-    <button class="btn btn-primary" type="button" routerLink="/home/register">
+  <div class="col-md-12 buttondiv">
+    <button
+      *ngIf="user.type == 'admin'"
+      class="btn btn-primary"
+      type="button"
+      routerLink="/home/register"
+    >
       Create a new user
+    </button>
+    <button
+      *ngIf="user.type == 'superAdmin'"
+      class="btn btn-primary"
+      type="button"
+      routerLink="/home/register"
+    >
+      Create a new Admin
     </button>
   </div>
 </div>

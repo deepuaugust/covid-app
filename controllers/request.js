@@ -1,30 +1,51 @@
 const mongoose = require("mongoose");
 const { Response, Request, RequestHistory, User } = require("../models");
 
-const done = (err, data) => {
+const handler = (err, data) => {
   console.log(err, data);
 };
 
-exports.create = function (req, res) {
-  if (req.body._id) {
-    Request.findByIdAndUpdate(
-      req.body._id,
-      { $set: { ...req.body } },
-      (err, data) => {
-        if (err) return res.send(err);
-        else {
-          return res.json(
-            new Response({
-              message: "success",
-              data,
-              code: 200,
-            })
+exports.create = function (req, res, next) {
+  const { body } = req;
+  if (body._id) {
+    Request.findById(body._id)
+      .lean()
+      .exec((requestErr, requestData) => {
+        if (
+          requestData &&
+          (requestData.status !== body.status ||
+            requestData.assignedTo != body.assignedTo)
+        ) {
+          console.log("to be updated");
+          RequestHistory.updateOne(
+            { requestID: body._id },
+            {
+              $push: {
+                assignment: {
+                  assignedTo: body.assignedTo,
+                  status: body.status,
+                },
+              },
+            },
+            handler
           );
         }
+      });
+
+    Request.findByIdAndUpdate(body._id, { $set: { ...body } }, (err, data) => {
+      if (err) return res.send(err);
+      else {
+        return res.json(
+          new Response({
+            message: "success",
+            data,
+            code: 200,
+          })
+        );
       }
-    );
+    });
   } else {
-    Request.create(req.body, (err, data) => {
+    Request.create(body, (err, data) => {
       if (err) return res.send(err);
       else {
         const assignment = [{ assignedTo: data.assignedTo, status: 1 }];
@@ -108,7 +129,6 @@ exports.addComment = function (req, res) {
     {},
     { populate: "requestID" },
     (err, history) => {
-      console.log(err, history);
       let status = body.status;
       let assignedTo = history.requestID.assignedTo;
       const { assignment } = history;
@@ -122,7 +142,7 @@ exports.addComment = function (req, res) {
         }
 
         history.assignment.push({ status, assignedTo });
-        history.save(done);
+        history.save(handler);
       }
       Request.findByIdAndUpdate(
         history.requestID,
@@ -181,7 +201,6 @@ exports.summary = function (req, res) {
     let match = {};
     if (user.type === "regular")
       match = { createdBy: new mongoose.Types.ObjectId(userid) };
-    console.log(match);
     Request.aggregate(
       [{ $match: match }, { $group: { _id: "$status", count: { $sum: 1 } } }],
       (errReq, data) =>

@@ -99,7 +99,7 @@ export class RequestInteractComponent implements OnInit {
               this.assignments[0].assignedTo.lName,
           status: this.getStatus(this.assignments[i].status),
           statusid: this.assignments[i].status,
-          comment: this.comments[i - 1].comment,
+          comment: this.comments[i - 1] ? this.comments[i - 1].comment : '',
         });
       }
     }

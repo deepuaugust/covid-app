@@ -17,7 +17,6 @@ export class RequestService {
   constructor(private _http: HttpClient, private route: Router) {}
 
   create(data): Observable<any> {
-    console.log(data);
     return this._http.post<any>(this._createUrl, data);
   }
   list(): Observable<any> {

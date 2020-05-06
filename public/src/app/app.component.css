@@ -41,6 +41,7 @@
   #maindiv {
     transition: margin-left .5s;
     padding: 20px;
+    margin-top: 20px;
   }
 
   .menu {

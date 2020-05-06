@@ -16,7 +16,6 @@ exports.create = function (req, res, next) {
           (requestData.status !== body.status ||
             requestData.assignedTo != body.assignedTo)
         ) {
-          console.log("to be updated");
           RequestHistory.updateOne(
             { requestID: body._id },
             {
@@ -25,6 +24,9 @@ exports.create = function (req, res, next) {
                   assignedTo: body.assignedTo,
                   status: body.status,
                 },
+                comments: {
+                  comment: 'Request modified',
+                }
               },
             },
             handler

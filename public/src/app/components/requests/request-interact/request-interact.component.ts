@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class RequestInteractComponent implements OnInit {
   request = {};
   updates = {};
-  countrycode = '';
+  countrycode = "";
   user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : "";

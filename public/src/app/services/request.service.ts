@@ -2,17 +2,18 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { constants } from "../config";
 
 @Injectable()
 export class RequestService {
-  private _createUrl = "http://localhost:3001/api/request/create";
-  private _listUrl = "http://localhost:3001/api/request";
-  private _updateUrl = "http://localhost:3001/api/request/update";
-  private _listByCategoryUrl = "http://localhost:3001/api/request/category/";
-  private _interactUrl = "http://localhost:3001/api/request/interact/";
-  private _addCommentUrl = "http://localhost:3001/api/request/addcomment/";
-  private _getWithRoleUrl = "http://localhost:3001/api/request/roleassigned/";
-  private _summaryUrl = "http://localhost:3001/api/request/summary/";
+  private _createUrl = constants.apiUrl + "api/request/create";
+  private _listUrl = constants.apiUrl + "api/request";
+  private _updateUrl = constants.apiUrl + "api/request/update";
+  private _listByCategoryUrl = constants.apiUrl + "api/request/category/";
+  private _interactUrl = constants.apiUrl + "api/request/interact/";
+  private _addCommentUrl = constants.apiUrl + "api/request/addcomment/";
+  private _getWithRoleUrl = constants.apiUrl + "api/request/roleassigned/";
+  private _summaryUrl = constants.apiUrl + "api/request/summary/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 

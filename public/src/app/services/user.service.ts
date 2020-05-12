@@ -2,15 +2,16 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { constants } from "../config";
 
 @Injectable()
 export class UserService {
-  private _loginUrl = "http://localhost:3001/api/auth/login";
-  private _signupUrl = "http://localhost:3001/api/auth/signup";
-  private _listUrl = "http://localhost:3001/api/user";
-  private _listUrlByRole = "http://localhost:3001/api/user/role";
-  private _getassigneeUrl = "http://localhost:3001/api/user/getassignee";
-  private _summaryUrl = "http://localhost:3001/api/user/summary/";
+  private _loginUrl = constants.apiUrl + "api/auth/login";
+  private _signupUrl = constants.apiUrl + "api/auth/signup";
+  private _listUrl = constants.apiUrl + "api/user";
+  private _listUrlByRole = constants.apiUrl + "api/user/role";
+  private _getassigneeUrl = constants.apiUrl + "api/user/getassignee";
+  private _summaryUrl = constants.apiUrl + "api/user/summary/";
 
   TOKEN_KEY = "token";
 

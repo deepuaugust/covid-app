@@ -2,13 +2,14 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { constants } from "../config";
 
 @Injectable()
 export class CategoryService {
-  private _createUrl = "http://localhost:3001/api/category/create";
-  private _listUrl = "http://localhost:3001/api/category";
-  private _updateUrl = "http://localhost:3001/api/category/update";
-  private _summaryUrl = "http://localhost:3001/api/category/summary/";
+  private _createUrl = constants.apiUrl + "api/category/create";
+  private _listUrl = constants.apiUrl + "api/category";
+  private _updateUrl = constants.apiUrl + "api/category/update";
+  private _summaryUrl = constants.apiUrl + "api/category/summary/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 

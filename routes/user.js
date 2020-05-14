@@ -5,6 +5,8 @@ const userController = require("../controllers/user");
 
 router.get("/", jwt.verifyJWT, userController.list);
 
+router.get("/:id", jwt.verifyJWT, userController.list);
+
 router.get("/role/:role", jwt.verifyJWT, userController.listWithRole);
 
 router.post("/getassignee", jwt.verifyJWT, userController.getAssignee);

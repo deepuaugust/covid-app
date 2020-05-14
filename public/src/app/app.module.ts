@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: "home/register", component: RegisterComponent },
   { path: "home", component: AdminComponent },
   { path: "home/user", component: UserComponent },
+  { path: "home/user/edit/:id", component: RegisterComponent },
   { path: "category", component: CategoryComponent },
   { path: "category/create", component: CreateCategoryComponent },
   { path: "roles", component: RolesComponent },

@@ -12,6 +12,8 @@ export class UserService {
   private _listUrlByRole = constants.apiUrl + "api/user/role";
   private _getassigneeUrl = constants.apiUrl + "api/user/getassignee";
   private _summaryUrl = constants.apiUrl + "api/user/summary/";
+  private _getByIdUrl = constants.apiUrl + "api/user/";
+  private _updateUserUrl = constants.apiUrl + "api/user/update";
 
   TOKEN_KEY = "token";
 
@@ -29,6 +31,9 @@ export class UserService {
 
   signup(data): Observable<any> {
     return this._http.post(this._signupUrl, data);
+  }
+  update(data): Observable<any> {
+    return this._http.post(this._updateUserUrl, data);
   }
 
   login(loginData): Observable<any> {
@@ -55,5 +60,8 @@ export class UserService {
   }
   summary(type): Observable<any> {
     return this._http.get<any>(`${this._summaryUrl}${type}`);
+  }
+  getById(id): Observable<any> {
+    return this._http.get<any>(`${this._getByIdUrl}${id}`);
   }
 }

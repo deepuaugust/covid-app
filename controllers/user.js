@@ -16,8 +16,10 @@ exports.listWithRole = function (req, res) {
 
 exports.list = function (req, res) {
   let query = {};
+  const { id = "" } = req.params;
+  if (id != "") query = { _id: id };
 
-  User.find(query, {}, (err, data) =>
+  User.find(query, { password: 0 }, (err, data) =>
     err
       ? res.send(err)
       : res.json(new Response({ message: "success", data, code: 200 }))
@@ -63,7 +65,31 @@ exports.getAssignee = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  res.send("TODO");
+  const { body } = req;
+  const { category, role, fName, lName, password } = body;
+  if (!body.userName || !body.password) {
+    res.json(
+      new Response({
+        message: "Please Enter username and password",
+        status: "failed",
+        code: 200,
+      })
+    );
+  } else {
+    User.findByIdAndUpdate(body._id, {
+      $set: { category, role, fName, lName, password },
+    }).exec((err) => {
+      console.log(err);
+      if (err) return res.json({ success: false, msg: err });
+      res.json(
+        new Response({
+          status: "success",
+          message: "User created succesfully.!",
+          code: 200,
+        })
+      );
+    });
+  }
 };
 
 exports.summary = function (req, res) {

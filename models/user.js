@@ -13,6 +13,7 @@ let UserSchema = new Schema({
   type: String,
   createdBy: { type: ObjectId, ref: "Users" },
   created_at: { type: Date, default: Date.now },
+  status: { type: Boolean, default: true },
 });
 
 UserSchema.pre("save", function (next) {
@@ -44,4 +45,4 @@ UserSchema.methods.comparePassword = function (passw, cb) {
   });
 };
 
-module.exports= mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

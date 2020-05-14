@@ -1,6 +1,6 @@
 <div class="main col-md-12">
   <h2 style="text-align: center;">
-    Add {{ loggedInUser.type === "superAdmin" ? "Admin" : "User" }}
+    {{ heading }} {{ loggedInUser.type === "superAdmin" ? "Admin" : "User" }}
   </h2>
 
   <form class="col-md-12" #signupForm="ngForm" (ngSubmit)="signup(user)">
@@ -128,7 +128,12 @@
         </div>
       </div>
       <div class="col-md-12 buttondiv">
-        <button class="btn btn-success" [ngClass]="{disabled:!signupForm.form.valid}" [disabled]="!signupForm.form.valid" type="submit">
+        <button
+          class="btn btn-success"
+          [ngClass]="{ disabled: !signupForm.form.valid }"
+          [disabled]="!signupForm.form.valid"
+          type="submit"
+        >
           Sign Up
         </button>
       </div>

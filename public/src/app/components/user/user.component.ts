@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
 import { ToasterService } from "../../services/toaster.service";
+import { UserCellRendererComponent } from "../cell_renderer/userCellRenderer/cell_renderer.component";
 
 @Component({
   selector: "app-user",
@@ -61,6 +62,12 @@ export class UserComponent implements OnInit {
               field: "role.name",
               sortable: true,
               filter: true,
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Actions",
+              field: "action",
+              cellRendererFramework: UserCellRendererComponent,
               cellStyle: { border: "1px solid lightgrey" },
             },
           ];

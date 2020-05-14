@@ -1,0 +1,17 @@
+<div class="main col-md-12">
+  <h2 class="col-md-12" style="text-align: center; color: white;">
+    Import Data
+  </h2>
+
+  <div class='file-input'>
+    <input type='file' (change)="fileSelect($event)">
+    <span class='button'>Choose</span>
+    <span class='label' data-js-label>No file selected</span>
+  </div>
+
+  <div class="col-md-12 buttondiv">
+    <button class="btn btn-primary" type="button" (click)="uploadJson()">
+      Upload
+    </button>
+  </div>
+</div>

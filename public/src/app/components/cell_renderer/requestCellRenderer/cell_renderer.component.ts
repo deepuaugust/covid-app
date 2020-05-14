@@ -5,7 +5,7 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./cell_renderer.component.html",
   styleUrls: ["./cell_renderer.component.css"],
 })
-export class CellRendererComponent implements OnInit {
+export class RequestCellRendererComponent implements OnInit {
   user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : "";

@@ -24,8 +24,10 @@ import { CategoryService } from './services/category.service';
 import { RolesService } from './services/role.service';
 import { RequestService } from './services/request.service';
 import { AuthInterceptorService } from "./authInterceptor.service";
-import { CellRendererComponent } from './components/cell_renderer/cell_renderer.component';
+import { RequestCellRendererComponent } from './components/cell_renderer/requestCellRenderer/cell_renderer.component';
+import { UserCellRendererComponent } from './components/cell_renderer/userCellRenderer/cell_renderer.component';
 import { RequestInteractComponent } from './components/requests/request-interact/request-interact.component';
+import { ExcelImport } from "./components/excelImport/excelImport.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -42,6 +44,7 @@ const routes: Routes = [
   { path: "requests/create", component: RequestCreateComponent },
   { path: "requests/edit/:id", component: RequestCreateComponent },
   { path: "requests/interact/:id", component: RequestInteractComponent },
+  { path: "requests/import", component: ExcelImport },
 ];
 
 @NgModule({
@@ -57,8 +60,10 @@ const routes: Routes = [
     CreateRolesComponent,
     RequestsComponent,
     RequestCreateComponent,
-    CellRendererComponent,
+    RequestCellRendererComponent,
+    UserCellRendererComponent,
     RequestInteractComponent,
+    ExcelImport
   ],
   imports: [
     BrowserModule,
@@ -70,7 +75,7 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     AgGridModule.withComponents([]),
   ],
-  entryComponents:[CellRendererComponent],
+  entryComponents:[RequestCellRendererComponent, UserCellRendererComponent],
   providers: [UserService, CategoryService, RolesService, RequestService, ToasterService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,

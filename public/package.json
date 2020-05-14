@@ -24,6 +24,7 @@
     "ag-grid-community": "^23.0.2",
     "core-js": "^2.5.4",
     "ngx-toastr": "^10.0.0",
+    "xlsx": "0.13.3",
     "rxjs": "6.0.0",
     "zone.js": "^0.8.26"
   },

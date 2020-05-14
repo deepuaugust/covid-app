@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { RequestService } from "../../services/request.service";
 import { ToasterService } from "../../services/toaster.service";
-import { CellRendererComponent } from "../cell_renderer/cell_renderer.component";
+import { RequestCellRendererComponent } from "../cell_renderer/requestCellRenderer/cell_renderer.component";
 import countries from "src/app/utils/countries.json";
 import utils from "src/app/utils/utils.json";
 
@@ -105,7 +105,7 @@ export class RequestsComponent implements OnInit {
             {
               headerName: "Actions",
               field: "action",
-              cellRendererFramework: CellRendererComponent,
+              cellRendererFramework: RequestCellRendererComponent,
               cellStyle: { border: "1px solid lightgrey" },
             },
           ];

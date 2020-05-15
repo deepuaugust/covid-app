@@ -16,8 +16,10 @@ exports.listWithRole = function (req, res) {
 
 exports.list = function (req, res) {
   let query = {};
+  const { id = "" } = req.params;
+  if (id != "") query = { _id: id };
 
-  User.find(query, {}, (err, data) =>
+  User.find(query, { password: 0 }, (err, data) =>
     err
       ? res.send(err)
       : res.json(new Response({ message: "success", data, code: 200 }))
@@ -26,7 +28,11 @@ exports.list = function (req, res) {
 
 exports.getAssignee = function (req, res) {
   let body = req.body;
-  match = { role: new mongoose.Types.ObjectId(body.role), type: body.type };
+  match = {
+    role: new mongoose.Types.ObjectId(body.role),
+    type: body.type,
+    status: true,
+  };
 
   User.aggregate(
     [
@@ -63,7 +69,21 @@ exports.getAssignee = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  res.send("TODO");
+  const { body } = req;
+  const { category, status, role, fName, lName } = body;
+  User.findByIdAndUpdate(body._id, {
+    $set: { category, role, status, fName, lName },
+  }).exec((err) => {
+    console.log(err);
+    if (err) return res.json({ success: false, msg: err });
+    res.json(
+      new Response({
+        status: "success",
+        message: "User created succesfully.!",
+        code: 200,
+      })
+    );
+  });
 };
 
 exports.summary = function (req, res) {

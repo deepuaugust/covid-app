@@ -6,7 +6,7 @@ import utils from "../../utils/utils.json";
 import { RolesService } from "../../services/role.service";
 import { CategoryService } from "../../services/category.service";
 import { UserService } from "../../services/user.service";
-import * as XLSX from 'xlsx';
+import * as XLSX from "xlsx";
 
 @Component({
   selector: "app-admin",
@@ -17,7 +17,7 @@ import * as XLSX from 'xlsx';
   ],
 })
 export class AdminComponent implements OnInit {
-  name = 'This is XLSX TO JSON CONVERTER';
+  name = "This is XLSX TO JSON CONVERTER";
   willDownload = false;
   statuses = utils.statuses.map((d) => d.label);
   requestsSummary = [];
@@ -29,7 +29,8 @@ export class AdminComponent implements OnInit {
     ? JSON.parse(localStorage.getItem("user"))
     : "";
   type = this.user.type === "superAdmin" ? "admin" : "regular";
-  userType = this.user.type === "superAdmin" ? "Admins" : "Volunteers/Service Providers";
+  userType =
+    this.user.type === "superAdmin" ? "Admins" : "Volunteers/Service Providers";
 
   constructor(
     private toaster: ToasterService,

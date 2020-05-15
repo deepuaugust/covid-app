@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ToasterService } from "../../services/toaster.service";
 import { UserService } from "src/app/services/user.service";
 import { CategoryService } from "src/app/services/category.service";
@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
   loggedInUser = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : "";
+  heading = "";
+
   // type = this.loggedInUser.type === "admin" ? "regular" : "admin";
 
   type =
@@ -22,18 +24,22 @@ export class RegisterComponent implements OnInit {
         ? "regular"
         : "admin"
       : "";
-
-  user = { type: this.type };
+  isEditMode = false;
+  user = { type: this.type, status: true };
   roles = [];
   categories = [];
   private errorMessage: string;
   constructor(
     private route: Router,
+    private _route: ActivatedRoute,
     private _user: UserService,
     private _category: CategoryService,
     private _roles: RolesService,
     private toaster: ToasterService
-  ) {}
+  ) {
+    const { url } = this.route;
+    if (url.indexOf("edit") > -1) this.isEditMode = true;
+  }
 
   loadCategories = () => {
     this._category.list().subscribe(
@@ -63,20 +69,55 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.loadCategories();
+    this.loadData();
+    this.heading = this.isEditMode ? "Edit" : "Create";
+  }
+
+  loadData() {
+    if (this.isEditMode) {
+      const id = this._route.snapshot.params["id"];
+      this._user.getById(id).subscribe(
+        (res) => {
+          if (res.message == "success" && res.data[0]) {
+            const [user] = res.data;
+            this.user = user;
+            this.onChange(user.category);
+          } else this.toaster.showError(res.message);
+        },
+        (error) => {
+          this.toaster.showError(error.error.message);
+          if (error.error.statusCode === 403) this.route.navigate(["login"]);
+        }
+      );
+    }
   }
 
   signup(data) {
-    this._user.signup(data).subscribe(
-      (data) => {
-        if (data.status == "success") {
-          this.toaster.showSuccess("User registered successfully");
-          this.route.navigate(["/home/user"]);
-        } else this.toaster.showError(data.message);
-      },
-      (error) => {
-        this.toaster.showError(error.error.message);
-        if (error.error.statusCode === 403) this.route.navigate(["login"]);
-      }
-    );
+    if (this.isEditMode) {
+      this._user.update(data).subscribe(
+        (data) => {
+          if (data.status == "success") {
+            this.toaster.showSuccess("User Updated successfully");
+            this.route.navigate(["/user"]);
+          } else this.toaster.showError(data.message);
+        },
+        (error) => {
+          this.toaster.showError(error.error.message);
+        }
+      );
+    } else {
+      this._user.signup(data).subscribe(
+        (data) => {
+          if (data.status == "success") {
+            this.toaster.showSuccess("User registered successfully");
+            this.route.navigate(["/user"]);
+          } else this.toaster.showError(data.message);
+        },
+        (error) => {
+          this.toaster.showError(error.error.message);
+          if (error.error.statusCode === 403) this.route.navigate(["login"]);
+        }
+      );
+    }
   }
 }

@@ -9,13 +9,16 @@ export class RequestCellRendererComponent implements OnInit {
   user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : "";
-  readAccess = this.user.role && this.user.role.requestReadAccess;
+  readAccess =
+    (this.user.role && this.user.role.requestReadAccess) ||
+    this.user.type === "admin";
   data: any;
   params: any;
   constructor() {}
 
   agInit(params) {
     this.params = params;
+    console.log(this.params)
     this.data = params.data;
   }
 

@@ -8,6 +8,24 @@
   >
     <div class="container col-md-12">
       <label class="col-md-12" for="title">
+        <b>Token</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.token"
+        class="form-control col-md-12"
+        placeholder="Enter Token"
+        name="token"
+        required
+        #token="ngModel"
+      />
+      <div
+        [hidden]="token.valid || token.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Token is required
+      </div>
+      <label class="col-md-12" for="title">
         <b>Title</b>
       </label>
       <input
@@ -270,7 +288,8 @@
       >
         <option disabled> Assign To</option>
         <option *ngFor="let user of users" [ngValue]="user._id"
-          >{{ user.fName }} {{ user.lName }} ({{user.total}} requests in queue)</option
+          >{{ user.fName }} {{ user.lName }} ({{ user.total }} requests in
+          queue)</option
         >
       </select>
       <div

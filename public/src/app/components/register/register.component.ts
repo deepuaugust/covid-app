@@ -24,8 +24,8 @@ export class RegisterComponent implements OnInit {
         ? "regular"
         : "admin"
       : "";
-
-  user = { type: this.type };
+  isEditMode = false;
+  user = { type: this.type, status: true };
   roles = [];
   categories = [];
   private errorMessage: string;
@@ -36,7 +36,10 @@ export class RegisterComponent implements OnInit {
     private _category: CategoryService,
     private _roles: RolesService,
     private toaster: ToasterService
-  ) {}
+  ) {
+    const { url } = this.route;
+    if (url.indexOf("edit") > -1) this.isEditMode = true;
+  }
 
   loadCategories = () => {
     this._category.list().subscribe(
@@ -67,13 +70,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.loadCategories();
     this.loadData();
-    const id = this._route.snapshot.params["id"];
-    this.heading = id == undefined || id == null ? "Create" : "Edit";
+    this.heading = this.isEditMode ? "Edit" : "Create";
   }
 
   loadData() {
-    const { url } = this.route;
-    if (url.indexOf("edit") > -1) {
+    if (this.isEditMode) {
       const id = this._route.snapshot.params["id"];
       this._user.getById(id).subscribe(
         (res) => {
@@ -92,13 +93,12 @@ export class RegisterComponent implements OnInit {
   }
 
   signup(data) {
-    const { url } = this.route;
-    if (url.indexOf("edit") > -1) {
+    if (this.isEditMode) {
       this._user.update(data).subscribe(
         (data) => {
           if (data.status == "success") {
             this.toaster.showSuccess("User Updated successfully");
-            this.route.navigate(["/home/user"]);
+            this.route.navigate(["/user"]);
           } else this.toaster.showError(data.message);
         },
         (error) => {
@@ -110,7 +110,7 @@ export class RegisterComponent implements OnInit {
         (data) => {
           if (data.status == "success") {
             this.toaster.showSuccess("User registered successfully");
-            this.route.navigate(["/home/user"]);
+            this.route.navigate(["/user"]);
           } else this.toaster.showError(data.message);
         },
         (error) => {

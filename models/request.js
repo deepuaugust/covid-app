@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 const { ObjectId } = Schema;
 
 let RequestSchema = new Schema({
-  fullName: { type: String, required: true, max: 100 },
+  token: { type: String, required: true, max: 100, unique: true },
   title: { type: String, required: true, max: 500 },
+  fullName: { type: String, required: true, max: 100 },
   description: { type: String },
   country: { type: String, required: true },
   currentAddress: { type: String },

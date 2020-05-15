@@ -42,6 +42,11 @@ export class RequestsComponent implements OnInit {
           this.requests = res.data;
           this.columnDefs = [
             {
+              headerName: "Token #",
+              field: "token",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
               headerName: "Request",
               field: "title",
               cellStyle: { border: "1px solid lightgrey" },

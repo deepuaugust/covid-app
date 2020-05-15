@@ -66,14 +66,20 @@ exports.login = function login(req, res) {
             { populate: "role" },
             (e, userData) => {
               // return the information including token as JSON
-              res.json(
-                new Response({
-                  status: "success",
-                  message: "Authentication succesfull.!",
-                  data: { jwtToken: token, userDetails: userData },
-                  code: 200,
-                })
-              );
+              if (userData.status)
+                return res.json(
+                  new Response({
+                    status: "success",
+                    message: "Authentication succesfull.!",
+                    data: { jwtToken: token, userDetails: userData },
+                    code: 200,
+                  })
+                );
+              return res.status(201).send({
+                success: false,
+                msg:
+                  "Administrator has disabled your access, please contact administrator.",
+              });
             }
           );
         } else {

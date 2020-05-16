@@ -13,6 +13,7 @@ export class ExcelImport implements OnInit {
     ? JSON.parse(localStorage.getItem("user"))
     : "";
   uploadData = [];
+  uploadType = '';
 
   constructor(private toaster: ToasterService, private route: Router) {}
 
@@ -29,7 +30,7 @@ export class ExcelImport implements OnInit {
       jsonData = workBook.SheetNames.reduce((initial, name) => {
         const sheet = workBook.Sheets[name];
         initial[name] = XLSX.utils.sheet_to_json(sheet);
-        return initial[name];
+        return initial;
       }, {});
       //This is where the data is being displayed. dataString variable contains the json data.
       const dataString = JSON.stringify(jsonData);
@@ -65,6 +66,8 @@ export class ExcelImport implements OnInit {
       this.toaster.showError("Please select a file");
     else {
       console.log(this.uploadData);
+      if(this.uploadData['Medical'] !== undefined) this.uploadType = 'Medical';
+      else this.uploadType = 'Non-Medical';
       this.toaster.showSuccess("Upload successful");
       this.route.navigate(['/requests']);
     }

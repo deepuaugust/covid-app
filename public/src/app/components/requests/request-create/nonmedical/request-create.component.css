@@ -1,0 +1,80 @@
+.main {
+    width: 50%;
+    box-shadow: 3px 3px 3px 3px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    -ms-transform: translate(50%, -20%);
+    transform: translate(50%, -20%);
+    overflow-y: auto;
+  }
+  
+  form {
+    border: 3px solid #f1f1f1;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  
+  input {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 15px;
+  }
+  
+  select, textarea {
+      margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .disabled {
+    background-color: lightgrey;
+  }
+  
+  .buttondiv{
+    text-align: center;
+  }
+  
+  .container {
+    padding: 16px;
+  }
+  
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  
+  .ng-valid[required],
+  .ng-valid.required {
+    border-left: 5px solid #42a948;
+    /* green */
+  }
+  
+  .ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+    /* red */
+  }
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+  

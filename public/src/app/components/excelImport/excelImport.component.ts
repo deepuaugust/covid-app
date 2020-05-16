@@ -79,7 +79,7 @@ export class ExcelImport implements OnInit {
           if (res.data == null) this.toaster.showError(res.message);
           else {
             this.toaster.showSuccess("Upload successful");
-            this.route.navigate(["/requests"]);
+            this.route.navigate(["/requests/home"]);
           }
         },
         (error) => {

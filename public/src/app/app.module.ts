@@ -16,7 +16,7 @@ import { CategoryComponent } from "./components/category/category.component";
 import { CreateCategoryComponent } from "./components/category/create-category/create-category.component";
 import { RolesComponent } from "./components/roles/roles.component";
 import { CreateRolesComponent } from "./components/roles/create-roles/create-roles.component";
-import { RequestsComponent } from "./components/requests/requests.component";
+import { RequestsMedicalComponent } from "./components/requests/requests-medical/requests-medical.component";
 import { RequestCreateComponent } from "./components/requests/request-create/request-create.component";
 import { ToasterService } from './services/toaster.service';
 import { UserService } from './services/user.service';
@@ -28,6 +28,10 @@ import { RequestCellRendererComponent } from './components/cell_renderer/request
 import { UserCellRendererComponent } from './components/cell_renderer/userCellRenderer/cell_renderer.component';
 import { RequestInteractComponent } from './components/requests/request-interact/request-interact.component';
 import { ExcelImport } from "./components/excelImport/excelImport.component";
+import { RequestHomeComponent } from './components/requests/request-home/request-home.component';
+import { RequestsNonMedicalComponent } from './components/requests/requests-nonmedical/requests-nonmedical.component';
+import { RequestCreateMedicalComponent } from './components/requests/request-create/medical/request-create.component';
+import { RequestCreateNonMedicalComponent } from './components/requests/request-create/nonmedical/request-create.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -40,8 +44,11 @@ const routes: Routes = [
   { path: "category/create", component: CreateCategoryComponent },
   { path: "roles", component: RolesComponent },
   { path: "roles/create", component: CreateRolesComponent },
-  { path: "requests", component: RequestsComponent },
-  { path: "requests/create", component: RequestCreateComponent },
+  { path: "requests/medical", component: RequestsMedicalComponent },
+  { path: "requests/non-medical", component: RequestsNonMedicalComponent },
+  { path: "requests/home", component: RequestHomeComponent },
+  { path: "requests/create/medical", component: RequestCreateMedicalComponent },
+  { path: "requests/create/nonmedical", component: RequestCreateNonMedicalComponent },
   { path: "requests/edit/:id", component: RequestCreateComponent },
   { path: "requests/interact/:id", component: RequestInteractComponent },
   { path: "requests/import", component: ExcelImport },
@@ -58,12 +65,16 @@ const routes: Routes = [
     CreateCategoryComponent,
     RolesComponent,
     CreateRolesComponent,
-    RequestsComponent,
+    RequestsMedicalComponent,
     RequestCreateComponent,
     RequestCellRendererComponent,
     UserCellRendererComponent,
     RequestInteractComponent,
-    ExcelImport
+    ExcelImport,
+    RequestHomeComponent,
+    RequestsNonMedicalComponent,
+    RequestCreateMedicalComponent,
+    RequestCreateNonMedicalComponent
   ],
   imports: [
     BrowserModule,

@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit {
     this._user.logout();
   }
 
+  goHome(){
+    alert('hasd');
+  }
+
   login(data) {
     localStorage.setItem("token", "");
     this._user.login(data).subscribe((res) => {
@@ -34,9 +38,14 @@ export class LoginComponent implements OnInit {
         if (role == "superAdmin" || role == "admin") {
           this.route.navigate(["/home"]);
           document.getElementById('menu_id').style.display = "block";
+          document.getElementById('mySidenav').getElementsByTagName('a')[2].style.display = "none";
+          document.getElementById('mySidenav').getElementsByTagName('a')[1].style.display = "block";
         } else {
-          this.route.navigate(["/requests"]);}
+          this.route.navigate(["/requests/home"]);
           document.getElementById('menu_id').style.display = "block";
+          document.getElementById('mySidenav').getElementsByTagName('a')[1].style.display = "none";
+          document.getElementById('mySidenav').getElementsByTagName('a')[2].style.display = "block";
+        }
       }
     });
   }

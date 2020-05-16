@@ -1,0 +1,24 @@
+<div class="main col-md-12">
+  <h2 class="col-md-12" style="text-align: center;color:white">Requests</h2>
+
+  <div class="col-md-12">
+    <ag-grid-angular
+      style="height: 600px;"
+      class="ag-theme-alpine col-md-12"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [headerHeight]="50"
+      [rowHeight]="55"
+      [suppressMenuHide]="true"
+    >
+    </ag-grid-angular>
+  </div>
+  <div class="col-md-12 buttondiv" *ngIf="isVolunteer">
+    <button class="btn btn-primary" type="button" routerLink="/requests/create/medical">
+      Create a new request
+    </button>
+    <button style="margin-left:30px" class="btn btn-primary" type="button" routerLink="/requests/import">
+      Import Data
+    </button>
+  </div>
+</div>

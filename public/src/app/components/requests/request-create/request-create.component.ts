@@ -21,7 +21,7 @@ export class RequestCreateComponent implements OnInit {
   request = { createdBy: this.user._id };
   categories = [];
   roles = [];
-  users = [];
+  users = [{ value: "dasd", label: "dfdsf", count: 2 }];
   countryList = countries;
 
   statuses = []; // utils.statuses;
@@ -103,8 +103,7 @@ export class RequestCreateComponent implements OnInit {
     const { url } = this.route;
     if (url.indexOf("create") > -1) {
       this.request["status"] = 1;
-    } else if (url.indexOf("edit") > -1)
-      this.statuses = utils.statuses; //.filter((d) => d.value != 1);
+    } else if (url.indexOf("edit") > -1) this.statuses = utils.statuses; //.filter((d) => d.value != 1);
   }
 
   loadData() {

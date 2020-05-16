@@ -4,51 +4,69 @@
     {{ request.requestID.title }}
   </h1>
   <h5 style="text-align: center;">
-    Created By: {{ request.requestID ? request.requestID.createdBy.fName : "" }}
-    {{ request.requestID ? request.requestID.createdBy.lName : "" }}
+    Created By: {{ request.requestID ? request.requestID.createdBy : "" }}
+    {{ request.requestID ? request.requestID.createdBy : "" }}
   </h5>
+
   <div class="col-md-12 details">
     <div class="col-md-6">
+      <div class="col-md-12">
+        <b>Token:</b>
+        {{ request.requestID ? request.requestID.token : "" }}
+      </div>
       <div class="col-md-12">
         <b>Full Name:</b>
         {{ request.requestID ? request.requestID.fullName : "" }}
       </div>
       <div class="col-md-12">
-        <b>Description:</b>
-        {{ request.requestID ? request.requestID.description : "" }}
+        <b>Current Country:</b>
+        {{ request.requestID ? request.requestID.currentCountry : "" }}
       </div>
       <div class="col-md-12">
-        <b>Country:</b> {{ request.requestID ? request.requestID.country : "" }}
+        <b>Contact Phone:</b>
+        {{ request.requestID ? request.requestID.contactPhone : "" }}
       </div>
       <div class="col-md-12">
-        <b>Communication Medium:</b>
-        {{ request.requestID ? request.requestID.communicationMedium : "" }}
+        <b>status:</b>
+        {{ request.requestID ? request.requestID.status : "" }}
+      </div>
+      <div class="col-md-12">
+        <b>assignedTo:</b>
+        {{ request.requestID ? request.requestID.assignedTo : "" }}
+      </div>
+      <div class="col-md-12">
+        <b>created at:</b>
+        {{ request.requestID ? request.requestID.created_at : "" }}
       </div>
     </div>
     <div class="col-md-6">
       <div class="col-md-12">
-        <b>Primary Address:</b>
-        {{ request.requestID ? request.requestID.currentAddress : "" }}
+        <b>Age:</b>
+        {{ request.requestID ? request.requestID.age : "" }}
       </div>
       <div class="col-md-12">
-        <b>Native Address:</b>
-        {{ request.requestID ? request.requestID.nativeAddress : "" }}
+        <b>Gender Address:</b>
+        {{ request.requestID ? request.requestID.gender : "" }}
       </div>
       <div class="col-md-12">
-        <b>Primary Contact Number:</b>
-        {{
-          request.requestID
-            ? countrycode + request.requestID.primaryContactNumber
-            : ""
-        }}
+        <b>supportRequested :</b>
+        {{ request.requestID ? request.requestID.supportRequested : "" }}
       </div>
       <div class="col-md-12">
-        <b>Alternate Contact Number:</b>
-        {{
-          request.requestID
-            ? countrycode + request.requestID.alternateContactNumber
-            : ""
-        }}
+        <b>supportRequiredFor:</b>
+        {{ request.requestID ? request.requestID.supportRequiredFor : "" }}
+      </div>
+      <div class="col-md-12">
+        <b>Contact Full Name:</b>
+        {{ request.requestID ? request.requestID.contactFullName : "" }}
+      </div>
+      <div class="col-md-12">
+        <b>district:</b>
+        {{ request.requestID ? request.requestID.district : "" }}
+      </div>
+      <div class="col-md-12">
+        <b>postal:</b>
+        {{ request.requestID ? request.requestID.postal : "" }}
       </div>
     </div>
   </div>
@@ -56,48 +74,29 @@
   <h3 style="text-align: center;" *ngIf="request.requestID">
     Request Status
   </h3>
-  <!-- <div class="col-md-12" *ngFor="let item of requestdata; let last = last">
-    <div class="col-md-12 journeydiv">
-      <div
-        class="stepdiv col-md-12"
-        [ngClass]="{
-          new: item.statusid === 1,
-          inprogress: item.statusid == 2,
-          resolved: item.statusid == 3,
-          archive: item.statusid == 4
-        }"
-      >
-        <b>Assigned To:</b> {{ item.assigned }}
-        <div class="col-md-12"><b>Status:</b> {{ item.status }}</div>
-        <div class="col-md-12"><b>Comment:</b> {{ item.comment }}</div>
-      </div>
-    </div>
-    <div class="col-md-12 journeydiv" *ngIf="!last">
-      <div class="arrow"><span style="font-size: 50px;">&#8595;</span></div>
-    </div>
-  </div> -->
+
   <div class="col-md-12">
-  <div class="col-md-4" *ngFor="let item of requestdata; let last = last">
-    <div class="col-md-11 journeydiv1">
-      <div
-        class="stepdiv1 col-md-12"
-        [ngClass]="{
-          new: item.statusid === 1,
-          inprogress: item.statusid == 2,
-          resolved: item.statusid == 3,
-          archive: item.statusid == 4
-        }"
-      >
-        <b>Assigned To:</b> {{ item.assigned }}
-        <div class="col-md-12"><b>Status:</b> {{ item.status }}</div>
-        <div class="col-md-12"><b>Comment:</b> {{ item.comment }}</div>
+    <div class="col-md-4" *ngFor="let item of requestdata; let last = last">
+      <div class="col-md-11 journeydiv1">
+        <div
+          class="stepdiv1 col-md-12"
+          [ngClass]="{
+            new: item.statusid === 1,
+            inprogress: item.statusid == 2,
+            resolved: item.statusid == 3,
+            archive: item.statusid == 4
+          }"
+        >
+          <b>Assigned To:</b> {{ item.assigned }}
+          <div class="col-md-12"><b>Status:</b> {{ item.status }}</div>
+          <div class="col-md-12"><b>Comment:</b> {{ item.comment }}</div>
+        </div>
       </div>
-    </div>
-    <div class="col-md-1 arrowdiv" *ngIf="!last">
-      <div><span class="arrow">&#8594;</span></div>
+      <div class="col-md-1 arrowdiv" *ngIf="!last">
+        <div><span class="arrow">&#8594;</span></div>
+      </div>
     </div>
   </div>
-</div>
   <div class="separator col-md-12"></div>
   <div
     *ngIf="(request.requestID && request.requestID.status != 4) || isVolunteer"

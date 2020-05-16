@@ -141,12 +141,7 @@ exports.list = function (req, res) {
     query,
     {},
     {
-      populate: [
-        { path: "category", select: { _id: 1, name: 1 } },
-        { path: "assignedTo", select: { _id: 1, fName: 1, lName: 1 } },
-        { path: "role", select: { _id: 1, name: 1 } },
-        { path: "createdBy", select: { _id: 1, fName: 1, lName: 1 } },
-      ],
+      populate: [{ path: "createdBy", select: { _id: 1, fName: 1, lName: 1 } }],
     },
 
     (err, data) =>
@@ -169,10 +164,12 @@ exports.interact = function (req, res) {
       populate: [
         {
           path: "requestID",
-          populate: {
-            path: "createdBy",
-            select: { _id: 1, fName: 1, lName: 1 },
-          },
+          populate: [
+            {
+              path: "createdBy",
+              select: { _id: 1, fName: 1, lName: 1 },
+            },
+          ],
         },
       ],
     },
@@ -198,8 +195,10 @@ exports.addComment = function (req, res) {
         history.comments.push({ user: body.user, comment: body.comment });
       if (prevAssignment.status !== body.status) {
         if (body.status === 4) {
-          assignedTo = history.requestID.createdBy;
-          status = body.status;
+          User.findById(history.requestID.createdBy, (userErr, userData) => {
+            assignedTo = userData.username;
+            status = body.status;
+          });
         }
 
         history.assignment.push({ status, assignedTo });
@@ -226,32 +225,38 @@ exports.addComment = function (req, res) {
 
 exports.roleassigned = function (req, res) {
   const { userid } = req.params;
-  User.findById(userid, {}, (useErr, userData) => {
-    if (useErr)
-      res.json(new Response({ message: "fail", data: null, code: 200 }));
-    else {
-      let query = { assignedTo: userData.userName };
-      if (userData.role && userData.role.requestReadAccess)
-        query = { createdBy: userid };
-      if (userData.type === "admin") query = {};
-      console.log(query);
-      Request.find(
-        query,
-        {},
-        {
-          populate: {
-            path: "createdBy",
-            select: { _id: 1, fName: 1, lName: 1 },
+  User.findById(
+    userid,
+    {},
+    { populate: { path: "role" } },
+    (useErr, userData) => {
+      console.log(userData);
+      if (useErr)
+        res.json(new Response({ message: "fail", data: null, code: 200 }));
+      else {
+        let query = { assignedTo: userData.userName };
+        if (userData.role && userData.role.requestReadAccess)
+          query = { createdBy: userid };
+        if (userData.type === "admin") query = {};
+        console.log(query);
+        Request.find(
+          query,
+          {},
+          {
+            populate: {
+              path: "createdBy",
+              select: { _id: 1, fName: 1, lName: 1 },
+            },
           },
-        },
 
-        (err, data) =>
-          err
-            ? res.send(err)
-            : res.json(new Response({ message: "success", data, code: 200 }))
-      );
+          (err, data) =>
+            err
+              ? res.send(err)
+              : res.json(new Response({ message: "success", data, code: 200 }))
+        );
+      }
     }
-  });
+  );
 };
 
 exports.summary = function (req, res) {

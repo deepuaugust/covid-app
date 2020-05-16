@@ -21,7 +21,7 @@ export class RequestCreateComponent implements OnInit {
   request = { createdBy: this.user._id };
   categories = [];
   roles = [];
-  users = [];
+  users = [{ value: "dasd", label: "dfdsf", count: 2 }];
   countryList = countries;
 
   statuses = []; // utils.statuses;
@@ -50,61 +50,11 @@ export class RequestCreateComponent implements OnInit {
     );
   };
 
-  onCategoryChange = (category) => {
-    const { url } = this.route;
-    this.roles = [];
-    if (url.indexOf("create") > -1) {
-      this.request["role"] = "";
-      this.request["assignedTo"] = "";
-    }
-    this._roles.getByCategory(category).subscribe(
-      (res) => {
-        if (res.data == null) this.toaster.showError(res.message);
-        else {
-          this.roles = res.data;
-          if (url.indexOf("edit") > -1) {
-            this.request["role"] = this.request["role"]._id;
-            this.onRoleChange(this.request["role"]);
-          }
-        }
-      },
-      (error) => {
-        this.toaster.showError(error.error.message);
-        if (error.error.statusCode === 403) this.route.navigate(["login"]);
-      }
-    );
-  };
-
-  onRoleChange = (role) => {
-    const { url } = this.route;
-    this.users = [];
-    if (url.indexOf("create") > -1) {
-      this.request["assignedTo"] = "";
-    }
-    const query = { type: "regular", role };
-    this._user.getAssignee(query).subscribe(
-      (res) => {
-        if (res.data == null) this.toaster.showError(res.message);
-        else {
-          this.users = res.data;
-          if (url.indexOf("edit") > -1) {
-            this.request["assignedTo"] = this.request["assignedTo"]._id;
-          }
-        }
-      },
-      (error) => {
-        this.toaster.showError(error.error.message);
-        if (error.error.statusCode === 403) this.route.navigate(["login"]);
-      }
-    );
-  };
-
   setStaus() {
     const { url } = this.route;
     if (url.indexOf("create") > -1) {
       this.request["status"] = 1;
-    } else if (url.indexOf("edit") > -1)
-      this.statuses = utils.statuses; //.filter((d) => d.value != 1);
+    } else if (url.indexOf("edit") > -1) this.statuses = utils.statuses; //.filter((d) => d.value != 1);
   }
 
   loadData() {
@@ -115,8 +65,6 @@ export class RequestCreateComponent implements OnInit {
         (res) => {
           if (res.message == "success" && res.data[0]) {
             this.request = res.data[0];
-            this.request["category"] = this.request["category"]._id;
-            this.onCategoryChange(this.request["category"]);
           } else this.toaster.showError(res.message);
         },
         (error) => {

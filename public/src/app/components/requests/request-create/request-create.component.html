@@ -25,51 +25,14 @@
       >
         Token is required
       </div>
-      <label class="col-md-12" for="title">
-        <b>Title</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.title"
-        class="form-control col-md-12"
-        placeholder="Enter Title"
-        name="title"
-        required
-        #title="ngModel"
-      />
-      <div
-        [hidden]="title.valid || title.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Title is required
-      </div>
-      <label class="col-md-12" for="lname">
-        <b>Description</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.description"
-        class="form-control col-md-12"
-        placeholder="Enter Description"
-        name="description"
-        required
-        #description="ngModel"
-      />
-      <div
-        [hidden]="description.valid || description.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Description is required
-      </div>
-
-      <label class="col-md-12" for="name">
-        <b>Full Name</b>
+      <label class="col-md-12" for="fullName">
+        <b>fullName</b>
       </label>
       <input
         type="text"
         [(ngModel)]="request.fullName"
         class="form-control col-md-12"
-        placeholder="Enter Full Name"
+        placeholder="Enter fullName"
         name="fullName"
         required
         #fullName="ngModel"
@@ -78,132 +41,158 @@
         [hidden]="fullName.valid || fullName.pristine"
         class="alert alert-danger col-md-12"
       >
-        Title is required
+        fullName is required
       </div>
 
-      <label class="col-md-12" for="country">
-        <b>Select Country</b>
+      <label class="col-md-12" for="currentCountry">
+        <b>Select currentCountry</b>
       </label>
       <select
-        [(ngModel)]="request.country"
+        [(ngModel)]="request.currentCountry"
         class="form-control col-md-12"
-        name="country"
+        name="currentCountry"
         required
-        #country="ngModel"
+        #currentCountry="ngModel"
       >
-        <option disabled> Country</option>
+        <option disabled> currentCountry</option>
         <option *ngFor="let country of countryList" [ngValue]="country.code">
           {{ country.name }} ({{ country.dial_code }})</option
         >
       </select>
       <div
-        [hidden]="country.valid || country.pristine"
+        [hidden]="currentCountry.valid || currentCountry.pristine"
         class="alert alert-danger col-md-12"
       >
-        Country is required
+        currentCountry is required
       </div>
 
-      <label class="col-md-12" for="primaryContactNumber">
-        <b>Primary Contact Number</b>
+      <label class="col-md-12" for="phoneNumber">
+        <b>phoneNumber</b>
       </label>
       <input
-        type="number"
-        [(ngModel)]="request.primaryContactNumber"
+        type="text"
+        [(ngModel)]="request.phoneNumber"
+        class="form-control col-md-12"
+        placeholder="Enter Full Name"
+        name="phoneNumber"
+        required
+        #phoneNumber="ngModel"
+      />
+      <div
+        [hidden]="phoneNumber.valid || phoneNumber.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        phoneNumber is required
+      </div>
+
+      <label class="col-md-12" for="contactFullName">
+        <b>Contact Full Name</b>
+      </label>
+      <input
+        type="string"
+        [(ngModel)]="request.contactFullName"
         class="form-control col-md-12"
         placeholder="Primary Contact number"
-        name="primaryContactNumber"
-        #primaryContactNumber="ngModel"
-        required
+        name="contactFullName"
+        #contactFullName="ngModel"
       />
-      <div
-        [hidden]="primaryContactNumber.valid || primaryContactNumber.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Primary Contact Number is required
-      </div>
 
-      <label class="col-md-12" for="alternateContactNumber">
-        <b>Alternate Contact Number</b>
+      <label class="col-md-12" for="contactPhone">
+        <b>contact Phone</b>
+      </label>
+      <input
+        type="string"
+        [(ngModel)]="request.contactPhone"
+        class="form-control col-md-12"
+        placeholder="Alternate Contact Number"
+        name="contactPhone"
+        #contactPhone="ngModel"
+      />
+
+      <label class="col-md-12" for="age">
+        <b>Age</b>
       </label>
       <input
         type="number"
-        [(ngModel)]="request.alternateContactNumber"
+        [(ngModel)]="request.age"
         class="form-control col-md-12"
-        placeholder="Alternate Contact Number"
-        name="alternateContactNumber"
-        #alternateContactNumber="ngModel"
+        placeholder="Age"
+        name="age"
+        #age="ngModel"
       />
-      <!-- <div
-        [hidden]="
-          alternateContactNumber.valid || alternateContactNumber.pristine
-        "
-        class="alert alert-danger col-md-12"
-      >
-        Alternate Contact Number is required
-      </div> -->
 
-      <label class="col-md-12" for="currentAddress">
-        <b>Current Address</b>
+      <label class="col-md-12" for="gender">
+        <b>gender</b>
+      </label>
+      <input
+        type="string"
+        [(ngModel)]="request.gender"
+        class="form-control col-md-12"
+        placeholder="gender"
+        name="gender"
+        #gender="ngModel"
+      />
+
+      <label class="col-md-12" for="supportRequested">
+        <b>supportRequested</b>
+      </label>
+      <input
+        type="string"
+        [(ngModel)]="request.supportRequested"
+        class="form-control col-md-12"
+        placeholder="supportRequested"
+        name="supportRequested"
+        #supportRequested="ngModel"
+      />
+
+      <label class="col-md-12" for="supportRequiredFor">
+        <b>supportRequiredFor</b>
+      </label>
+      <input
+        type="string"
+        [(ngModel)]="request.supportRequiredFor"
+        class="form-control col-md-12"
+        placeholder="supportRequiredFor"
+        name="supportRequiredFor"
+        #supportRequiredFor="ngModel"
+      />
+
+      <label class="col-md-12" for="postal">
+        <b>postal</b>
+      </label>
+      <input
+        type="string"
+        [(ngModel)]="request.postal"
+        class="form-control col-md-12"
+        placeholder="postal"
+        name="postal"
+        #postal="ngModel"
+      />
+
+      <label class="col-md-12" for="email">
+        <b>email</b>
+      </label>
+      <input
+        type="string"
+        [(ngModel)]="request.email"
+        class="form-control col-md-12"
+        placeholder="email"
+        name="email"
+        #email="ngModel"
+      />
+
+      <label class="col-md-12" for="fullAddress">
+        <b>Full Address</b>
       </label>
       <textarea
         class="form-control col-md-12"
-        placeholder="Current Address"
-        [(ngModel)]="request.currentAddress"
+        placeholder="Full Address"
+        [(ngModel)]="request.fullAddress"
         [maxlength]="400"
-        name="currentAddress"
-        #currentAddress
-      >
-      </textarea>
+        name="fullAddress"
+        #fullAddress
+      ></textarea>
 
-      <!-- <div
-        [hidden]="currentAddress.valid || currentAddress.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Current address is required
-      </div> -->
-
-      <label class="col-md-12" for="nativeAddress">
-        <b>Native Address</b>
-      </label>
-      <textarea
-        class="form-control col-md-12"
-        placeholder="Native Address"
-        [(ngModel)]="request.nativeAddress"
-        [maxlength]="400"
-        name="nativeAddress"
-        #nativeAddress
-      >
-      </textarea>
-      <!-- <div
-        [hidden]="nativeAddress.valid || nativeAddress.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Native address is required
-      </div> -->
-
-      <label class="col-md-12" for="communicationMedium">
-        <b>Preferred communication medium</b>
-      </label>
-      <select
-        [(ngModel)]="request.communicationMedium"
-        class="form-control col-md-12"
-        name="communicationMedium"
-        required
-        #communicationMedium="ngModel"
-      >
-        <option disabled> Preferred communication medium</option>
-        <option
-          *ngFor="let mode of communicationModes"
-          [ngValue]="mode.value"
-          >{{ mode.label }}</option
-        >
-      </select>
-      <div
-        [hidden]="communicationMedium.valid || communicationMedium.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Preferred communication medium is required
-      </div>
       <div *ngIf="statuses.length > 1">
         <label class="col-md-12" for="status">
           <b>Status</b>
@@ -228,84 +217,22 @@
         </div>
       </div>
       <div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
-        <b>Please select a category and role to find the relevant assignee.</b>
-      </div>
-      <label class="col-md-12" for="category">
-        <b>Category</b>
-      </label>
-      <select
-        [(ngModel)]="request.category"
-        class="form-control col-md-12"
-        placeholder="Select Category"
-        name="category"
-        required
-        #category="ngModel"
-        (ngModelChange)="onCategoryChange($event)"
-      >
-        <option disabled>Select Category</option>
-        <option *ngFor="let category of categories" [ngValue]="category._id">{{
-          category.name
-        }}</option>
-      </select>
-      <div
-        [hidden]="category.valid || category.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Category is required
-      </div>
-      <label class="col-md-12" for="Role">
-        <b>Role</b>
-      </label>
-      <select
-        [(ngModel)]="request.role"
-        class="form-control col-md-12"
-        placeholder="Select Category"
-        name="role"
-        required
-        (ngModelChange)="onRoleChange($event)"
-        #role="ngModel"
-      >
-        <option disabled>Select Role</option>
-        <option *ngFor="let role of roles" [ngValue]="role._id">{{
-          role.name
-        }}</option>
-      </select>
-      <div
-        [hidden]="role.valid || role.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Role is required
+        <b>Please enter user name of assignee.</b>
       </div>
       <label class="col-md-12" for="assignee">
         <b>Assignee</b>
       </label>
-      <select
+      <input
+        type="string"
         [(ngModel)]="request.assignedTo"
         class="form-control col-md-12"
-        name="assignTo"
-        required
-        #assignTo="ngModel"
-      >
-        <option disabled> Assign To</option>
-        <option *ngFor="let user of users" [ngValue]="user._id"
-          >{{ user.fName }} {{ user.lName }} ({{ user.total }} requests in
-          queue)</option
-        >
-      </select>
-      <div
-        [hidden]="assignTo.valid || assignTo.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Assignee is required
-      </div>
+        placeholder="assignedTo"
+        name="assignedTo"
+        #assignedTo="ngModel"
+      />
       <div class="col-md-12 buttondiv">
-        <button
-          class="btn btn-success"
-          [ngClass]="{ disabled: !requestForm.form.valid }"
-          [disabled]="!requestForm.form.valid"
-          type="submit"
-        >
-          {{ heading }} Request
+        <button [disabled]="!requestForm.form.valid" type="submit">
+          Sign Up
         </button>
       </div>
     </div>

@@ -14,6 +14,7 @@ export class RequestService {
   private _addCommentUrl = constants.apiUrl + "api/request/addcomment/";
   private _getWithRoleUrl = constants.apiUrl + "api/request/roleassigned/";
   private _summaryUrl = constants.apiUrl + "api/request/summary/";
+  private _uploadUrl = constants.apiUrl + "api/request/upload/";
 
   constructor(private _http: HttpClient, private route: Router) {}
 
@@ -41,7 +42,11 @@ export class RequestService {
   addComment(data): Observable<any> {
     return this._http.post<any>(this._addCommentUrl, data);
   }
+  upload(data): Observable<any> {
+    return this._http.post<any>(this._uploadUrl, data);
+  }
   summary(id): Observable<any> {
     return this._http.get<any>(`${this._summaryUrl}${id}`);
   }
+  
 }

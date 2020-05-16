@@ -39,20 +39,6 @@ export class RequestsComponent implements OnInit {
       (res) => {
         if (res.data == null) this.toaster.showError(res.message);
         else {
-          age: 834;
-          contactFullName: "ഇസ്ഹാഖ് മുഹമ്മദ്‌";
-          contactPhone: "009166666666";
-          created_at: "2020-05-16T09:37:28.992Z";
-          currentCountry: "United Arab Emirates / +971";
-          district: "PALAKKAD";
-          fullName: "PRIYATHA P";
-          gender: "F";
-          postal: "673012";
-          status: "pending";
-          supportRequested: "ഭക്ഷണ സാധനങ്ങൾ ഇല്ലായ്മ";
-          supportRequiredFor: "AFHAM";
-          token: "13/07/421";
-
           this.requests = res.data;
           this.columnDefs = [
             {

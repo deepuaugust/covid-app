@@ -43,12 +43,7 @@ export class RequestInteractComponent implements OnInit {
         else {
           const { data } = res;
           this.request = data;
-          this.request["requestID"].country = this.getCountries(
-            this.request["requestID"].country
-          );
-          this.request["requestID"].communicationMedium = this.getMedium(
-            this.request["requestID"].communicationMedium
-          );
+
           this.setStaus();
           this.assignments = this.request["assignment"];
           this.comments = this.request["comments"];
@@ -63,43 +58,25 @@ export class RequestInteractComponent implements OnInit {
     );
   }
 
-  getMedium(val) {
-    const medium = utils.communicationModes.filter(
-      (item) => item.value === val
-    );
-    return medium[0].label;
-  }
-
-  getCountries(code) {
-    const country = countries.filter((item) => item.code === code);
-    this.countrycode = country[0].dial_code;
-    return country[0].name;
-  }
-
   processRequestData() {
     for (let i = 0; i < this.assignments.length; i++) {
       if (i == 0) {
         this.requestdata.push({
-          assigned:
-            this.assignments[i].assignedTo.fName +
-            " " +
-            this.assignments[i].assignedTo.lName,
-          status: this.getStatus(this.assignments[i].status),
+          assigned: this.assignments[i].assignedTo,
+          status: this.assignments[i].status,
+          // status: this.getStatus(this.assignments[i].status),
           statusid: this.assignments[i].status,
           comment: "Request Initiated",
         });
       } else {
         this.requestdata.push({
           assigned: this.assignments[i].assignedTo
-            ? this.assignments[i].assignedTo.fName +
-              " " +
-              this.assignments[i].assignedTo.lName
-            : this.assignments[0].assignedTo.fName +
-              " " +
-              this.assignments[0].assignedTo.lName,
-          status: this.getStatus(this.assignments[i].status),
+            ? this.assignments[i].assignedTo
+            : this.assignments[0].assignedTo,
+          status: this.assignments[i].status,
+          // status: this.getStatus(this.assignments[i].status),
           statusid: this.assignments[i].status,
-          comment: this.comments[i - 1] ? this.comments[i - 1].comment : '',
+          comment: this.comments[i - 1] ? this.comments[i - 1].comment : "",
         });
       }
     }

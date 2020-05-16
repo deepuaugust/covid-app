@@ -23,4 +23,6 @@ router.post("/create", jwt.verifyJWT, requestController.create);
 
 router.post("/addcomment", jwt.verifyJWT, requestController.addComment);
 
+router.post("/upload", jwt.verifyJWT, requestController.upload);
+
 module.exports = router;

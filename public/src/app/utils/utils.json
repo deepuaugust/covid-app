@@ -2,23 +2,19 @@
     "statuses": [
         {
             "label": "New",
-            "value": 1
-        },
-        {
-            "label": "Re Open",
-            "value": 2
+            "value": "New"
         },
         {
             "label": "In progress",
-            "value": 3
+            "value": "In progress"
         },
         {
             "label": "Resolved",
-            "value": 4
+            "value": "Resolved"
         },
         {
             "label": "Archive",
-            "value": 5
+            "value": "Archive"
         }
     ],
     "communicationModes": [

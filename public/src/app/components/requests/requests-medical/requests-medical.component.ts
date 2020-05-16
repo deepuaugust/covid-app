@@ -73,6 +73,7 @@ export class RequestsMedicalComponent implements OnInit {
               field: "age",
               cellStyle: { border: "1px solid lightgrey" },
             },
+
             {
               headerName: "Gender",
               field: "gender",

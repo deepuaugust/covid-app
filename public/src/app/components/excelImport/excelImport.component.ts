@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import * as XLSX from "xlsx";
+import { RequestService } from "../../services/request.service";
 import { ToasterService } from "src/app/services/toaster.service";
 import { Router } from "@angular/router";
 
@@ -13,9 +14,13 @@ export class ExcelImport implements OnInit {
     ? JSON.parse(localStorage.getItem("user"))
     : "";
   uploadData = [];
-  uploadType = '';
+  uploadType = "";
 
-  constructor(private toaster: ToasterService, private route: Router) {}
+  constructor(
+    private toaster: ToasterService,
+    private _request: RequestService,
+    private route: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -66,10 +71,25 @@ export class ExcelImport implements OnInit {
       this.toaster.showError("Please select a file");
     else {
       console.log(this.uploadData);
-      if(this.uploadData['Medical'] !== undefined) this.uploadType = 'Medical';
-      else this.uploadType = 'Non-Medical';
-      this.toaster.showSuccess("Upload successful");
-      this.route.navigate(['/requests']);
+      if (this.uploadData["Medical"] !== undefined) this.uploadType = "Medical";
+      else this.uploadType = "Non-Medical";
+
+      this._request.upload(this.uploadData).subscribe(
+        (res) => {
+          if (res.data == null) this.toaster.showError(res.message);
+          else {
+            this.toaster.showSuccess("Upload successful");
+            this.route.navigate(["/requests"]);
+          }
+        },
+        (error) => {
+          this.toaster.showError(error.error.message);
+          if (error.error.statusCode === 403) this.route.navigate(["login"]);
+        }
+      );
+
+      // this.toaster.showSuccess("Upload successful");
+      // this.route.navigate(['/requests']);
     }
   }
 }

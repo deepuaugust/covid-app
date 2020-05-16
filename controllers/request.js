@@ -25,8 +25,8 @@ exports.create = function (req, res, next) {
                   status: body.status,
                 },
                 comments: {
-                  comment: 'Request modified',
-                }
+                  comment: "Request modified",
+                },
               },
             },
             handler
@@ -47,25 +47,90 @@ exports.create = function (req, res, next) {
       }
     });
   } else {
-    Request.create(body, (err, data) => {
+    Request.create(body, (err, data, next) => {
+      console.log(err, data);
       if (err) return res.send(err);
-      else {
-        const assignment = [{ assignedTo: data.assignedTo, status: 1 }];
-        if (data.status !== 1)
-          assignment.push({ assignedTo: data.assignedTo, status: data.status });
-        const history = { requestID: data._id, assignment, comments: [] };
-        RequestHistory.create(history, (e, s) => {
-          return res.json(
-            new Response({
-              message: "success",
-              data: { data, e, s },
-              code: 200,
-            })
-          );
+      else
+        new Response({
+          message: "success",
+          data,
+          code: 200,
         });
-      }
     });
   }
+};
+
+exports.upload = function (req, res) {
+  let data = req.body.Sheet1;
+  let newD = [];
+  const keys = {
+    token: "Token Number",
+    currentCountry: "CURRENT Country of Residence (ഇപ്പോൾ താമസിക്കുന്ന രാജ്യം)",
+    fullName: "FULL Name (പൂർണ്ണമായ പേര്)",
+    phoneNumber: "CONTACT WhatsApp Number (വാട്ട്‌സ്ആപ്പ് നമ്പർ)",
+    contactPhone:
+      "ബന്ധപ്പെടേണ്ട വ്യക്തിയുടെ മൊബൈൽ നമ്പർ - Phone Number to be contacted",
+    age: "AGE (പ്രായം)",
+    gender: "GENDER (ജൻഡർ)",
+    supportRequested: "SUPPORT Requested",
+    supportRequiredFor:
+      "SUPPORT Required for (പിന്തുണ ആവശ്യമായി വന്നിട്ടുള്ളത്)",
+    contactFullName:
+      "ഞങ്ങൾ ബന്ധപ്പെടേണ്ട വ്യക്തിയുടെ മുഴുവൻ പേര് - Person to be contacted *Full Name*",
+    fullAddress:
+      "Flat No / House No / House Name	Apartments / Local Area / Street / Road	Landmark & Post Office",
+    district: "District / City",
+    postal: "PIN or Postal Code",
+    email: "EMAIL Address (ഈ - മെയിൽ വിലാസം)",
+    status: "STATUS",
+    assignedTo: "FORWARDED TO",
+  };
+  data.map((d) => {
+    let obj = {};
+
+    obj.token = d[keys.token];
+
+    obj.currentCountry = d[keys.currentCountry];
+    obj.fullName = d[keys.fullName];
+    obj.phoneNumber = d[keys.phoneNumber];
+    obj.contactPhone = d[keys.contactPhone];
+    obj.age = d[keys.age];
+    obj.gender = d[keys.gender];
+    obj.supportRequested = d[keys.supportRequested];
+    obj.supportRequiredFor = d[keys.supportRequiredFor];
+    obj.contactFullName = d[keys.contactFullName];
+    obj.fullAddress = d[keys.fullAddress];
+    obj.district = d[keys.district];
+    obj.postal = d[keys.postal];
+    obj.email = d[keys.email];
+    obj.status = d[keys.status];
+    obj.assignedTo = d[keys.assignedTo];
+    newD.push(obj);
+    return newD;
+  });
+  Request.insertMany(newD, (e, requests) => {
+    if (e) {
+      /* TOD0 delete created req */
+      res.json(e);
+    } else {
+      let history = [];
+      requests.map((req) => {
+        const hisObj = {};
+        hisObj.requestID = req._id;
+        hisObj.assignment = [
+          { assignedTo: req.assignedTo, status: req.status },
+        ];
+        history.push(hisObj);
+      });
+      RequestHistory.insertMany(history, (requestsErr, requestsHis) => {
+        requestsErr
+          ? res.json(requestsErr)
+          : res.json(
+              new Response({ message: "success", data: requestsHis, code: 200 })
+            );
+      });
+    }
+  });
 };
 
 exports.list = function (req, res) {
@@ -104,16 +169,10 @@ exports.interact = function (req, res) {
       populate: [
         {
           path: "requestID",
-          populate: [
-            { path: "category", select: { _id: 1, name: 1 } },
-            { path: "assignedTo", select: { _id: 1, fName: 1, lName: 1 } },
-            { path: "role", select: { _id: 1, name: 1 } },
-            { path: "createdBy", select: { _id: 1, fName: 1, lName: 1 } },
-          ],
-        },
-        {
-          path: "assignment.assignedTo",
-          select: { _id: 1, fName: 1, lName: 1 },
+          populate: {
+            path: "createdBy",
+            select: { _id: 1, fName: 1, lName: 1 },
+          },
         },
       ],
     },
@@ -167,25 +226,23 @@ exports.addComment = function (req, res) {
 
 exports.roleassigned = function (req, res) {
   const { userid } = req.params;
-  User.findById(userid, {}, { populate: "role" }, (useErr, userData) => {
+  User.findById(userid, {}, (useErr, userData) => {
     if (useErr)
       res.json(new Response({ message: "fail", data: null, code: 200 }));
     else {
-      let query = { assignedTo: userid };
+      let query = { assignedTo: userData.userName };
       if (userData.role && userData.role.requestReadAccess)
         query = { createdBy: userid };
       if (userData.type === "admin") query = {};
-
+      console.log(query);
       Request.find(
         query,
         {},
         {
-          populate: [
-            { path: "category", select: { _id: 1, name: 1 } },
-            { path: "assignedTo", select: { _id: 1, fName: 1, lName: 1 } },
-            { path: "role", select: { _id: 1, name: 1 } },
-            { path: "createdBy", select: { _id: 1, fName: 1, lName: 1 } },
-          ],
+          populate: {
+            path: "createdBy",
+            select: { _id: 1, fName: 1, lName: 1 },
+          },
         },
 
         (err, data) =>

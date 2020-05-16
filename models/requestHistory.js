@@ -6,16 +6,16 @@ let RequestHistorySchema = new Schema({
   requestID: { type: ObjectId, ref: "Requests" },
   comments: [
     {
-      user: { type: ObjectId, ref: "User" },
+      user: String,
       comment: { type: String },
       created_at: { type: Date, default: Date.now },
     },
   ],
   assignment: [
     {
-      assignedTo: { type: ObjectId, ref: "User" },
+      assignedTo: String,
       created_at: { type: Date, default: Date.now },
-      status: Number,
+      status: String,
     },
   ],
 });

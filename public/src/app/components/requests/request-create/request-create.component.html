@@ -217,57 +217,23 @@
         </div>
       </div>
       <div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
-        <b>Please select a category and role to find the relevant assignee.</b>
+        <b>Please enter user name of assignee.</b>
       </div>
-      <label class="col-md-12" for="category">
-        <b>Category</b>
-      </label>
-      <select
-        class="form-control col-md-12"
-        placeholder="Select Category"
-        name="category"
-        onchange="onCategoryChange($event)"
-      >
-        <option disabled>Select Category</option>
-        <option *ngFor="let category of categories" [ngValue]="category._id">{{
-          category.name
-        }}</option>
-      </select>
-      <label class="col-md-12" for="Role">
-        <b>Role</b>
-      </label>
-      <select
-        class="form-control col-md-12"
-        placeholder="Select Category"
-        name="role"
-        onchange="onRoleChange($event)"
-      >
-        <option disabled>Select Role</option>
-        <option *ngFor="let role of roles" [ngValue]="role._id">{{
-          role.name
-        }}</option>
-      </select>
       <label class="col-md-12" for="assignee">
         <b>Assignee</b>
       </label>
-      <select
+      <input
+        type="string"
         [(ngModel)]="request.assignedTo"
         class="form-control col-md-12"
-        name="assignTo"
-        required
-        #assignTo="ngModel"
-      >
-        <option disabled> Assign To</option>
-        <option *ngFor="let user of users" [ngValue]="user._id"
-          >{{ user.fName }} {{ user.lName }} ({{ user.total }} requests in
-          queue)</option
-        >
-      </select>
-      <div
-        [hidden]="assignTo.valid || assignTo.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Assignee is required
+        placeholder="assignedTo"
+        name="assignedTo"
+        #assignedTo="ngModel"
+      />
+      <div class="col-md-12 buttondiv">
+        <button [disabled]="!requestForm.form.valid" type="submit">
+          Sign Up
+        </button>
       </div>
     </div>
   </form>

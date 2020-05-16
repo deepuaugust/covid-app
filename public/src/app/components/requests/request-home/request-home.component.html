@@ -1,0 +1,151 @@
+<div class="maindiv col-md-12">
+  <div class="container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div
+            class="col-md-6 imgdiv"
+            routerLink="/requests/medical"
+          >
+            <div class="card-container">
+              <div class="card">
+                <div class="front">
+                  <div class="cover">
+                    <img src="../../../assets/images/cardbg.jpg" />
+                  </div>
+                  <div class="user">
+                    <img
+                      class="img-circle"
+                      src="../../../assets/images/category.png"
+                    />
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h3 class="name">Medical</h3>
+                      <p class="profession"></p>
+
+                      <p class="text-center">
+                        The list of medical requests can be viewed and modified in this page.
+                      </p>
+                    </div>
+                    <div class="footer"></div>
+                  </div>
+                </div>
+                <!-- end front panel -->
+                <div class="back">
+                  <div class="header">
+                    <h5 class="motto">
+                      "Clean your hands often. Use soap and water, or an
+                      alcohol-based hand rub."
+                    </h5>
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h4 class="text-center">Brief Overview</h4>
+                      <p class="text-center">
+                        The below depicts the total count of medical requests registered
+                        within the application.
+                      </p>
+
+                      <div class="stats-container">
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+                        <div class="stats" style="width: 100%;">
+                          <h4>{{ userSummary }}</h4>
+                          <p>
+                            Medical Requests
+                          </p>
+                        </div>
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer"></div>
+                </div>
+                <!-- end back panel -->
+              </div>
+              <!-- end card -->
+            </div>
+            <!-- end card-container -->
+          </div>
+          <div
+            class="col-md-6 imgdiv"
+            routerLink="/requests/non-medical"
+          >
+            <div class="card-container">
+              <div class="card">
+                <div class="front">
+                  <div class="cover">
+                    <img src="../../../assets/images/cardbg.jpg" />
+                  </div>
+                  <div class="user">
+                    <img
+                      class="img-circle"
+                      src="../../../assets/images/category.png"
+                    />
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h3 class="name">Non-Medical</h3>
+                      <p class="profession"></p>
+
+                      <p class="text-center">
+                        The list of non-medical requests can be viewed and modified in this page.
+                      </p>
+                    </div>
+                    <div class="footer"></div>
+                  </div>
+                </div>
+                <!-- end front panel -->
+                <div class="back">
+                  <div class="header">
+                    <h5 class="motto">
+                      "Maintain a safe distance from anyone who is coughing or
+                      sneezing."
+                    </h5>
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h4 class="text-center">Brief Overview</h4>
+                      <p class="text-center">
+                        The below depicts the total count of non-medical requests registered
+                        within the application.
+                      </p>
+
+                      <div class="stats-container">
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+
+                        <div class="stats">
+                          <h4>{{ categorySummary }}</h4>
+                          <p>
+                            Non-Medical Requests
+                          </p>
+                        </div>
+                        <div class="stats">
+                          <h4></h4>
+                          <p></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer"></div>
+                </div>
+                <!-- end back panel -->
+              </div>
+              <!-- end card -->
+            </div>
+            <!-- end card-container -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

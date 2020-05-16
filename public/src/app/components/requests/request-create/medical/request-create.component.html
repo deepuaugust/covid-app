@@ -1,0 +1,298 @@
+<div class="main col-md-12">
+  <h2 style="text-align: center;">{{ heading }} Request</h2>
+
+  <form
+    class="col-md-12"
+    #requestForm="ngForm"
+    (ngSubmit)="createRequest(request)"
+  >
+    <div class="container col-md-12">
+      <label class="col-md-12" for="title">
+        <b>Registration Number</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.token"
+        class="form-control col-md-12"
+        placeholder="Enter Registration number"
+        name="token"
+        required
+        #token="ngModel"
+      />
+      <div
+        [hidden]="token.valid || token.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Registration Number is required
+      </div>
+
+      <label class="col-md-12" for="title">
+        <b>Doctor Name</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.doctorName"
+        class="form-control col-md-12"
+        placeholder="Enter Doctor Name"
+        name="doctorName"
+        required
+        #doctorName="ngModel"
+      />
+      <div
+        [hidden]="doctorName.valid || doctorName.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Doctor Name is required
+      </div>
+
+      <label class="col-md-12" for="country">
+        <b>Select Country</b>
+      </label>
+      <select
+        [(ngModel)]="request.country"
+        class="form-control col-md-12"
+        name="country"
+        required
+        #country="ngModel"
+      >
+        <option disabled> Country</option>
+        <option *ngFor="let country of countryList" [ngValue]="country.code">
+          {{ country.name }} ({{ country.dial_code }})</option
+        >
+      </select>
+      <div
+        [hidden]="country.valid || country.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Country is required
+      </div>
+
+      <label class="col-md-12" for="area">
+        <b>Area in the Country</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.area"
+        class="form-control col-md-12"
+        placeholder="Enter Area in the Country"
+        name="area"
+        required
+        #area="ngModel"
+      />
+      <div
+        [hidden]="area.valid || area.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Area in the Country is required
+      </div>
+
+      <label class="col-md-12" for="age">
+        <b>Age</b>
+      </label>
+      <input
+        type="number"
+        [(ngModel)]="request.age"
+        class="form-control col-md-12"
+        placeholder="Age"
+        name="age"
+        #age="ngModel"
+      />
+
+      <label class="col-md-12" for="gender">
+        <b>Gender</b>
+      </label>
+      <select
+        [(ngModel)]="request.gender"
+        class="form-control col-md-12"
+        name="gender"
+        #gender="ngModel"
+      >
+        <option disabled> Status</option>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+      </select>
+
+      <label class="col-md-12" for="covidStatus">
+        <b>COVID Status</b>
+      </label>
+      <select
+        [(ngModel)]="request.covidStatus"
+        class="form-control col-md-12"
+        name="covidStatus"
+        #covidStatus="ngModel"
+        required
+      >
+        <option disabled>COVID Status</option>
+        <option value="Positive">Positive</option>
+        <option value="Negative">Negative</option>
+        <option value="Unknown">Unknown</option>
+      </select>
+      <div
+        [hidden]="covidStatus.valid || covidStatus.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        COVID status is required
+      </div>
+
+      <label class="col-md-12" for="medicalHistory">
+        <b>Past Medical History</b>
+      </label>
+      <select
+        [(ngModel)]="request.medicalHistory"
+        class="form-control col-md-12"
+        name="medicalHistory"
+        #medicalHistory="ngModel"
+        required
+      >
+        <option disabled>Past Medical History</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      <div
+        [hidden]="medicalHistory.valid || medicalHistory.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Past Medical History is required
+      </div>
+
+      <label class="col-md-12" for="currentPrescription">
+        <b>Current Prescription</b>
+      </label>
+      <select
+        [(ngModel)]="request.currentPrescription"
+        class="form-control col-md-12"
+        name="currentPrescription"
+        #currentPrescription="ngModel"
+        required
+      >
+        <option disabled>Current Prescription</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      <div
+        [hidden]="currentPrescription.valid || currentPrescription.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Current Prescription is required
+      </div>
+
+      <label class="col-md-12" for="currentIssues">
+        <b>Current Issues</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.currentIssues"
+        class="form-control col-md-12"
+        placeholder="Enter Current Issues"
+        name="currentIssues"
+        required
+        #currentIssues="ngModel"
+      />
+      <div
+        [hidden]="currentIssues.valid || currentIssues.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Current Issues is required
+      </div>
+
+      <label class="col-md-12" for="advice">
+        <b>Advice and prescription given</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="request.advice"
+        class="form-control col-md-12"
+        placeholder="Enter Advice and prescription given"
+        name="advice"
+        #advice="ngModel"
+      />
+
+      <label class="col-md-12" for="prescriptionIssue">
+        <b>Prescription Issued ?</b>
+      </label>
+      <select
+        [(ngModel)]="request.prescriptionIssue"
+        class="form-control col-md-12"
+        name="prescriptionIssue"
+        #prescriptionIssue="ngModel"
+        required
+      >
+        <option disabled>Prescription Issued?</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      <div
+        [hidden]="prescriptionIssue.valid || prescriptionIssue.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Prescription Issued is required
+      </div>
+
+      <label class="col-md-12" for="medicalFollowup">
+        <b>Medical Followup needed?</b>
+      </label>
+      <select
+        [(ngModel)]="request.medicalFollowup"
+        class="form-control col-md-12"
+        name="medicalFollowup"
+        #medicalFollowup="ngModel"
+        required
+      >
+        <option disabled>Medical Followup needed?</option>
+        <option value="Required">Required</option>
+        <option value="Not Required">Not Required</option>
+      </select>
+      <div
+        [hidden]="medicalFollowup.valid || medicalFollowup.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Medical Followup needed is required
+      </div>
+
+      <label class="col-md-12" for="health">
+        <b>Mental Health/Social Follow-up?</b>
+      </label>
+      <select
+        [(ngModel)]="request.health"
+        class="form-control col-md-12"
+        name="health"
+        #health="ngModel"
+        required
+      >
+        <option disabled>Mental Health/Social Follow-up?</option>
+        <option value="Mental Health">Mental Health</option>
+        <option value="Social Health">Social Health</option>
+        <option value="Both">Both</option>
+        <option value="NIL">NIL</option>
+      </select>
+      <div
+        [hidden]="health.valid || health.pristine"
+        class="alert alert-danger col-md-12"
+      >
+        Mental Health/Social Follow-up needed is required
+      </div>
+
+      <label class="col-md-12" for="comments">
+        <b>Comments</b>
+      </label>
+      <textarea
+        [(ngModel)]="request.comments"
+        class="form-control col-md-12"
+        placeholder="Enter Comments"
+        name="comments"
+        #comments="ngModel"
+      ></textarea>
+
+      <div class="col-md-12 buttondiv">
+        <button
+          class="btn btn-success"
+          [ngClass]="{ disabled: !requestForm.form.valid }"
+          [disabled]="!requestForm.form.valid"
+          type="submit"
+        >
+          {{ heading }} Request
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

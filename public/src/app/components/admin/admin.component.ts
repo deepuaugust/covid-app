@@ -6,7 +6,6 @@ import utils from "../../utils/utils.json";
 import { RolesService } from "../../services/role.service";
 import { CategoryService } from "../../services/category.service";
 import { UserService } from "../../services/user.service";
-import * as XLSX from "xlsx";
 
 @Component({
   selector: "app-admin",
@@ -17,8 +16,6 @@ import * as XLSX from "xlsx";
   ],
 })
 export class AdminComponent implements OnInit {
-  name = "This is XLSX TO JSON CONVERTER";
-  willDownload = false;
   statuses = utils.statuses.map((d) => d.label);
   requestsSummary = [];
   roleSummary = [];

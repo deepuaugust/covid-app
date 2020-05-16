@@ -28,4 +28,9 @@ export class AppComponent {
     this.closeNav();
     this.route.navigate(["home"]);
   }
+
+  goToRequestHome() {
+    this.closeNav();
+    this.route.navigate(["requests/home"]);
+  }
 }

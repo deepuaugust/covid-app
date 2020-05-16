@@ -69,7 +69,7 @@ export class ExcelImport implements OnInit {
       if(this.uploadData['Medical'] !== undefined) this.uploadType = 'Medical';
       else this.uploadType = 'Non-Medical';
       this.toaster.showSuccess("Upload successful");
-      this.route.navigate(['/requests']);
+      this.route.navigate(['/requests/home']);
     }
   }
 }

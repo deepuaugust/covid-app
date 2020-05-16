@@ -1,17 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { RequestService } from "../../services/request.service";
-import { ToasterService } from "../../services/toaster.service";
-import { RequestCellRendererComponent } from "../cell_renderer/requestCellRenderer/cell_renderer.component";
+import { RequestService } from "../../../services/request.service";
+import { ToasterService } from "../../../services/toaster.service";
+import { RequestCellRendererComponent } from "../../cell_renderer/requestCellRenderer/cell_renderer.component";
 import countries from "src/app/utils/countries.json";
 import utils from "src/app/utils/utils.json";
 
 @Component({
   selector: "app-requests",
-  templateUrl: "./requests.component.html",
-  styleUrls: ["./requests.component.css"],
+  templateUrl: "./requests-medical.component.html",
+  styleUrls: ["./requests-medical.component.css"],
 })
-export class RequestsComponent implements OnInit {
+export class RequestsMedicalComponent implements OnInit {
   user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : "";
@@ -47,25 +47,8 @@ export class RequestsComponent implements OnInit {
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "Request",
-              field: "title",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Description",
-              field: "description",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Status",
-              valueGetter: function (params) {
-                let status = utils.statuses.filter(
-                  (item) => item.value == params.data.status
-                );
-                return status[0].label;
-              },
-              sortable: true,
-              filter: true,
+              headerName: "Doctor Name",
+              field: "doctorName",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
@@ -81,30 +64,63 @@ export class RequestsComponent implements OnInit {
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "Category",
-              field: "category.name",
-              sortable: true,
-              filter: true,
+              headerName: "Area in the country",
+              field: "area",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "Role",
-              field: "role.name",
-              sortable: true,
-              filter: true,
+              headerName: "Age",
+              field: "age",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "Assigned To",
-              valueGetter: function (params) {
-                return params.data.assignedTo
-                  ? params.data.assignedTo.fName +
-                      " " +
-                      params.data.assignedTo.lName
-                  : "";
-              },
-              sortable: true,
-              filter: true,
+              headerName: "Gender",
+              field: "gender",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "COVID Status",
+              field: "covidStatus",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Past Medical History",
+              field: "medicalHistory",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Current Prescription",
+              field: "currentPrescription",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Current Issues",
+              field: "currentIssues",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Advice and prescription given",
+              field: "advice",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Prescription Issued ?",
+              field: "prescriptionIssue",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Medical Followup needed?",
+              field: "medicalFollowup",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Mental Health/Social Follow-up?",
+              field: "health",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Comments",
+              field: "comments",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {

@@ -4,7 +4,7 @@ import { ToasterService } from "../../../../services/toaster.service";
 import { UserService } from "src/app/services/user.service";
 import { CategoryService } from "src/app/services/category.service";
 import { RolesService } from "src/app/services/role.service";
-import { RequestService } from "src/app/services/request.service";
+import { MedicalRequestService } from "src/app/services/medicalRequest.service";
 import countries from "src/app/utils/countries.json";
 import utils from "src/app/utils/utils.json";
 
@@ -23,6 +23,7 @@ export class RequestCreateMedicalComponent implements OnInit {
   roles = [];
   users = [];
   countryList = countries;
+  isEditMode = false;
 
   statuses = []; // utils.statuses;
   communicationModes = utils.communicationModes;
@@ -31,11 +32,12 @@ export class RequestCreateMedicalComponent implements OnInit {
     private route: Router,
     private _route: ActivatedRoute,
     private _user: UserService,
-    private _category: CategoryService,
-    private _roles: RolesService,
-    private _request: RequestService,
+    private _request: MedicalRequestService,
     private toaster: ToasterService
-  ) {}
+  ) {
+    const { url } = this.route;
+    if (url.indexOf("edit") > -1) this.isEditMode = true;
+  }
 
   loadData() {
     const { url } = this.route;
@@ -64,7 +66,8 @@ export class RequestCreateMedicalComponent implements OnInit {
   createRequest = (request) => {
     this._request.create(request).subscribe(
       (res) => {
-        if (res.message == "success") this.route.navigate(["/requests"]);
+        if (res.message == "success")
+          this.route.navigate(["/requests/medical"]);
         else this.toaster.showError(res.message);
       },
       (error) => {

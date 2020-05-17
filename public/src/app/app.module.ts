@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from "@angular/common";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 import { BrowserModule } from "@angular/platform-browser";
-import { AgGridModule } from 'ag-grid-angular';
+import { AgGridModule } from "ag-grid-angular";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -18,20 +18,21 @@ import { RolesComponent } from "./components/roles/roles.component";
 import { CreateRolesComponent } from "./components/roles/create-roles/create-roles.component";
 import { RequestsMedicalComponent } from "./components/requests/requests-medical/requests-medical.component";
 import { RequestCreateComponent } from "./components/requests/request-create/request-create.component";
-import { ToasterService } from './services/toaster.service';
-import { UserService } from './services/user.service';
-import { CategoryService } from './services/category.service';
-import { RolesService } from './services/role.service';
-import { RequestService } from './services/request.service';
+import { ToasterService } from "./services/toaster.service";
+import { UserService } from "./services/user.service";
+import { CategoryService } from "./services/category.service";
+import { RolesService } from "./services/role.service";
+import { RequestService } from "./services/request.service";
+import { MedicalRequestService } from "./services/medicalRequest.service";
 import { AuthInterceptorService } from "./authInterceptor.service";
-import { RequestCellRendererComponent } from './components/cell_renderer/requestCellRenderer/cell_renderer.component';
-import { UserCellRendererComponent } from './components/cell_renderer/userCellRenderer/cell_renderer.component';
-import { RequestInteractComponent } from './components/requests/request-interact/request-interact.component';
+import { RequestCellRendererComponent } from "./components/cell_renderer/requestCellRenderer/cell_renderer.component";
+import { UserCellRendererComponent } from "./components/cell_renderer/userCellRenderer/cell_renderer.component";
+import { RequestInteractComponent } from "./components/requests/request-interact/request-interact.component";
 import { ExcelImport } from "./components/excelImport/excelImport.component";
-import { RequestHomeComponent } from './components/requests/request-home/request-home.component';
-import { RequestsNonMedicalComponent } from './components/requests/requests-nonmedical/requests-nonmedical.component';
-import { RequestCreateMedicalComponent } from './components/requests/request-create/medical/request-create.component';
-import { RequestCreateNonMedicalComponent } from './components/requests/request-create/nonmedical/request-create.component';
+import { RequestHomeComponent } from "./components/requests/request-home/request-home.component";
+import { RequestsNonMedicalComponent } from "./components/requests/requests-nonmedical/requests-nonmedical.component";
+import { RequestCreateMedicalComponent } from "./components/requests/request-create/medical/request-create.component";
+import { RequestCreateNonMedicalComponent } from "./components/requests/request-create/nonmedical/request-create.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -48,9 +49,18 @@ const routes: Routes = [
   { path: "requests/non-medical", component: RequestsNonMedicalComponent },
   { path: "requests/home", component: RequestHomeComponent },
   { path: "requests/create/medical", component: RequestCreateMedicalComponent },
-  { path: "requests/create/nonmedical", component: RequestCreateNonMedicalComponent },
-  { path: "requests/edit/medical/:id", component: RequestCreateMedicalComponent },
-  { path: "requests/edit/nonmedical/:id", component: RequestCreateNonMedicalComponent },
+  {
+    path: "requests/create/nonmedical",
+    component: RequestCreateNonMedicalComponent,
+  },
+  {
+    path: "requests/edit/medical/:id",
+    component: RequestCreateMedicalComponent,
+  },
+  {
+    path: "requests/edit/nonmedical/:id",
+    component: RequestCreateNonMedicalComponent,
+  },
   { path: "requests/interact/:id", component: RequestInteractComponent },
   { path: "requests/import", component: ExcelImport },
 ];
@@ -75,7 +85,7 @@ const routes: Routes = [
     RequestHomeComponent,
     RequestsNonMedicalComponent,
     RequestCreateMedicalComponent,
-    RequestCreateNonMedicalComponent
+    RequestCreateNonMedicalComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,12 +97,20 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     AgGridModule.withComponents([]),
   ],
-  entryComponents:[RequestCellRendererComponent, UserCellRendererComponent],
-  providers: [UserService, CategoryService, RolesService, RequestService, ToasterService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
-    multi: true
-  }],
+  entryComponents: [RequestCellRendererComponent, UserCellRendererComponent],
+  providers: [
+    UserService,
+    CategoryService,
+    RolesService,
+    RequestService,
+    ToasterService,
+    MedicalRequestService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

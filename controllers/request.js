@@ -61,7 +61,9 @@ exports.create = function (req, res, next) {
 };
 
 exports.upload = function (req, res) {
-  let data = req.body.Sheet1;
+  let { data, createdBy } = req.body;
+  console.log(createdBy);
+  const { Sheet1 = [] } = data;
   let newD = [];
 
   const keys = {
@@ -84,8 +86,8 @@ exports.upload = function (req, res) {
     status: "Status",
     assignedTo: "Forwarded to",
   };
-  data.map((d) => {
-    let obj = {};
+  Sheet1.map((d) => {
+    let obj = { createdBy };
 
     obj.token = d[keys.token];
 

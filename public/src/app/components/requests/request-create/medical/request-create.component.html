@@ -27,23 +27,47 @@
       </div>
 
       <label class="col-md-12" for="title">
-        <b>Doctor Name</b>
+        <b>Contact Number</b>
       </label>
       <input
-        type="text"
-        [(ngModel)]="request.doctorName"
+        type="number"
+        [(ngModel)]="request.contactNumber"
         class="form-control col-md-12"
-        placeholder="Enter Doctor Name"
-        name="doctorName"
+        placeholder="Enter Contact Number"
+        name="contactNumber"
         required
-        #doctorName="ngModel"
+        #contactNumber="ngModel"
       />
       <div
-        [hidden]="doctorName.valid || doctorName.pristine"
+        [hidden]="contactNumber.valid || contactNumber.pristine"
         class="alert alert-danger col-md-12"
       >
-        Doctor Name is required
+        Contact Number is required
       </div>
+
+      <label class="col-md-12" for="age">
+        <b>Age</b>
+      </label>
+      <input
+        type="number"
+        [(ngModel)]="request.age"
+        class="form-control col-md-12"
+        placeholder="Age"
+        name="age"
+        #age="ngModel"
+      />
+
+      <label class="col-md-12" for="gender">
+        <b>Gender</b>
+      </label>
+      <input
+        typ="text"
+        [(ngModel)]="request.gender"
+        placeholder="Gender"
+        class="form-control col-md-12"
+        name="gender"
+        #gender="ngModel"
+      />
 
       <label class="col-md-12" for="country">
         <b>Select Country</b>
@@ -56,7 +80,7 @@
         #country="ngModel"
       >
         <option disabled> Country</option>
-        <option *ngFor="let country of countryList" [ngValue]="country.code">
+        <option *ngFor="let country of countryList" [ngValue]="country.name">
           {{ country.name }} ({{ country.dial_code }})</option
         >
       </select>
@@ -85,185 +109,175 @@
       >
         Area in the Country is required
       </div>
-
-      <label class="col-md-12" for="age">
-        <b>Age</b>
-      </label>
-      <input
-        type="number"
-        [(ngModel)]="request.age"
-        class="form-control col-md-12"
-        placeholder="Age"
-        name="age"
-        #age="ngModel"
-      />
-
-      <label class="col-md-12" for="gender">
-        <b>Gender</b>
-      </label>
-      <input
-        typ="text"
-        [(ngModel)]="request.gender"
-        class="form-control col-md-12"
-        name="gender"
-        #gender="ngModel"
-      />
-
-      <label class="col-md-12" for="covidStatus">
-        <b>COVID Status</b>
+      <label class="col-md-12" for="status">
+        <b>Request status New / Inprogrss / Solved</b>
       </label>
       <input
         type="text"
-        [(ngModel)]="request.covidStatus"
+        [(ngModel)]="request.status"
         class="form-control col-md-12"
-        name="covidStatus"
-        #covidStatus="ngModel"
+        name="status"
+        #status="ngModel"
         required
       />
 
       <div
-        [hidden]="covidStatus.valid || covidStatus.pristine"
+        [hidden]="status.valid || status.pristine"
         class="alert alert-danger col-md-12"
       >
-        COVID status is required
+        status is required
       </div>
-
-      <label class="col-md-12" for="medicalHistory">
-        <b>Past Medical History</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.medicalHistory"
-        class="form-control col-md-12"
-        name="medicalHistory"
-        #medicalHistory="ngModel"
-        required
-      />
-
-      <div
-        [hidden]="medicalHistory.valid || medicalHistory.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Past Medical History is required
-      </div>
-
-      <label class="col-md-12" for="currentPrescription">
-        <b>Current Prescription</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.currentPrescription"
-        class="form-control col-md-12"
-        name="currentPrescription"
-        #currentPrescription="ngModel"
-        required
-      />
-
-      <div
-        [hidden]="currentPrescription.valid || currentPrescription.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Current Prescription is required
-      </div>
-
-      <label class="col-md-12" for="currentIssues">
-        <b>Current Issues</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.currentIssues"
-        class="form-control col-md-12"
-        placeholder="Enter Current Issues"
-        name="currentIssues"
-        required
-        #currentIssues="ngModel"
-      />
-      <div
-        [hidden]="currentIssues.valid || currentIssues.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Current Issues is required
-      </div>
-
-      <label class="col-md-12" for="advice">
-        <b>Advice and prescription given</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.advice"
-        class="form-control col-md-12"
-        placeholder="Enter Advice and prescription given"
-        name="advice"
-        #advice="ngModel"
-      />
-
-      <label class="col-md-12" for="prescriptionIssue">
-        <b>Prescription Issued ?</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.prescriptionIssue"
-        class="form-control col-md-12"
-        name="prescriptionIssue"
-        #prescriptionIssue="ngModel"
-        required
-      />
-
-      <div
-        [hidden]="prescriptionIssue.valid || prescriptionIssue.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Prescription Issued is required
-      </div>
-
-      <label class="col-md-12" for="medicalFollowup">
-        <b>Medical Followup needed?</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.medicalFollowup"
-        class="form-control col-md-12"
-        name="medicalFollowup"
-        #medicalFollowup="ngModel"
-        required
-      />
-      <div
-        [hidden]="medicalFollowup.valid || medicalFollowup.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Medical Followup needed is required
-      </div>
-
-      <label class="col-md-12" for="health">
-        <b>Mental Health/Social Follow-up?</b>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="request.health"
-        class="form-control col-md-12"
-        name="health"
-        #health="ngModel"
-        required
-      />
-
-      <div
-        [hidden]="health.valid || health.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Mental Health/Social Follow-up needed is required
-      </div>
-
-      <label class="col-md-12" for="comments">
-        <b>Comments</b>
+      <label class="col-md-12" for="complaints">
+        <b>Complaints</b>
       </label>
       <textarea
-        [(ngModel)]="request.comments"
+        [(ngModel)]="request.complaints"
         class="form-control col-md-12"
-        placeholder="Enter Comments"
-        name="comments"
-        #comments="ngModel"
+        placeholder="Enter complaints"
+        name="complaints"
+        #complaints="ngModel"
       ></textarea>
+      <div *ngIf="isEditMode">
+        <label class="col-md-12" for="title">
+          <b>Doctor Name</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.assignedTo"
+          class="form-control col-md-12"
+          placeholder="Enter Doctor Name"
+          name="assignedTo"
+          required
+          #assignedTo="ngModel"
+        />
+        <div
+          [hidden]="assignedTo.valid || assignedTo.pristine"
+          class="alert alert-danger col-md-12"
+        >
+          Doctor Name is required
+        </div>
 
+        <label class="col-md-12" for="requirement">
+          <b>Requirment General / Psych</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.requirement"
+          class="form-control col-md-12"
+          name="requirement"
+          #requirement="ngModel"
+        />
+        <label class="col-md-12" for="requirement">
+          <b>Details</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.details"
+          class="form-control col-md-12"
+          name="requirement"
+          #requirement="ngModel"
+        />
+        <label class="col-md-12" for="covidStatus">
+          <b>COVID Status</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.covidStatus"
+          class="form-control col-md-12"
+          name="covidStatus"
+          #covidStatus="ngModel"
+        />
+
+        <label class="col-md-12" for="medicalHistory">
+          <b>Past Medical History</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.medicalHistory"
+          class="form-control col-md-12"
+          name="medicalHistory"
+          #medicalHistory="ngModel"
+        />
+
+        <label class="col-md-12" for="currentPrescription">
+          <b>Current Prescription</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.currentPrescription"
+          class="form-control col-md-12"
+          name="currentPrescription"
+          #currentPrescription="ngModel"
+        />
+
+        <label class="col-md-12" for="currentIssues">
+          <b>Current Issues</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.currentIssues"
+          class="form-control col-md-12"
+          placeholder="Enter Current Issues"
+          name="currentIssues"
+          #currentIssues="ngModel"
+        />
+
+        <label class="col-md-12" for="advice">
+          <b>Advice and prescription given</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.advice"
+          class="form-control col-md-12"
+          placeholder="Enter Advice and prescription given"
+          name="advice"
+          #advice="ngModel"
+        />
+
+        <label class="col-md-12" for="prescriptionIssue">
+          <b>Prescription Issued ?</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.prescriptionIssue"
+          class="form-control col-md-12"
+          name="prescriptionIssue"
+          #prescriptionIssue="ngModel"
+        />
+
+        <label class="col-md-12" for="medicalFollowup">
+          <b>Medical Followup needed?</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.medicalFollowup"
+          class="form-control col-md-12"
+          name="medicalFollowup"
+          #medicalFollowup="ngModel"
+        />
+
+        <label class="col-md-12" for="health">
+          <b>Mental Health/Social Follow-up?</b>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="request.health"
+          class="form-control col-md-12"
+          name="health"
+          #health="ngModel"
+        />
+
+        <label class="col-md-12" for="comments">
+          <b>Comments</b>
+        </label>
+        <textarea
+          [(ngModel)]="request.comments"
+          class="form-control col-md-12"
+          placeholder="Enter Comments"
+          name="comments"
+          #comments="ngModel"
+        ></textarea>
+      </div>
       <div class="col-md-12 buttondiv">
         <button
           class="btn btn-success"

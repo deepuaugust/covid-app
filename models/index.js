@@ -5,4 +5,5 @@ module.exports = {
   Roles: require("./roles"),
   Request: require("./request"),
   RequestHistory: require("./requestHistory"),
+  MedicalRequest: require("./medicalRequest"),
 };

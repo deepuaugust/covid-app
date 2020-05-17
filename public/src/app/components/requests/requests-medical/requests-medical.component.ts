@@ -53,12 +53,13 @@ export class RequestsMedicalComponent implements OnInit {
             },
             {
               headerName: "Country",
-              valueGetter: function (params) {
-                let country = countries.filter(
-                  (item) => item.code == params.data.country
-                );
-                return country[0].name;
-              },
+              field: "currentCountry",
+              // valueGetter: function (params) {
+              //   let country = countries.filter(
+              //     (item) => item.code == params.data.country
+              //   );
+              //   return country[0].name;
+              // },
               sortable: true,
               filter: true,
               cellStyle: { border: "1px solid lightgrey" },

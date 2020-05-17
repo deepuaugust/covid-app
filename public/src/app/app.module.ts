@@ -49,7 +49,8 @@ const routes: Routes = [
   { path: "requests/home", component: RequestHomeComponent },
   { path: "requests/create/medical", component: RequestCreateMedicalComponent },
   { path: "requests/create/nonmedical", component: RequestCreateNonMedicalComponent },
-  { path: "requests/edit/:id", component: RequestCreateComponent },
+  { path: "requests/edit/medical/:id", component: RequestCreateMedicalComponent },
+  { path: "requests/edit/nonmedical/:id", component: RequestCreateNonMedicalComponent },
   { path: "requests/interact/:id", component: RequestInteractComponent },
   { path: "requests/import", component: ExcelImport },
 ];

@@ -101,32 +101,26 @@
       <label class="col-md-12" for="gender">
         <b>Gender</b>
       </label>
-      <select
+      <input
+        typ="text"
         [(ngModel)]="request.gender"
         class="form-control col-md-12"
         name="gender"
         #gender="ngModel"
-      >
-        <option disabled> Status</option>
-        <option value="M">Male</option>
-        <option value="F">Female</option>
-      </select>
+      />
 
       <label class="col-md-12" for="covidStatus">
         <b>COVID Status</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.covidStatus"
         class="form-control col-md-12"
         name="covidStatus"
         #covidStatus="ngModel"
         required
-      >
-        <option disabled>COVID Status</option>
-        <option value="Positive">Positive</option>
-        <option value="Negative">Negative</option>
-        <option value="Unknown">Unknown</option>
-      </select>
+      />
+
       <div
         [hidden]="covidStatus.valid || covidStatus.pristine"
         class="alert alert-danger col-md-12"
@@ -137,17 +131,15 @@
       <label class="col-md-12" for="medicalHistory">
         <b>Past Medical History</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.medicalHistory"
         class="form-control col-md-12"
         name="medicalHistory"
         #medicalHistory="ngModel"
         required
-      >
-        <option disabled>Past Medical History</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
+      />
+
       <div
         [hidden]="medicalHistory.valid || medicalHistory.pristine"
         class="alert alert-danger col-md-12"
@@ -158,17 +150,15 @@
       <label class="col-md-12" for="currentPrescription">
         <b>Current Prescription</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.currentPrescription"
         class="form-control col-md-12"
         name="currentPrescription"
         #currentPrescription="ngModel"
         required
-      >
-        <option disabled>Current Prescription</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
+      />
+
       <div
         [hidden]="currentPrescription.valid || currentPrescription.pristine"
         class="alert alert-danger col-md-12"
@@ -210,17 +200,15 @@
       <label class="col-md-12" for="prescriptionIssue">
         <b>Prescription Issued ?</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.prescriptionIssue"
         class="form-control col-md-12"
         name="prescriptionIssue"
         #prescriptionIssue="ngModel"
         required
-      >
-        <option disabled>Prescription Issued?</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
+      />
+
       <div
         [hidden]="prescriptionIssue.valid || prescriptionIssue.pristine"
         class="alert alert-danger col-md-12"
@@ -231,17 +219,14 @@
       <label class="col-md-12" for="medicalFollowup">
         <b>Medical Followup needed?</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.medicalFollowup"
         class="form-control col-md-12"
         name="medicalFollowup"
         #medicalFollowup="ngModel"
         required
-      >
-        <option disabled>Medical Followup needed?</option>
-        <option value="Required">Required</option>
-        <option value="Not Required">Not Required</option>
-      </select>
+      />
       <div
         [hidden]="medicalFollowup.valid || medicalFollowup.pristine"
         class="alert alert-danger col-md-12"
@@ -252,19 +237,15 @@
       <label class="col-md-12" for="health">
         <b>Mental Health/Social Follow-up?</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.health"
         class="form-control col-md-12"
         name="health"
         #health="ngModel"
         required
-      >
-        <option disabled>Mental Health/Social Follow-up?</option>
-        <option value="Mental Health">Mental Health</option>
-        <option value="Social Health">Social Health</option>
-        <option value="Both">Both</option>
-        <option value="NIL">NIL</option>
-      </select>
+      />
+
       <div
         [hidden]="health.valid || health.pristine"
         class="alert alert-danger col-md-12"

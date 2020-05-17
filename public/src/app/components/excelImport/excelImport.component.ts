@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import * as XLSX from "xlsx";
 import { RequestService } from "../../services/request.service";
+import { MedicalRequestService } from "../../services/medicalRequest.service";
 import { ToasterService } from "src/app/services/toaster.service";
 import { Router } from "@angular/router";
 
@@ -19,6 +20,7 @@ export class ExcelImport implements OnInit {
   constructor(
     private toaster: ToasterService,
     private _request: RequestService,
+    private _mediacalRequest: MedicalRequestService,
     private route: Router
   ) {}
 
@@ -69,27 +71,46 @@ export class ExcelImport implements OnInit {
     const label = document.querySelector("[data-js-label]");
     if (label.innerHTML == "No file selected")
       this.toaster.showError("Please select a file");
-    else {
-      console.log(this.uploadData);
-      if (this.uploadData["Medical"] !== undefined) this.uploadType = "Medical";
-      else this.uploadType = "Non-Medical";
 
-      this._request.upload(this.uploadData).subscribe(
-        (res) => {
-          if (res.data == null) this.toaster.showError(res.message);
-          else {
-            this.toaster.showSuccess("Upload successful");
-            this.route.navigate(["/requests/home"]);
+    console.log(this.uploadData);
+    if (this.uploadData["Medical"] !== undefined) {
+      this.uploadType = "Medical";
+      this.uploadType = "Non-Medical";
+      this._mediacalRequest
+        .upload({ createdBy: this.user._id, data: this.uploadData })
+        .subscribe(
+          (res) => {
+            if (res.data == null) this.toaster.showError(res.message);
+            else {
+              this.toaster.showSuccess("Upload successful");
+              this.route.navigate(["/requests/home"]);
+            }
+          },
+          (error) => {
+            this.toaster.showError(error.error.message);
+            if (error.error.statusCode === 403) this.route.navigate(["login"]);
           }
-        },
-        (error) => {
-          this.toaster.showError(error.error.message);
-          if (error.error.statusCode === 403) this.route.navigate(["login"]);
-        }
-      );
-
-      // this.toaster.showSuccess("Upload successful");
-      // this.route.navigate(['/requests']);
+        );
+    } else {
+      this.uploadType = "Non-Medical";
+      this._request
+        .upload({ createdBy: this.user._id, data: this.uploadData })
+        .subscribe(
+          (res) => {
+            if (res.data == null) this.toaster.showError(res.message);
+            else {
+              this.toaster.showSuccess("Upload successful");
+              this.route.navigate(["/requests/home"]);
+            }
+          },
+          (error) => {
+            this.toaster.showError(error.error.message);
+            if (error.error.statusCode === 403) this.route.navigate(["login"]);
+          }
+        );
     }
+
+    // this.toaster.showSuccess("Upload successful");
+    // this.route.navigate(['/requests']);
   }
 }

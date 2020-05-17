@@ -61,32 +61,33 @@ exports.create = function (req, res, next) {
 };
 
 exports.upload = function (req, res) {
-  let data = req.body.Sheet1;
+  let { data, createdBy } = req.body;
+  console.log(createdBy);
+  const { Sheet1 = [] } = data;
   let newD = [];
+
   const keys = {
     token: "Token Number",
-    currentCountry: "CURRENT Country of Residence (ഇപ്പോൾ താമസിക്കുന്ന രാജ്യം)",
-    fullName: "FULL Name (പൂർണ്ണമായ പേര്)",
-    phoneNumber: "CONTACT WhatsApp Number (വാട്ട്‌സ്ആപ്പ് നമ്പർ)",
-    contactPhone:
-      "ബന്ധപ്പെടേണ്ട വ്യക്തിയുടെ മൊബൈൽ നമ്പർ - Phone Number to be contacted",
-    age: "AGE (പ്രായം)",
-    gender: "GENDER (ജൻഡർ)",
-    supportRequested: "SUPPORT Requested",
-    supportRequiredFor:
-      "SUPPORT Required for (പിന്തുണ ആവശ്യമായി വന്നിട്ടുള്ളത്)",
-    contactFullName:
-      "ഞങ്ങൾ ബന്ധപ്പെടേണ്ട വ്യക്തിയുടെ മുഴുവൻ പേര് - Person to be contacted *Full Name*",
-    fullAddress:
-      "Flat No / House No / House Name	Apartments / Local Area / Street / Road	Landmark & Post Office",
+    currentCountry: "Current Country of Residence",
+    fullName: "Full Name",
+    phoneNumber: "Contact WhatsApp Number",
+    contactPhone: "Phone Number to be contacted",
+    age: "Age",
+    gender: "Gender",
+    supportRequested: "Support Requested",
+    supportRequiredFor: "Support Required for",
+    contactFullName: "Full name of the Person to be Contacted*",
+    houseName: "Flat No / House No / House Name",
+    location: " Apartments / Local Area / Street / Road",
+    landmark: "Landmark & Post Office",
     district: "District / City",
-    postal: "PIN or Postal Code",
-    email: "EMAIL Address (ഈ - മെയിൽ വിലാസം)",
-    status: "STATUS",
-    assignedTo: "FORWARDED TO",
+    postal: "Postal Code",
+    email: "EMAIL Address",
+    status: "Status",
+    assignedTo: "Forwarded to",
   };
-  data.map((d) => {
-    let obj = {};
+  Sheet1.map((d) => {
+    let obj = { createdBy };
 
     obj.token = d[keys.token];
 

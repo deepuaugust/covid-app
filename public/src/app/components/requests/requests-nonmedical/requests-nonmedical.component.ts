@@ -48,12 +48,14 @@ export class RequestsNonMedicalComponent implements OnInit {
             },
             {
               headerName: "Select Country of residence",
-              valueGetter: function (params) {
-                let country = countries.filter(
-                  (item) => item.code == params.data.country
-                );
-                return country[0].name;
-              },
+              // valueGetter: function (params) {
+              //   let country = countries.filter(
+              //     (item) => item.code == params.data.country
+              //   );
+              //   return country[0].name;
+              // },
+              field: "currentCountry",
+
               sortable: true,
               filter: true,
               cellStyle: { border: "1px solid lightgrey" },

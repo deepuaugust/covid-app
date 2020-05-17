@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { RequestService } from "../../../services/request.service";
+import { MedicalRequestService } from "../../../services/medicalRequest.service";
 import { ToasterService } from "../../../services/toaster.service";
 import { RequestCellRendererComponent } from "../../cell_renderer/requestCellRenderer/cell_renderer.component";
 import countries from "src/app/utils/countries.json";
@@ -29,7 +29,7 @@ export class RequestsMedicalComponent implements OnInit {
   communicationModes = utils.communicationModes;
 
   constructor(
-    private _request: RequestService,
+    private _request: MedicalRequestService,
     private toaster: ToasterService,
     private route: Router
   ) {}
@@ -46,19 +46,10 @@ export class RequestsMedicalComponent implements OnInit {
               field: "token",
               cellStyle: { border: "1px solid lightgrey" },
             },
-            {
-              headerName: "Doctor Name",
-              field: "doctorName",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
+           
             {
               headerName: "Country",
-              valueGetter: function (params) {
-                let country = countries.filter(
-                  (item) => item.code == params.data.country
-                );
-                return country[0].name;
-              },
+              field: "country",
               sortable: true,
               filter: true,
               cellStyle: { border: "1px solid lightgrey" },
@@ -80,48 +71,13 @@ export class RequestsMedicalComponent implements OnInit {
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "COVID Status",
-              field: "covidStatus",
+              headerName: "Doctor Name",
+              field: "assignedTo",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "Past Medical History",
-              field: "medicalHistory",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Current Prescription",
-              field: "currentPrescription",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Current Issues",
-              field: "currentIssues",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Advice and prescription given",
-              field: "advice",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Prescription Issued ?",
-              field: "prescriptionIssue",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Medical Followup needed?",
-              field: "medicalFollowup",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Mental Health/Social Follow-up?",
-              field: "health",
-              cellStyle: { border: "1px solid lightgrey" },
-            },
-            {
-              headerName: "Comments",
-              field: "comments",
+              headerName: "Status",
+              field: "status",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {

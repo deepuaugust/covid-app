@@ -64,7 +64,7 @@
         <b>Whatsapp Contact Number</b>
       </label>
       <input
-        type="number"
+        type="text"
         [(ngModel)]="request.contactWhatsapp"
         class="form-control col-md-12"
         placeholder="Whatsapp Contact number"
@@ -83,7 +83,7 @@
         <b>Phone Contact Number</b>
       </label>
       <input
-        type="number"
+        type="text"
         [(ngModel)]="request.contactPhone"
         class="form-control col-md-12"
         placeholder="Phone Contact Number"
@@ -113,16 +113,13 @@
       <label class="col-md-12" for="gender">
         <b>Gender</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.gender"
         class="form-control col-md-12"
         name="gender"
         #gender="ngModel"
-      >
-        <option disabled> Status</option>
-        <option value="M">Male</option>
-        <option value="F">Female</option>
-      </select>
+      />
 
       <label class="col-md-12" for="supportRequested">
         <b>Support Requested</b>
@@ -297,163 +294,6 @@
       >
         Forwarded To is required
       </div>
-
-      <!-- <label class="col-md-12" for="currentAddress">
-        <b>Current Address</b>
-      </label>
-      <textarea
-        class="form-control col-md-12"
-        placeholder="Current Address"
-        [(ngModel)]="request.currentAddress"
-        [maxlength]="400"
-        name="currentAddress"
-        #currentAddress
-      >
-      </textarea> -->
-
-      <!-- <div
-        [hidden]="currentAddress.valid || currentAddress.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Current address is required
-      </div> -->
-
-      <!-- <label class="col-md-12" for="nativeAddress">
-        <b>Native Address</b>
-      </label>
-      <textarea
-        class="form-control col-md-12"
-        placeholder="Native Address"
-        [(ngModel)]="request.nativeAddress"
-        [maxlength]="400"
-        name="nativeAddress"
-        #nativeAddress
-      >
-      </textarea> -->
-      <!-- <div
-        [hidden]="nativeAddress.valid || nativeAddress.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Native address is required
-      </div> -->
-
-      <!-- <label class="col-md-12" for="communicationMedium">
-        <b>Preferred communication medium</b>
-      </label>
-      <select
-        [(ngModel)]="request.communicationMedium"
-        class="form-control col-md-12"
-        name="communicationMedium"
-        required
-        #communicationMedium="ngModel"
-      >
-        <option disabled> Preferred communication medium</option>
-        <option
-          *ngFor="let mode of communicationModes"
-          [ngValue]="mode.value"
-          >{{ mode.label }}</option
-        >
-      </select>
-      <div
-        [hidden]="communicationMedium.valid || communicationMedium.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Preferred communication medium is required
-      </div>
-      <div *ngIf="statuses.length > 1">
-        <label class="col-md-12" for="status">
-          <b>Status</b>
-        </label>
-        <select
-          [(ngModel)]="request.status"
-          class="form-control col-md-12"
-          name="status"
-          required
-          #status="ngModel"
-        >
-          <option disabled> Status</option>
-          <option *ngFor="let status of statuses" [ngValue]="status.value">{{
-            status.label
-          }}</option>
-        </select>
-        <div
-          [hidden]="status.valid || status.pristine"
-          class="alert alert-danger col-md-12"
-        >
-          Status is required
-        </div>
-      </div>
-      <div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
-        <b>Please select a category and role to find the relevant assignee.</b>
-      </div>
-      <label class="col-md-12" for="category">
-        <b>Category</b>
-      </label>
-      <select
-        [(ngModel)]="request.category"
-        class="form-control col-md-12"
-        placeholder="Select Category"
-        name="category"
-        required
-        #category="ngModel"
-        (ngModelChange)="onCategoryChange($event)"
-      >
-        <option disabled>Select Category</option>
-        <option *ngFor="let category of categories" [ngValue]="category._id">{{
-          category.name
-        }}</option>
-      </select>
-      <div
-        [hidden]="category.valid || category.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Category is required
-      </div>
-      <label class="col-md-12" for="Role">
-        <b>Role</b>
-      </label>
-      <select
-        [(ngModel)]="request.role"
-        class="form-control col-md-12"
-        placeholder="Select Category"
-        name="role"
-        required
-        (ngModelChange)="onRoleChange($event)"
-        #role="ngModel"
-      >
-        <option disabled>Select Role</option>
-        <option *ngFor="let role of roles" [ngValue]="role._id">{{
-          role.name
-        }}</option>
-      </select>
-      <div
-        [hidden]="role.valid || role.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Role is required
-      </div>
-      <label class="col-md-12" for="assignee">
-        <b>Assignee</b>
-      </label>
-      <select
-        [(ngModel)]="request.assignedTo"
-        class="form-control col-md-12"
-        name="assignTo"
-        required
-        #assignTo="ngModel"
-      >
-        <option disabled> Assign To</option>
-        <option *ngFor="let user of users" [ngValue]="user._id"
-          >{{ user.fName }} {{ user.lName }} ({{ user.total }} requests in
-          queue)</option
-        >
-      </select>
-      <div
-        [hidden]="assignTo.valid || assignTo.pristine"
-        class="alert alert-danger col-md-12"
-      >
-        Assignee is required
-      </div> -->
       <div class="col-md-12 buttondiv">
         <button
           class="btn btn-success"

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-cell_renderer",
@@ -6,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./cell_renderer.component.css"],
 })
 export class RequestCellRendererComponent implements OnInit {
+  medical = true;
   user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : "";
@@ -14,7 +16,7 @@ export class RequestCellRendererComponent implements OnInit {
     this.user.type === "admin";
   data: any;
   params: any;
-  constructor() {}
+  constructor(private route: Router) {}
 
   agInit(params) {
     this.params = params;
@@ -22,5 +24,11 @@ export class RequestCellRendererComponent implements OnInit {
     this.data = params.data;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const { url } = this.route;
+    if (url.indexOf("non") > -1) {
+      this.medical = false;
+    }
+    else this.medical = true;
+  }
 }

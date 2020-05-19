@@ -43,7 +43,7 @@ export class RequestInteractComponent implements OnInit {
         else {
           const { data } = res;
           this.request = data;
-
+          console.log(this.request);
           this.setStaus();
           this.assignments = this.request["assignment"];
           this.comments = this.request["comments"];

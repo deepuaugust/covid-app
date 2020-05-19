@@ -27,19 +27,15 @@
       </div>
 
       <label class="col-md-12" for="currentCountry">
-        <b>Select Country of Residence</b>
+        <b>Country of Residence</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.currentCountry"
         class="form-control col-md-12"
         name="currentCountry"
         #country="ngModel"
-      >
-        <option disabled> Country</option>
-        <option *ngFor="let country of countryList" [ngValue]="country.code">
-          {{ country.name }} ({{ country.dial_code }})</option
-        >
-      </select>
+      />
 
       <label class="col-md-12" for="name">
         <b>Full Name</b>
@@ -60,20 +56,20 @@
         Full Name is required
       </div>
 
-      <label class="col-md-12" for="contactWhatsapp">
+      <label class="col-md-12" for="phoneNumber">
         <b>Whatsapp Contact Number</b>
       </label>
       <input
         type="text"
-        [(ngModel)]="request.contactWhatsapp"
+        [(ngModel)]="request.phoneNumber"
         class="form-control col-md-12"
         placeholder="Whatsapp Contact number"
-        name="contactWhatsapp"
-        #contactWhatsapp="ngModel"
+        name="phoneNumber"
+        #phoneNumber="ngModel"
         required
       />
       <div
-        [hidden]="contactWhatsapp.valid || contactWhatsapp.pristine"
+        [hidden]="phoneNumber.valid || phoneNumber.pristine"
         class="alert alert-danger col-md-12"
       >
         Whatsapp Contact Number is required
@@ -140,16 +136,16 @@
         Support Requested is required
       </div>
 
-      <label class="col-md-12" for="supportRequestedFor">
+      <label class="col-md-12" for="supportRequiredFor">
         <b>Support Requested For</b>
       </label>
       <input
         type="text"
-        [(ngModel)]="request.supportRequestedFor"
+        [(ngModel)]="request.supportRequiredFor"
         class="form-control col-md-12"
         placeholder="Enter Title"
-        name="supportRequestedFor"
-        #supportRequestedFor="ngModel"
+        name="supportRequiredFor"
+        #supportRequiredFor="ngModel"
       />
 
       <label class="col-md-12" for="contactFullName">

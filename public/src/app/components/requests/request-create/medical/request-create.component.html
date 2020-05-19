@@ -70,20 +70,17 @@
       />
 
       <label class="col-md-12" for="country">
-        <b>Select Country</b>
+        <b>Country</b>
       </label>
-      <select
+      <input
+        type="text"
         [(ngModel)]="request.country"
         class="form-control col-md-12"
         name="country"
         required
         #country="ngModel"
-      >
-        <option disabled> Country</option>
-        <option *ngFor="let country of countryList" [ngValue]="country.name">
-          {{ country.name }} ({{ country.dial_code }})</option
-        >
-      </select>
+      />
+
       <div
         [hidden]="country.valid || country.pristine"
         class="alert alert-danger col-md-12"
@@ -246,7 +243,7 @@
         />
 
         <label class="col-md-12" for="medicalFollowup">
-          <b>Medical Followup needed?</b>
+          <b>Medical / Mental /Social Follow up?</b>
         </label>
         <input
           type="text"
@@ -254,17 +251,6 @@
           class="form-control col-md-12"
           name="medicalFollowup"
           #medicalFollowup="ngModel"
-        />
-
-        <label class="col-md-12" for="health">
-          <b>Mental Health/Social Follow-up?</b>
-        </label>
-        <input
-          type="text"
-          [(ngModel)]="request.health"
-          class="form-control col-md-12"
-          name="health"
-          #health="ngModel"
         />
 
         <label class="col-md-12" for="comments">

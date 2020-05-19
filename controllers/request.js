@@ -76,10 +76,10 @@ exports.upload = function (req, res) {
     gender: "Gender",
     supportRequested: "Support Requested",
     supportRequiredFor: "Support Required for",
-    contactFullName: "Full name of the Person to be Contacted*",
-    houseName: "Flat No / House No / House Name",
-    location: " Apartments / Local Area / Street / Road",
-    landmark: "Landmark & Post Office",
+    contactFullName: "Full name of the Person to be Contacted",
+    houseNumber: "Flat No / House No / House Name",
+    area: "Apartments / Local Area / Street / Road",
+    landmark: "Landmark and Post Office",
     district: "District / City",
     postal: "Postal Code",
     email: "EMAIL Address",
@@ -100,7 +100,9 @@ exports.upload = function (req, res) {
     obj.supportRequested = d[keys.supportRequested];
     obj.supportRequiredFor = d[keys.supportRequiredFor];
     obj.contactFullName = d[keys.contactFullName];
-    obj.fullAddress = d[keys.fullAddress];
+    obj.houseNumber = d[keys.houseNumber];
+    obj.area = d[keys.area],
+    obj.landmark = d[keys.landmark],
     obj.district = d[keys.district];
     obj.postal = d[keys.postal];
     obj.email = d[keys.email];

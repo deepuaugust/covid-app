@@ -40,6 +40,7 @@ export class RequestsNonMedicalComponent implements OnInit {
         if (res.data == null) this.toaster.showError(res.message);
         else {
           this.requests = res.data;
+          console.log(this.requests);
           this.columnDefs = [
             {
               headerName: "Token #",
@@ -47,7 +48,7 @@ export class RequestsNonMedicalComponent implements OnInit {
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "Select Country of residence",
+              headerName: "Country of residence",
               // valueGetter: function (params) {
               //   let country = countries.filter(
               //     (item) => item.code == params.data.country
@@ -67,7 +68,7 @@ export class RequestsNonMedicalComponent implements OnInit {
             },
             {
               headerName: "Whatsapp Contact Number",
-              field: "contactWhatsapp",
+              field: "phoneNumber",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
@@ -92,7 +93,7 @@ export class RequestsNonMedicalComponent implements OnInit {
             },
             {
               headerName: "Support Requested For",
-              field: "supportRequestedFor",
+              field: "supportRequiredFor",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {

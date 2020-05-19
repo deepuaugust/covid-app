@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const { ObjectId } = Schema;
 
 let MedicalRequest = new Schema({
-  token: String,
+  token: { type: String, required: true, unique: true },
   contactNumber: String,
   age: Number,
   gender: String,

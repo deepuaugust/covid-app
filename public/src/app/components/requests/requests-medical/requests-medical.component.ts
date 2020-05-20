@@ -46,7 +46,11 @@ export class RequestsMedicalComponent implements OnInit {
               field: "token",
               cellStyle: { border: "1px solid lightgrey" },
             },
-           
+            {
+              headerName: "Doctor Name",
+              field: "assignedTo",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
             {
               headerName: "Country",
               field: "country",
@@ -71,13 +75,43 @@ export class RequestsMedicalComponent implements OnInit {
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "Doctor Name",
-              field: "assignedTo",
+              headerName: "COVID Status",
+              field: "covidStatus",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
-              headerName: "Status",
-              field: "status",
+              headerName: "Past Medical History",
+              field: "medicalHistory",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Current Prescription",
+              field: "currentPrescription",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Current Issues",
+              field: "currentIssues",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Advice and prescription given",
+              field: "advice",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Prescription Issued ?",
+              field: "prescriptionIssue",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Mental Health/Social Follow-up?",
+              field: "medicalFollowup",
+              cellStyle: { border: "1px solid lightgrey" },
+            },
+            {
+              headerName: "Comments",
+              field: "comments",
               cellStyle: { border: "1px solid lightgrey" },
             },
             {
